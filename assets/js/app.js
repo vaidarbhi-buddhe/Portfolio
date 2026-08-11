@@ -284,10 +284,10 @@ const App = {
      ------------------------------------------------------------------------ */
   setupModals() {
     const cvModal = document.getElementById('cv-modal');
-    const openCvBtns = document.querySelectorAll('.open-cv-btn');
+    const openCvModalBtns = document.querySelectorAll('.open-cv-modal-btn');
     const closeBtns = document.querySelectorAll('.modal-close-btn');
 
-    openCvBtns.forEach(btn => {
+    openCvModalBtns.forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
         if (cvModal) cvModal.classList.add('open');

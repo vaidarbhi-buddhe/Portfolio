@@ -59,13 +59,13 @@
             </svg>
           </span>
         </button>
-        <a href="#cv-modal" class="btn btn-primary btn-sm open-cv-btn">
+        <a href="assets/documents/Vaidarbhi_Buddhe_Resume.pdf" download="Vaidarbhi_Buddhe_Resume.pdf" class="btn btn-primary btn-sm direct-download-cv" id="header-cv-download-btn">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
             <polyline points="7 10 12 15 17 10"></polyline>
             <line x1="12" y1="15" x2="12" y2="3"></line>
           </svg>
-          <span>View / Print CV</span>
+          <span>Download CV</span>
         </a>
         <button class="mobile-toggle" id="mobile-toggle" aria-label="Open Navigation Menu">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -110,8 +110,16 @@
             </svg>
             <span>Run Interactive Simulators</span>
           </a>
+          <a href="assets/documents/Vaidarbhi_Buddhe_Resume.pdf" download="Vaidarbhi_Buddhe_Resume.pdf" class="btn btn-outline-amber">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>Download CV (PDF)</span>
+          </a>
           <a href="#experience" class="btn btn-secondary">
-            <span>Explore Research & Plants</span>
+            <span>Explore Research</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <line x1="5" y1="12" x2="19" y2="12"></line>
               <polyline points="12 5 19 12 12 19"></polyline>
@@ -993,15 +1001,37 @@
     <div class="modal-dialog glass-card" style="background: #ffffff; color: #0f172a;">
       <button class="modal-close-btn" aria-label="Close Modal">✕</button>
 
-      <div style="display: flex; justify-content: flex-end; margin-bottom: 1.5rem;" class="no-print">
-        <button class="btn btn-primary btn-sm" id="modal-print-cv-btn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="6 9 6 2 18 2 18 9"></polyline>
-            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
-            <rect x="6" y="14" width="12" height="8"></rect>
-          </svg>
-          <span>Print / Save as PDF</span>
-        </button>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.75rem;" class="no-print">
+        <div>
+          <h3 style="margin: 0; font-size: 1.2rem; color: #0f172a;">Official Resume Preview</h3>
+          <span style="font-size: 0.8rem; color: #64748b;">ICT Mumbai (MARJ Jalna)</span>
+        </div>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <a href="assets/documents/Vaidarbhi_Buddhe_Resume.pdf" download="Vaidarbhi_Buddhe_Resume.pdf" class="btn btn-primary btn-sm">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>Download Original PDF</span>
+          </a>
+          <a href="assets/documents/Vaidarbhi_Buddhe_Resume.pdf" target="_blank" class="btn btn-secondary btn-sm" style="color: #0f172a; border-color: #cbd5e1;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+            <span>Open in Tab</span>
+          </a>
+          <button class="btn btn-secondary btn-sm" id="modal-print-cv-btn" style="color: #0f172a; border-color: #cbd5e1;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 6 2 18 2 18 9"></polyline>
+              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+              <rect x="6" y="14" width="12" height="8"></rect>
+            </svg>
+            <span>Print View</span>
+          </button>
+        </div>
       </div>
 
       <!-- Printable Resume Document -->
