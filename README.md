@@ -4,7 +4,7 @@
 
 ### Chemical Engineer | Process Optimization | Research & Simulation
 
-[Portfolio](#) • [LinkedIn](https://linkedin.com/in/vaidarbhi-buddhe)
+[Portfolio](https://vaidarbhi-buddhe.github.io/Portfolio) • [LinkedIn](https://linkedin.com/in/vaidarbhi-buddhe)
 
 </div>
 
