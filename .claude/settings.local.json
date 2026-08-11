@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /Users/atharvadnyaneshwarshastrakar -name \"ICT_Logo1.png\" 2>/dev/null | head -5)",
+      "Bash(python3 -c ' *)",
+      "Bash(python3 -m pip install python-docx --quiet)",
+      "Bash(python3 /private/tmp/claude-501/-Users-atharvadnyaneshwarshastrakar-Desktop-Vaidarbhi-Buddhe-Docs/49a523c7-7ebe-4a6b-9dff-ec42ffa71654/scratchpad/build_cv_docx.py)"
+    ]
+  }
+}

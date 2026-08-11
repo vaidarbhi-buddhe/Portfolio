@@ -1,0 +1,450 @@
+/* ==========================================================================
+   VAIDARBHI BUDDHE - CHEMICAL ENGINEERING PORTFOLIO
+   Interactive Simulators, Lab Explorer & Engineering Calculation Suites
+   ========================================================================== */
+
+.simulators-section {
+  position: relative;
+  background: linear-gradient(180deg, var(--bg-base) 0%, rgba(13, 21, 37, 0.9) 50%, var(--bg-base) 100%);
+}
+
+.sim-tabs-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.sim-tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.85rem 1.6rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.98rem;
+  transition: all var(--transition-normal);
+}
+
+.sim-tab-btn:hover {
+  border-color: var(--teal-500);
+  color: var(--teal-400);
+  transform: translateY(-2px);
+}
+
+.sim-tab-btn.active {
+  background: rgba(45, 212, 191, 0.1);
+  border-color: var(--teal-500);
+  color: var(--text-primary);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+
+.sim-tab-btn svg {
+  width: 18px;
+  height: 18px;
+  color: var(--teal-400);
+}
+
+.sim-content-pane {
+  display: none;
+}
+
+.sim-content-pane.active {
+  display: block;
+  animation: sim-pane-fade 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes sim-pane-fade {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --------------------------------------------------------------------------
+   Simulator 1: Aspen Plus RGibbs Syngas-to-LPG Reactor
+   -------------------------------------------------------------------------- */
+.aspen-console {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-xl);
+  padding: 2.25rem;
+  box-shadow: var(--shadow-lg);
+}
+
+.aspen-controls-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+}
+
+.panel-title-badge {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.panel-title-badge h4 {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.control-slider-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.slider-label-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.slider-val-readout {
+  font-family: var(--font-mono);
+  color: var(--teal-400);
+  font-weight: 700;
+}
+
+.aspen-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.1);
+  outline: none;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.aspen-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--teal-400);
+  box-shadow: 0 0 12px var(--teal-glow-lg);
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+}
+
+.aspen-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.25);
+  background: var(--cyan-400);
+}
+
+.aspen-vis-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.vis-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.vis-mode-toggles {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.vis-toggle-btn {
+  padding: 0.4rem 0.9rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.vis-toggle-btn.active, .vis-toggle-btn:hover {
+  background: rgba(20, 184, 166, 0.15);
+  border-color: var(--teal-500);
+  color: var(--teal-400);
+}
+
+.chart-wrapper {
+  position: relative;
+  width: 100%;
+  height: 320px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#aspen-chart-canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.aspen-telemetry-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.telemetry-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  text-align: center;
+}
+
+.telemetry-card .t-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.telemetry-card .t-value {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--teal-400);
+}
+
+/* --------------------------------------------------------------------------
+   Simulator 2: Heat Loss & Insulation Savings Calculator (Indorama Synthetics)
+   -------------------------------------------------------------------------- */
+.heatloss-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.calc-input-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-xl);
+  padding: 2.25rem;
+}
+
+.material-selector-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.mat-option-btn {
+  padding: 1rem 0.5rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.mat-option-btn.active {
+  border-color: var(--amber-400);
+  background: rgba(245, 158, 11, 0.12);
+  box-shadow: 0 0 20px var(--amber-glow);
+}
+
+.mat-option-btn strong {
+  display: block;
+  font-size: 0.88rem;
+  color: var(--text-primary);
+  margin-bottom: 0.2rem;
+}
+
+.mat-option-btn span {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.calc-output-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-xl);
+  padding: 2.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.savings-hero-badge {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(20, 184, 166, 0.15) 100%);
+  border: 1px solid var(--border-amber);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.savings-hero-badge .pct-drop {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--amber-400);
+  line-height: 1;
+}
+
+.savings-hero-badge p {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  margin-top: 0.5rem;
+}
+
+.savings-breakdown-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.savings-stat-cell {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+}
+
+.savings-stat-cell span {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  display: block;
+}
+
+.savings-stat-cell strong {
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  color: var(--teal-400);
+}
+
+/* --------------------------------------------------------------------------
+   Simulator 3: Analytical Lab Console (GC & Karl Fischer)
+   -------------------------------------------------------------------------- */
+.lab-console-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.lab-widget-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.lab-canvas-box {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.75rem;
+}
+
+#gc-chart-canvas, #kf-chart-canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.lab-actions-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* --------------------------------------------------------------------------
+   Simulator 4: Chemical Engineering Unit Converter & Reynolds Calculator
+   -------------------------------------------------------------------------- */
+.chem-utils-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.util-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-xl);
+  padding: 2.25rem;
+}
+
+.reynolds-regime-pill {
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+
+.regime-laminar {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid var(--emerald-400);
+  color: var(--emerald-400);
+}
+
+.regime-transition {
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid var(--amber-400);
+  color: var(--amber-400);
+}
+
+.regime-turbulent {
+  background: rgba(244, 63, 94, 0.15);
+  border: 1px solid var(--rose-400);
+  color: var(--rose-400);
+}
+
+/* Responsive Simulators */
+@media (max-width: 1024px) {
+  .aspen-console {
+    grid-template-columns: 1fr;
+  }
+  .heatloss-grid {
+    grid-template-columns: 1fr;
+  }
+  .lab-console-grid {
+    grid-template-columns: 1fr;
+  }
+  .chem-utils-grid {
+    grid-template-columns: 1fr;
+  }
+  .aspen-telemetry-strip {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

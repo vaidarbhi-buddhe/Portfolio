@@ -1,0 +1,525 @@
+/* ==========================================================================
+   VAIDARBHI BUDDHE - CHEMICAL ENGINEERING PORTFOLIO
+   Soothing, Refined & Calming Color System (Executive Engineering Theme)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+:root {
+  /* Soothing Dark Palette (Warm Petroleum Slate & Soft Seafoam) */
+  --bg-base: #0c121e;
+  --bg-surface: #111a2c;
+  --bg-card: rgba(18, 28, 46, 0.72);
+  --bg-card-hover: rgba(24, 38, 62, 0.85);
+  --bg-card-solid: #131e33;
+  --bg-glass: rgba(12, 18, 30, 0.82);
+  --bg-glass-subtle: rgba(255, 255, 255, 0.025);
+  --bg-input: #0e1626;
+
+  /* Borders & Dividers - Subtle & Non-Intrusive */
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-glow: rgba(45, 212, 191, 0.22);
+  --border-glass: rgba(255, 255, 255, 0.08);
+  --border-amber: rgba(245, 158, 11, 0.2);
+
+  /* Primary Brand (Soft Muted Teal & Coastal Cyan) */
+  --teal-400: #2dd4bf;
+  --teal-500: #14b8a6;
+  --teal-600: #0d9488;
+  --teal-glow: rgba(20, 184, 166, 0.12);
+  --teal-glow-lg: rgba(20, 184, 166, 0.2);
+
+  --cyan-400: #38bdf8;
+  --cyan-500: #0ea5e9;
+  --cyan-600: #0284c7;
+  --cyan-glow: rgba(14, 165, 233, 0.1);
+
+  /* Secondary Accents (Warm Soothing Amber & Soft Ochre) */
+  --amber-400: #fbbf24;
+  --amber-500: #f59e0b;
+  --amber-600: #d97706;
+  --amber-glow: rgba(245, 158, 11, 0.1);
+
+  /* Calming Supporting Accents */
+  --emerald-400: #34d399;
+  --emerald-500: #10b981;
+  --rose-400: #f87171;
+  --rose-500: #ef4444;
+
+  /* Typography Colors - High Readability without Glare */
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-muted: #8899b0;
+  --text-dim: #54657e;
+  --text-accent: #2dd4bf;
+
+  /* Typography Fonts */
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Soft, Natural Elevation Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.28);
+  --shadow-lg: 0 16px 36px rgba(0, 0, 0, 0.35);
+  --shadow-glow: 0 0 25px var(--teal-glow);
+  --shadow-amber-glow: 0 0 20px var(--amber-glow);
+
+  /* Radii & Transitions */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-xl: 28px;
+  --radius-pill: 9999px;
+
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+  --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Layout Container */
+  --container-max: 1220px;
+  --header-height: 72px;
+}
+
+/* Soothing Light Mode (Soft Warm Mist & Porcelain) */
+[data-theme="light"] {
+  --bg-base: #f5f7fb;
+  --bg-surface: #ffffff;
+  --bg-card: rgba(255, 255, 255, 0.85);
+  --bg-card-hover: #ffffff;
+  --bg-card-solid: #ffffff;
+  --bg-glass: rgba(245, 247, 251, 0.88);
+  --bg-glass-subtle: rgba(13, 148, 136, 0.03);
+  --bg-input: #ffffff;
+
+  --border-subtle: rgba(15, 23, 42, 0.07);
+  --border-glow: rgba(13, 148, 136, 0.25);
+  --border-glass: rgba(15, 23, 42, 0.09);
+  --border-amber: rgba(217, 119, 6, 0.2);
+
+  --teal-400: #0f766e;
+  --teal-500: #115e59;
+  --teal-600: #134e4a;
+  --teal-glow: rgba(13, 148, 136, 0.08);
+  --teal-glow-lg: rgba(13, 148, 136, 0.15);
+
+  --cyan-400: #0284c7;
+  --cyan-500: #0369a1;
+  --cyan-600: #075985;
+
+  --amber-400: #d97706;
+  --amber-500: #b45309;
+  --amber-600: #92400e;
+
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --text-dim: #94a3b8;
+  --text-accent: #0f766e;
+
+  --shadow-sm: 0 2px 6px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 6px 18px rgba(15, 23, 42, 0.06);
+  --shadow-lg: 0 14px 30px rgba(15, 23, 42, 0.08);
+  --shadow-glow: 0 0 25px rgba(13, 148, 136, 0.08);
+}
+
+/* ==========================================================================
+   Universal Reset & Soothing Ambient Setup
+   ========================================================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  line-height: 1.65;
+  overflow-x: hidden;
+  position: relative;
+  transition: background-color var(--transition-smooth), color var(--transition-smooth);
+}
+
+/* Soothing, Gentle Ambient Atmosphere (No Harsh Flashes) */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: 
+    radial-gradient(circle at 18% 15%, rgba(20, 184, 166, 0.07) 0%, transparent 50%),
+    radial-gradient(circle at 82% 80%, rgba(14, 165, 233, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.02) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: -2;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-size: 48px 48px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+[data-theme="light"] body::before {
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(13, 148, 136, 0.04) 0%, transparent 50%),
+    radial-gradient(circle at 85% 85%, rgba(2, 132, 199, 0.03) 0%, transparent 50%);
+}
+
+[data-theme="light"] body::after {
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+}
+
+/* Typography Hierarchy */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.28;
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: clamp(2.3rem, 4.8vw, 3.6rem); font-weight: 800; }
+h2 { font-size: clamp(1.75rem, 3.2vw, 2.4rem); font-weight: 700; }
+h3 { font-size: clamp(1.25rem, 2.2vw, 1.6rem); }
+h4 { font-size: 1.1rem; }
+
+p {
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+  margin-bottom: 1rem;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+a {
+  color: var(--teal-400);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--cyan-400);
+}
+
+code, kbd, samp, pre {
+  font-family: var(--font-mono);
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font-family: var(--font-sans);
+  cursor: pointer;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+/* Custom Scrollbar - Gentle */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-base);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(20, 184, 166, 0.2);
+  border-radius: var(--radius-pill);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--teal-500);
+}
+
+/* Layout Container */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.section {
+  padding: 5.5rem 0;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 3.75rem 0;
+  }
+}
+
+/* Section Header */
+.section-header {
+  text-align: center;
+  max-width: 740px;
+  margin: 0 auto 3.25rem auto;
+}
+
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.3rem 0.85rem;
+  background: rgba(20, 184, 166, 0.08);
+  border: 1px solid var(--border-glow);
+  color: var(--teal-400);
+  border-radius: var(--radius-pill);
+  margin-bottom: 0.9rem;
+}
+
+.section-tag svg {
+  width: 14px;
+  height: 14px;
+}
+
+.section-title {
+  margin-bottom: 0.85rem;
+}
+
+.section-title span.gradient-text {
+  background: linear-gradient(135deg, #f1f5f9 0%, var(--teal-400) 60%, var(--cyan-400) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-theme="light"] .section-title span.gradient-text {
+  background: linear-gradient(135deg, #0f172a 0%, #0f766e 60%, #0284c7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-subtitle {
+  color: var(--text-muted);
+  font-size: 1.02rem;
+  max-width: 620px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Glass Card Utility - Soothing & Subtle */
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card:hover {
+  border-color: var(--border-glow);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+  pointer-events: none;
+}
+
+/* Chemical & Engineering Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.22rem 0.6rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.badge.badge-teal {
+  border-color: rgba(20, 184, 166, 0.3);
+  background: rgba(20, 184, 166, 0.08);
+  color: var(--teal-400);
+}
+
+.badge.badge-amber {
+  border-color: rgba(245, 158, 11, 0.3);
+  background: rgba(245, 158, 11, 0.08);
+  color: var(--amber-400);
+}
+
+.badge.badge-cyan {
+  border-color: rgba(14, 165, 233, 0.3);
+  background: rgba(14, 165, 233, 0.08);
+  color: var(--cyan-400);
+}
+
+.badge.badge-emerald {
+  border-color: rgba(16, 185, 129, 0.3);
+  background: rgba(16, 185, 129, 0.08);
+  color: var(--emerald-400);
+}
+
+/* Buttons - Elegant & Tactile */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.75rem 1.45rem;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-normal);
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--teal-500) 0%, var(--teal-600) 100%);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 4px 14px var(--teal-glow-lg);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--teal-400) 0%, var(--teal-500) 100%);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px var(--teal-glow-lg);
+}
+
+.btn-secondary {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  color: var(--text-primary);
+  border: 1px solid var(--border-glass);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--teal-500);
+  color: var(--teal-400);
+  transform: translateY(-2px);
+}
+
+.btn-outline-amber {
+  background: rgba(245, 158, 11, 0.06);
+  border: 1px solid var(--border-amber);
+  color: var(--amber-400);
+}
+
+.btn-outline-amber:hover {
+  background: rgba(245, 158, 11, 0.14);
+  border-color: var(--amber-400);
+  transform: translateY(-2px);
+}
+
+.btn-sm {
+  padding: 0.45rem 0.95rem;
+  font-size: 0.84rem;
+  border-radius: var(--radius-sm);
+}
+
+.btn-lg {
+  padding: 0.9rem 1.8rem;
+  font-size: 1rem;
+  border-radius: var(--radius-lg);
+}
+
+/* Animations */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 0.95; transform: scale(1.04); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+}
+
+/* Toast Notifications */
+#toast-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  pointer-events: none;
+}
+
+.toast {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.9rem 1.25rem;
+  background: var(--bg-card-solid);
+  border: 1px solid var(--teal-500);
+  color: var(--text-primary);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  font-size: 0.9rem;
+  animation: slide-in-toast 0.3s ease-out forwards;
+  max-width: 380px;
+}
+
+@keyframes slide-in-toast {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
