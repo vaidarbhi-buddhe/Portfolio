@@ -100,9 +100,8 @@
         </div>
 
         <p class="hero-bio">
-          Scholar at the prestigious <strong>Institute of Chemical Technology (ICT Mumbai - MARJ Jalna)</strong>. Combining rigorous thermodynamics, Aspen Plus process simulation, heterogeneous catalyst synthesis, and plant-floor energy optimization to solve modern industrial challenges.
+          Student at the prestigious <strong>Institute of Chemical Technology (ICT Mumbai - MARJ Jalna)</strong>. Combining rigorous thermodynamics, Aspen Plus process simulation, heterogeneous catalyst synthesis, and plant-floor energy optimization to solve modern industrial challenges.
         </p>
-
         <div class="hero-cta-group">
           <a href="#simulators" class="btn btn-primary">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -156,7 +155,7 @@
               <h3>Vaidarbhi Buddhe</h3>
               <p>Chemical & Petrochemical Engineer</p>
               <div class="mini-pills">
-                <span class="badge badge-teal">CSIR-IIP Scholar</span>
+                <span class="badge badge-teal">CSIR Intern</span>
                 <span class="badge badge-amber">Six Sigma</span>
                 <span class="badge badge-cyan">Aspen Plus</span>
               </div>
@@ -195,7 +194,7 @@
 
           <div style="display: flex; justify-content: space-between; align-items: center;">
             <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted);">
-              📍 Bhandara & Jalna, MH
+              📍 Jalna, Maharashtra
             </span>
             <a href="#contact" class="btn btn-outline-amber btn-sm">
               <span>Connect Direct</span>
@@ -316,12 +315,16 @@
               <span class="fact-val" style="color: var(--amber-400);">CGPA 8.73 (Rank 3/45)</span>
             </div>
             <div class="fact-row">
+              <span class="fact-label">HIGHER SECONDARY (H.S.C.)</span>
+              <span class="fact-val" style="color: var(--teal-400);">88.17% (Science)</span>
+            </div>
+            <div class="fact-row">
               <span class="fact-label">HIGH SCHOOL (S.S.C.)</span>
               <span class="fact-val" style="color: var(--emerald-400);">100% (Rank 1 Distinction)</span>
             </div>
             <div class="fact-row">
               <span class="fact-label">LOCATION</span>
-              <span class="fact-val">Bhandara / Jalna, Maharashtra</span>
+              <span class="fact-val">Jalna, Maharashtra</span>
             </div>
           </div>
 
@@ -524,16 +527,66 @@
               <p style="font-size: 0.85rem; margin-top: 0.2rem; color: var(--text-secondary);">
                 Upgrading to Calcium Silicate reduces exterior surface temperature from 6°C down to 3°C above ambient, cutting convective & radiative losses by 50%.
               </p>
+              <h4>Insulation Material & Pipe Parameters</h4>
+              <span class="badge badge-teal">Indorama Synthetics CF-HTM</span>
+            </div>
+
+            <div class="material-selector-row">
+              <button class="mat-option-btn" data-mat="bare">
+                <strong>Bare Pipe</strong>
+                <span>No Insulation</span>
+              </button>
+              <button class="mat-option-btn" data-mat="mineral">
+                <strong>Mineral Wool</strong>
+                <span>k = 0.045 W/m·K</span>
+              </button>
+              <button class="mat-option-btn active" data-mat="calcium">
+                <strong>Calcium Silicate</strong>
+                <span>k = 0.055 W/m·K (High Temp)</span>
+              </button>
+            </div>
+
+            <div class="control-slider-group">
+              <div class="slider-label-row">
+                <span>HTM Fluid Temperature</span>
+                <span class="slider-val" id="htm-temp-val">280 °C</span>
+              </div>
+              <input type="range" id="calc-htm-temp" min="150" max="350" value="280" step="5" class="control-range">
+            </div>
+
+            <div class="control-slider-group">
+              <div class="slider-label-row">
+                <span>Ambient Air Temperature</span>
+                <span class="slider-val" id="amb-temp-val">30 °C</span>
+              </div>
+              <input type="range" id="calc-amb-temp" min="10" max="45" value="30" step="1" class="control-range">
+            </div>
+
+            <div class="control-slider-group">
+              <div class="slider-label-row">
+                <span>Insulation Thickness</span>
+                <span class="slider-val" id="thick-val">65 mm</span>
+              </div>
+              <input type="range" id="calc-thickness" min="25" max="150" value="65" step="5" class="control-range">
+            </div>
+
+            <div class="control-slider-group">
+              <div class="slider-label-row">
+                <span>Pipeline Length (CF-HTM Network)</span>
+                <span class="slider-val" id="len-val">120 m</span>
+              </div>
+              <input type="range" id="calc-pipe-length" min="20" max="500" value="120" step="10" class="control-range">
             </div>
           </div>
 
           <div class="calc-output-box">
             <div class="savings-hero-badge">
-              <span class="pct-drop" id="calc-pct-drop">50% Loss Cut</span>
-              <p>Thermal Loss Reduction vs Baseline</p>
+              <span class="save-label">HEAT LOSS REDUCTION</span>
+              <div class="save-pct" id="calc-reduction-pct">51.2%</div>
+              <span class="save-tagline">vs Traditional Mineral Wool Baseline</span>
             </div>
 
-            <div class="savings-breakdown-grid">
+            <div class="savings-stats-grid">
               <div class="savings-stat-cell">
                 <span>SURFACE TEMPERATURE</span>
                 <strong id="calc-surface-temp">33.1 °C (3.1°C Δ)</strong>
@@ -553,29 +606,29 @@
             </div>
 
             <div style="margin-top: 1.5rem; text-align: center;">
-              <span class="badge badge-emerald">Lean Six Sigma Green Belt Certified Analysis</span>
+              <span class="badge badge-emerald">Six Sigma White Belt Certified Analysis</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Tab Pane 3: Analytical Lab Console -->
+      <!-- Tab Pane 3: Analytical Gas Chromatography (GC) Station -->
       <div class="sim-content-pane" id="lab-sim-pane">
-        <div class="lab-console-grid">
+        <div class="gc-full-console">
           <!-- Gas Chromatography Console -->
           <div class="lab-widget-card">
             <div class="panel-title-badge">
-              <h4>Gas Chromatography (GC) Analyzer</h4>
+              <h4>Gas Chromatography (GC) Chromatogram Simulator</h4>
               <span class="badge badge-teal">FID / TCD Detector</span>
             </div>
             <p style="font-size: 0.85rem; color: var(--text-muted);">
-              High-resolution capillary column trace resolving syngas products ($CH_4, C_2H_6, C_3H_8, C_4H_{10}$, DME).
+              High-resolution capillary column trace resolving syngas products (CO/N₂, CH₄, C₂H₆, C₃H₈, C₄H₁₀, DME).
             </p>
             <div class="lab-canvas-box">
               <canvas id="gc-chart-canvas"></canvas>
             </div>
             <div class="lab-actions-bar">
-              <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--teal-400);">Carrier: He @ 1.2 mL/min</span>
+              <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--teal-400);">Carrier: He @ 1.2 mL/min • Isothermal 180°C</span>
               <button class="btn btn-primary btn-sm" id="gc-inject-btn">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
@@ -584,38 +637,58 @@
               </button>
             </div>
           </div>
-
-          <!-- Karl Fischer Moisture Console -->
+          <!-- GC Peak Integration & Quantitative Report -->
           <div class="lab-widget-card">
             <div class="panel-title-badge">
-              <h4>Karl Fischer Volumetric Titrator</h4>
-              <span class="badge badge-amber">Clarion Organics QA</span>
+              <h4>Peak Integration & Stream Assay</h4>
+              <span class="badge badge-amber">Quantitative Assay</span>
             </div>
-            <p style="font-size: 0.85rem; color: var(--text-muted);">
-              Electrochemical endpoint detection and moisture factor determination ($mg\ H_2O / mL$).
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.25rem;">
+              Resolved retention times (t_R) and integrated area selectivity breakdown for syngas products:
             </p>
-            <div class="lab-canvas-box">
-              <canvas id="kf-chart-canvas"></canvas>
-            </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; text-align: center;">
-              <div class="exp-metric-item" style="padding: 0.5rem;">
-                <span style="font-size: 0.68rem;">MOISTURE PPM</span>
-                <strong id="kf-ppm-out" style="font-size: 0.85rem;">1,373 ppm</strong>
-              </div>
-              <div class="exp-metric-item" style="padding: 0.5rem;">
-                <span style="font-size: 0.68rem;">WEIGHT %</span>
-                <strong id="kf-pct-out" style="font-size: 0.85rem;">0.137 %</strong>
-              </div>
-              <div class="exp-metric-item" style="padding: 0.5rem;">
-                <span style="font-size: 0.68rem;">TITRANT VOL</span>
-                <strong id="kf-vol-out" style="font-size: 0.85rem;">3.42 mL</strong>
-              </div>
-            </div>
-            <div class="lab-actions-bar">
-              <input type="number" id="kf-sample-weight" class="form-input" style="width: 110px; padding: 0.4rem;" value="1.25" step="0.05" title="Sample Weight (g)">
-              <button class="btn btn-outline-amber btn-sm" id="kf-titrate-btn">
-                <span>Start Titration</span>
-              </button>
+            <table class="gc-peak-table">
+              <thead>
+                <tr>
+                  <th>Compound</th>
+                  <th>Retention (t_R)</th>
+                  <th>Area %</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span style="color: #94a3b8;">●</span> CO / N₂</td>
+                  <td>1.20 min</td>
+                  <td>14.2%</td>
+                </tr>
+                <tr>
+                  <td><span style="color: #f87171;">●</span> CH₄ (Methane)</td>
+                  <td>2.40 min</td>
+                  <td>18.5%</td>
+                </tr>
+                <tr>
+                  <td><span style="color: #fbbf24;">●</span> C₂H₆ (Ethane)</td>
+                  <td>3.80 min</td>
+                  <td>9.1%</td>
+                </tr>
+                <tr>
+                  <td><span style="color: #2dd4bf;">●</span> C₃H₈ (Propane)</td>
+                  <td>5.60 min</td>
+                  <td>34.6%</td>
+                </tr>
+                <tr>
+                  <td><span style="color: #38bdf8;">●</span> C₄H₁₀ (Butane)</td>
+                  <td>7.40 min</td>
+                  <td>16.8%</td>
+                </tr>
+                <tr>
+                  <td><span style="color: #c084fc;">●</span> DME / Alcohols</td>
+                  <td>8.80 min</td>
+                  <td>6.8%</td>
+                </tr>
+              </tbody>
+            </table>
+            <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); border-top: 1px solid var(--border-subtle); padding-top: 0.5rem;">
+              Column: HP-PLOT Q Capillary (30m × 0.32mm × 20µm) • Calibration: ASTM D1946
             </div>
           </div>
         </div>
@@ -856,12 +929,12 @@
           <div>
             <h3 style="margin-bottom: 0.5rem;">Direct Coordinates</h3>
             <p style="color: var(--text-muted); font-size: 0.95rem;">
-              Based in Bhandara & Jalna, Maharashtra. Available for process engineering and plant optimization opportunities globally.
+              Based in Jalna, Maharashtra. Available for process engineering and plant optimization opportunities globally.
             </p>
           </div>
 
           <div class="contact-direct-cards">
-            <a href="mailto:imt22vs.buddhe@stumarj.ictmumbai.edu.in" class="contact-card-item">
+            <a href="mailto:vaidarbhibuddhe@gmail.com" class="contact-card-item">
               <div class="c-icon">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
@@ -869,8 +942,8 @@
                 </svg>
               </div>
               <div class="c-details">
-                <span>INSTITUTE EMAIL</span>
-                <strong>imt22vs.buddhe@stumarj.ictmumbai.edu.in</strong>
+                <span>DIRECT EMAIL</span>
+                <strong>vaidarbhibuddhe@gmail.com</strong>
               </div>
             </a>
 
@@ -908,8 +981,8 @@
                 </svg>
               </div>
               <div class="c-details">
-                <span>POSTAL ADDRESS</span>
-                <strong style="font-size: 0.85rem;">Lilai, Malati Nagar, Bhandara – 441904</strong>
+                <span>LOCATION</span>
+                <strong style="font-size: 0.85rem;">Jalna, Maharashtra, India</strong>
               </div>
             </div>
           </div>
@@ -989,7 +1062,7 @@
 
       <div class="footer-bottom">
         <span>© 2026 Vaidarbhi Buddhe • Chemical & Petrochemical Engineer. Designed for high-impact process innovation.</span>
-        <span>ICT MARJ Jalna • Bhandara, Maharashtra</span>
+        <span>ICT MARJ Jalna • Maharashtra, India</span>
       </div>
     </div>
   </footer>
@@ -1043,9 +1116,9 @@
             <div style="font-size: 9.5pt; font-weight: 600; color: #334155;">Institute of Chemical Technology, Mumbai, Marathwada Campus, Jalna</div>
           </div>
           <div class="cv-contact-print" style="text-align: right;">
-            <div>Lilai, Malati Nagar, Khat Road, Bhandara, MH – 441904</div>
+            <div>Jalna, Maharashtra, India</div>
             <div>+91 8484968019</div>
-            <div>imt22vs.buddhe@stumarj.ictmumbai.edu.in</div>
+            <div>vaidarbhibuddhe@gmail.com</div>
             <div>linkedin.com/in/vaidarbhi-buddhe</div>
           </div>
         </div>
@@ -1069,14 +1142,14 @@
           </div>
           <div class="cv-entry-print">
             <div class="cv-entry-header-print">
-              <span>J M Patel Arts, Commerce and Science College, Bhandara</span>
+              <span>J M Patel Arts, Commerce and Science College</span>
               <span>2021 – 2022</span>
             </div>
-            <div class="cv-entry-sub-print">H.S.C. – 88.17%</div>
+            <div class="cv-entry-sub-print">H.S.C. – 88.17% (Science Stream)</div>
           </div>
           <div class="cv-entry-print">
             <div class="cv-entry-header-print">
-              <span>Nutan Kanya High School, Bhandara</span>
+              <span>Nutan Kanya High School</span>
               <span>2019 – 2020</span>
             </div>
             <div class="cv-entry-sub-print">S.S.C. – 100% (Rank 1 Distinction)</div>
@@ -1120,7 +1193,7 @@
             <ul class="cv-entry-bullets-print">
               <li>Analysed the impact of a proposed insulation upgrade from mineral wool to calcium silicate, assessing its effect on surface temperature, heat loss, energy consumption and emissions.</li>
               <li>Supported the assessment of reducing surface temperature from 6°C to 3°C and achieving a 50% reduction in heat loss along with associated energy and emissions savings.</li>
-              <li>Participated in Kaizen activities to identify and implement continuous, incremental process improvements on the plant floor and completed Lean Six Sigma Green Belt training alongside plant employees.</li>
+              <li>Participated in Kaizen activities to identify and implement continuous, incremental process improvements on the plant floor.</li>
             </ul>
           </div>
 
@@ -1160,7 +1233,7 @@
             </tr>
             <tr>
               <td>Data & Programming:</td>
-              <td>Python, MATLAB, Microsoft Excel, Minitab</td>
+              <td>Python, MATLAB, Microsoft Excel</td>
             </tr>
             <tr>
               <td>Analytical Techniques:</td>
@@ -1168,7 +1241,7 @@
             </tr>
             <tr>
               <td>Process & Energy Efficiency:</td>
-              <td>Energy Efficiency Assessment, Heat-Loss Analysis, Sustainability Analysis, Continuous Improvement, Lean Six Sigma</td>
+              <td>Energy Efficiency Assessment, Heat-Loss Analysis, Sustainability Analysis, Continuous Improvement, Six Sigma</td>
             </tr>
             <tr>
               <td>Industrial Tools:</td>

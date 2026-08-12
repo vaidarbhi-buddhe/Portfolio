@@ -13,10 +13,10 @@ const portfolioData = {
     institution: "Institute of Chemical Technology (ICT Mumbai), MARJ Jalna",
     classRank: "Class Rank: 3 / 45",
     cgpa: "8.73",
-    email: "imt22vs.buddhe@stumarj.ictmumbai.edu.in",
+    email: "vaidarbhibuddhe@gmail.com",
     phone: "+91 8484968019",
-    location: "Bhandara / Jalna, Maharashtra, India",
-    address: "Lilai, Malati Nagar, Near Zudio, Khat Road, Bhandara, Maharashtra – 441904",
+    location: "Jalna, Maharashtra, India",
+    address: "Jalna, Maharashtra, India",
     linkedin: "https://linkedin.com/in/vaidarbhi-buddhe",
     linkedinDisplay: "linkedin.com/in/vaidarbhi-buddhe",
     objective: "Aspiring Chemical Engineer with strong industrial and research experience, seeking to contribute to process engineering, process optimisation, data analysis, and sustainable manufacturing. Eager to apply analytical skills, simulation tools, and engineering knowledge to enhance process safety, operational efficiency, energy performance, and sustainability across the chemical and petrochemical industry."
@@ -92,13 +92,13 @@ const portfolioData = {
         "Evaluated thermal performance of switching from standard mineral wool to high-efficiency calcium silicate insulation.",
         "Calculated and validated outer surface temperature drop from 6°C above ambient to 3°C, achieving an outstanding ~50% reduction in surface heat loss.",
         "Quantified monetary fuel cost savings and metric tons of CO₂ equivalent emission reductions.",
-        "Participated actively in cross-functional plant Kaizen workshops and completed certified Lean Six Sigma Green Belt training."
+        "Participated actively in cross-functional plant Kaizen workshops and continuous process improvement initiatives."
       ],
-      technologies: ["Heat Transfer Analysis", "Calcium Silicate", "Energy Efficiency", "Lean Six Sigma", "Kaizen", "Emissions Reduction"],
+      technologies: ["Heat Transfer Analysis", "Calcium Silicate", "Energy Efficiency", "Six Sigma", "Kaizen", "Emissions Reduction"],
       metrics: [
         { label: "Heat Loss Drop", val: "50% Reduction" },
         { label: "Surface Temp Delta", val: "6°C → 3°C Reduction" },
-        { label: "Methodology", val: "Lean Six Sigma & Kaizen" }
+        { label: "Methodology", val: "Kaizen & Six Sigma" }
       ]
     },
     {
@@ -187,12 +187,12 @@ const portfolioData = {
       category: "Industrial Operations & Lean Systems",
       icon: "settings",
       skills: [
-        { name: "Lean Six Sigma (Green Belt Trained, White Belt Certified)", level: 90, desc: "DMAIC framework, root-cause defect elimination, process capability analysis" },
+        { name: "Lean Six Sigma (White Belt Certified)", level: 90, desc: "DMAIC framework, defect reduction, process variation control" },
         { name: "PLC-Controlled Blending Systems", level: 84, desc: "Automated manifold sequencing, valve interlocks, batch recipe management" },
         { name: "SAP ERP Systems", level: 78, desc: "Material management, production order tracking, plant inventory flows" },
         { name: "Kaizen & Continuous Improvement", level: 88, desc: "Shop-floor 5S, gemba walks, operational loss tracking, downtime reduction" },
         { name: "CATIA & P&ID Schematics", level: 75, desc: "Equipment layout visualization, piping and instrumentation diagram design" },
-        { name: "Minitab & Statistical Quality Control", level: 82, desc: "ANOVA, control charts, process variation analysis, Pareto optimization" }
+        { name: "Statistical Quality Control & SPC Tools", level: 82, desc: "Control charts, process variation analysis, Pareto optimization, quality assurance" }
       ]
     }
   ],
@@ -213,17 +213,17 @@ const portfolioData = {
     },
     {
       degree: "Higher Secondary Certificate (H.S.C. – Science)",
-      institution: "J M Patel Arts, Commerce and Science College, Bhandara",
+      institution: "J M Patel Arts, Commerce and Science College",
       period: "2021 – 2022",
       grade: "Score: 88.17%",
-      rank: "Distinction in Physical Sciences & Mathematics",
+      rank: "Science Stream (H.S.C.)",
       details: [
         "Intensive focus on Advanced Chemistry, Physics, and Higher Mathematics."
       ]
     },
     {
       degree: "Secondary School Certificate (S.S.C.)",
-      institution: "Nutan Kanya High School, Bhandara",
+      institution: "Nutan Kanya High School",
       period: "2019 – 2020",
       grade: "Score: 100% (Flawless 100% Score)",
       rank: "Rank 1 / Institutional Gold Standard",
@@ -265,14 +265,6 @@ const portfolioData = {
       type: "Award",
       icon: "star",
       desc: "Conferred for outstanding academic merit and leadership among female engineering scholars at ICT."
-    },
-    {
-      title: "Lean Six Sigma Green Belt Training",
-      issuer: "Indorama Synthetics Plant Program",
-      date: "Oct 2024",
-      type: "Training",
-      icon: "check-circle",
-      desc: "Applied industrial training covering Kaizen, statistical process control, and plant-floor energy audit."
     },
     {
       title: "2nd Place, State Level Rugby Championship",

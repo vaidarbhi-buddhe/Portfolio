@@ -336,7 +336,7 @@ const App = {
         // Open mailto link with pre-filled content
         const subject = encodeURIComponent(`[Portfolio Inquiry - ${topic}] Message from ${name}`);
         const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nTopic: ${topic}\n\nMessage:\n${msg}`);
-        window.location.href = `mailto:imt22vs.buddhe@stumarj.ictmumbai.edu.in?subject=${subject}&body=${body}`;
+        window.location.href = `mailto:vaidarbhibuddhe@gmail.com?subject=${subject}&body=${body}`;
 
         this.showToast(`Thank you, ${name}! Your email draft has been generated.`);
         form.reset();
@@ -346,8 +346,8 @@ const App = {
     const copyEmailBtn = document.getElementById('copy-email-btn');
     if (copyEmailBtn) {
       copyEmailBtn.addEventListener('click', () => {
-        navigator.clipboard.writeText('imt22vs.buddhe@stumarj.ictmumbai.edu.in').then(() => {
-          this.showToast('Email copied to clipboard: imt22vs.buddhe@stumarj.ictmumbai.edu.in');
+        navigator.clipboard.writeText('vaidarbhibuddhe@gmail.com').then(() => {
+          this.showToast('Email copied to clipboard: vaidarbhibuddhe@gmail.com');
         });
       });
     }
