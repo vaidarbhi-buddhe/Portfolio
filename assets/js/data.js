@@ -187,12 +187,11 @@ const portfolioData = {
       category: "Industrial Operations & Lean Systems",
       icon: "settings",
       skills: [
-        { name: "Lean Six Sigma (White Belt Certified)", level: 90, desc: "DMAIC framework, defect reduction, process variation control" },
+        { name: "Six Sigma White Belt Certified", level: 90, desc: "DMAIC methodology, root-cause defect elimination, process variation control" },
         { name: "PLC-Controlled Blending Systems", level: 84, desc: "Automated manifold sequencing, valve interlocks, batch recipe management" },
         { name: "SAP ERP Systems", level: 78, desc: "Material management, production order tracking, plant inventory flows" },
         { name: "Kaizen & Continuous Improvement", level: 88, desc: "Shop-floor 5S, gemba walks, operational loss tracking, downtime reduction" },
-        { name: "CATIA & P&ID Schematics", level: 75, desc: "Equipment layout visualization, piping and instrumentation diagram design" },
-        { name: "Statistical Quality Control & SPC Tools", level: 82, desc: "Control charts, process variation analysis, Pareto optimization, quality assurance" }
+        { name: "CATIA & P&ID Schematics", level: 75, desc: "Equipment layout visualization, piping and instrumentation diagram design" }
       ]
     }
   ],

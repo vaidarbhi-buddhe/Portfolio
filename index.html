@@ -364,7 +364,7 @@
           Real-Time <span class="gradient-text">Process & Thermodynamic</span> Simulators
         </h2>
         <p class="section-subtitle">
-          Test interactive mathematical and thermodynamic models derived directly from my research at CSIR-IIP and plant engineering projects at Indorama Synthetics.
+          Test interactive mathematical and thermodynamic models derived directly from my syngas conversion research at CSIR-IIP and fluid dynamics modeling.
         </p>
       </div>
 
@@ -376,19 +376,7 @@
             <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
             <path d="M2 12h20"></path>
           </svg>
-          <span>1. Aspen RGibbs Syngas-to-LPG Reactor</span>
-        </button>
-        <button class="sim-tab-btn" data-tab="heatloss-sim-pane">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
-          </svg>
-          <span>2. CF-HTM Heat Loss & Insulation Upgrade</span>
-        </button>
-        <button class="sim-tab-btn" data-tab="lab-sim-pane">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M6 18h12M6 14h12M6 10h12M6 6h12"></path>
-          </svg>
-          <span>3. GC & Karl Fischer Lab Console</span>
+          <span>1. Aspen RGibbs Syngas-to-LPG Reactor Simulator</span>
         </button>
         <button class="sim-tab-btn" data-tab="calc-sim-pane">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -397,7 +385,7 @@
             <line x1="16" y1="14" x2="16" y2="18"></line>
             <path d="M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M8 18h.01M12 18h.01"></path>
           </svg>
-          <span>4. Engineering Calc & Reynolds Flow</span>
+          <span>2. Chemical Engineering Calculations & Reynolds Flow</span>
         </button>
       </div>
 
@@ -430,41 +418,37 @@
 
             <div class="control-slider-group">
               <div class="slider-label-row">
-                <span>Feed Ratio (H₂ / CO)</span>
-                <span class="slider-val-readout" id="aspen-ratio-val">1.8 : 1</span>
+                <span>H₂ / CO Feed Ratio</span>
+                <span class="slider-val-readout" id="aspen-ratio-val">2.00 : 1</span>
               </div>
-              <input type="range" class="aspen-slider" id="aspen-ratio" min="0.5" max="3.0" step="0.1" value="1.8">
-              <span style="font-size: 0.72rem; color: var(--text-muted);">Stoichiometric requirement: 1.5 – 2.0</span>
+              <input type="range" class="aspen-slider" id="aspen-ratio" min="1.0" max="3.5" step="0.05" value="2.00">
+              <span style="font-size: 0.72rem; color: var(--text-muted);">Stoichiometric synthesis baseline: 2.0</span>
             </div>
 
-            <div style="background: var(--bg-card); padding: 0.85rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
-              <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--amber-400); display: block; margin-bottom: 0.2rem;">
-                CATALYST FORMULATION
-              </span>
-              <p style="font-size: 0.82rem; margin: 0; color: var(--text-secondary);">
-                Quaternary <strong>Cu–ZnO–ZrO₂–Al₂O₃ (CZZA)</strong> co-precipitated under pH 7.2 ± 0.1 at 65°C, calcined at 400°C.
-              </p>
+            <div class="control-slider-group">
+              <div class="slider-label-row">
+                <span>Gas Hourly Space Velocity (GHSV)</span>
+                <span class="slider-val-readout" id="aspen-ghsv-val">3,200 h⁻¹</span>
+              </div>
+              <input type="range" class="aspen-slider" id="aspen-ghsv" min="1000" max="8000" step="100" value="3200">
+              <span style="font-size: 0.72rem; color: var(--text-muted);">Residence time control: 1,000 – 8,000 h⁻¹</span>
             </div>
           </div>
 
-          <div class="aspen-vis-panel">
-            <div class="vis-header-row">
-              <div class="vis-mode-toggles">
-                <button class="vis-toggle-btn active" data-view="yield">LPG Selectivity Curve</button>
-                <button class="vis-toggle-btn" data-view="breakdown">Product Fractions</button>
-                <button class="vis-toggle-btn" data-view="stream">Aspen Stream Table</button>
-              </div>
-              <span class="badge badge-amber">Gibbs Free Energy Minimization</span>
+          <div class="aspen-chart-panel">
+            <div class="panel-title-badge">
+              <h4>Equilibrium Product Distribution</h4>
+              <span class="badge badge-amber">27-Reaction Rigorous RGibbs</span>
             </div>
-
-            <div class="chart-wrapper">
+            
+            <div class="aspen-canvas-box">
               <canvas id="aspen-chart-canvas"></canvas>
             </div>
 
-            <div class="aspen-telemetry-strip">
+            <div class="telemetry-grid">
               <div class="telemetry-card">
                 <span class="t-label">CO CONVERSION</span>
-                <span class="t-value" id="telem-conversion">82.4%</span>
+                <span class="t-value" id="telem-co-conv">82.4%</span>
               </div>
               <div class="telemetry-card">
                 <span class="t-label">LPG SELECTIVITY</span>
@@ -478,217 +462,6 @@
                 <span class="t-label">REACTOR PHASE</span>
                 <span class="t-value" id="telem-phase">Vapor Phase</span>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tab Pane 2: Heat Loss Calculator (Indorama Synthetics) -->
-      <div class="sim-content-pane" id="heatloss-sim-pane">
-        <div class="heatloss-grid">
-          <div class="calc-input-box">
-            <div class="panel-title-badge" style="margin-bottom: 1.5rem;">
-              <h4>CF-HTM Piping & Insulation Specs</h4>
-              <span class="badge badge-amber">Indorama Synthetics Project</span>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label">Insulation Material Specification</label>
-              <div class="material-selector-row">
-                <div class="mat-option-btn" data-material="bare">
-                  <strong>Bare Pipe</strong>
-                  <span>No Insulation</span>
-                </div>
-                <div class="mat-option-btn" data-material="mineral-wool">
-                  <strong>Mineral Wool</strong>
-                  <span>Standard (6°C Δ)</span>
-                </div>
-                <div class="mat-option-btn active" data-material="calcium-silicate">
-                  <strong>Calcium Silicate</strong>
-                  <span>Upgrade (3°C Δ)</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label">Transfer Line Total Length (meters)</label>
-              <input type="number" class="form-input" id="calc-length" value="120" min="10" max="1000">
-            </div>
-
-            <div class="form-group">
-              <label class="form-label">Thermal Fluid Operating Temperature (°C)</label>
-              <input type="number" class="form-input" id="calc-fluid-temp" value="285" min="100" max="400">
-            </div>
-
-            <div style="background: rgba(20, 184, 166, 0.08); border-left: 3px solid var(--teal-500); padding: 0.85rem; border-radius: 0 var(--radius-xs) var(--radius-xs) 0;">
-              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--teal-400); font-weight: 700;">
-                ENGINEERING RATIONALE
-              </span>
-              <p style="font-size: 0.85rem; margin-top: 0.2rem; color: var(--text-secondary);">
-                Upgrading to Calcium Silicate reduces exterior surface temperature from 6°C down to 3°C above ambient, cutting convective & radiative losses by 50%.
-              </p>
-              <h4>Insulation Material & Pipe Parameters</h4>
-              <span class="badge badge-teal">Indorama Synthetics CF-HTM</span>
-            </div>
-
-            <div class="material-selector-row">
-              <button class="mat-option-btn" data-mat="bare">
-                <strong>Bare Pipe</strong>
-                <span>No Insulation</span>
-              </button>
-              <button class="mat-option-btn" data-mat="mineral">
-                <strong>Mineral Wool</strong>
-                <span>k = 0.045 W/m·K</span>
-              </button>
-              <button class="mat-option-btn active" data-mat="calcium">
-                <strong>Calcium Silicate</strong>
-                <span>k = 0.055 W/m·K (High Temp)</span>
-              </button>
-            </div>
-
-            <div class="control-slider-group">
-              <div class="slider-label-row">
-                <span>HTM Fluid Temperature</span>
-                <span class="slider-val" id="htm-temp-val">280 °C</span>
-              </div>
-              <input type="range" id="calc-htm-temp" min="150" max="350" value="280" step="5" class="control-range">
-            </div>
-
-            <div class="control-slider-group">
-              <div class="slider-label-row">
-                <span>Ambient Air Temperature</span>
-                <span class="slider-val" id="amb-temp-val">30 °C</span>
-              </div>
-              <input type="range" id="calc-amb-temp" min="10" max="45" value="30" step="1" class="control-range">
-            </div>
-
-            <div class="control-slider-group">
-              <div class="slider-label-row">
-                <span>Insulation Thickness</span>
-                <span class="slider-val" id="thick-val">65 mm</span>
-              </div>
-              <input type="range" id="calc-thickness" min="25" max="150" value="65" step="5" class="control-range">
-            </div>
-
-            <div class="control-slider-group">
-              <div class="slider-label-row">
-                <span>Pipeline Length (CF-HTM Network)</span>
-                <span class="slider-val" id="len-val">120 m</span>
-              </div>
-              <input type="range" id="calc-pipe-length" min="20" max="500" value="120" step="10" class="control-range">
-            </div>
-          </div>
-
-          <div class="calc-output-box">
-            <div class="savings-hero-badge">
-              <span class="save-label">HEAT LOSS REDUCTION</span>
-              <div class="save-pct" id="calc-reduction-pct">51.2%</div>
-              <span class="save-tagline">vs Traditional Mineral Wool Baseline</span>
-            </div>
-
-            <div class="savings-stats-grid">
-              <div class="savings-stat-cell">
-                <span>SURFACE TEMPERATURE</span>
-                <strong id="calc-surface-temp">33.1 °C (3.1°C Δ)</strong>
-              </div>
-              <div class="savings-stat-cell">
-                <span>TOTAL HEAT LOSS FLUX</span>
-                <strong id="calc-total-loss">2.5 kW</strong>
-              </div>
-              <div class="savings-stat-cell">
-                <span>ANNUAL CO₂ SAVINGS</span>
-                <strong id="calc-co2-saved">15.2 MT / yr</strong>
-              </div>
-              <div class="savings-stat-cell">
-                <span>ESTIMATED FUEL SAVINGS</span>
-                <strong id="calc-annual-savings">₹ 1.43 Lakhs</strong>
-              </div>
-            </div>
-
-            <div style="margin-top: 1.5rem; text-align: center;">
-              <span class="badge badge-emerald">Six Sigma White Belt Certified Analysis</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tab Pane 3: Analytical Gas Chromatography (GC) Station -->
-      <div class="sim-content-pane" id="lab-sim-pane">
-        <div class="gc-full-console">
-          <!-- Gas Chromatography Console -->
-          <div class="lab-widget-card">
-            <div class="panel-title-badge">
-              <h4>Gas Chromatography (GC) Chromatogram Simulator</h4>
-              <span class="badge badge-teal">FID / TCD Detector</span>
-            </div>
-            <p style="font-size: 0.85rem; color: var(--text-muted);">
-              High-resolution capillary column trace resolving syngas products (CO/N₂, CH₄, C₂H₆, C₃H₈, C₄H₁₀, DME).
-            </p>
-            <div class="lab-canvas-box">
-              <canvas id="gc-chart-canvas"></canvas>
-            </div>
-            <div class="lab-actions-bar">
-              <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--teal-400);">Carrier: He @ 1.2 mL/min • Isothermal 180°C</span>
-              <button class="btn btn-primary btn-sm" id="gc-inject-btn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                </svg>
-                <span>Inject Sample</span>
-              </button>
-            </div>
-          </div>
-          <!-- GC Peak Integration & Quantitative Report -->
-          <div class="lab-widget-card">
-            <div class="panel-title-badge">
-              <h4>Peak Integration & Stream Assay</h4>
-              <span class="badge badge-amber">Quantitative Assay</span>
-            </div>
-            <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.25rem;">
-              Resolved retention times (t_R) and integrated area selectivity breakdown for syngas products:
-            </p>
-            <table class="gc-peak-table">
-              <thead>
-                <tr>
-                  <th>Compound</th>
-                  <th>Retention (t_R)</th>
-                  <th>Area %</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><span style="color: #94a3b8;">●</span> CO / N₂</td>
-                  <td>1.20 min</td>
-                  <td>14.2%</td>
-                </tr>
-                <tr>
-                  <td><span style="color: #f87171;">●</span> CH₄ (Methane)</td>
-                  <td>2.40 min</td>
-                  <td>18.5%</td>
-                </tr>
-                <tr>
-                  <td><span style="color: #fbbf24;">●</span> C₂H₆ (Ethane)</td>
-                  <td>3.80 min</td>
-                  <td>9.1%</td>
-                </tr>
-                <tr>
-                  <td><span style="color: #2dd4bf;">●</span> C₃H₈ (Propane)</td>
-                  <td>5.60 min</td>
-                  <td>34.6%</td>
-                </tr>
-                <tr>
-                  <td><span style="color: #38bdf8;">●</span> C₄H₁₀ (Butane)</td>
-                  <td>7.40 min</td>
-                  <td>16.8%</td>
-                </tr>
-                <tr>
-                  <td><span style="color: #c084fc;">●</span> DME / Alcohols</td>
-                  <td>8.80 min</td>
-                  <td>6.8%</td>
-                </tr>
-              </tbody>
-            </table>
-            <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); border-top: 1px solid var(--border-subtle); padding-top: 0.5rem;">
-              Column: HP-PLOT Q Capillary (30m × 0.32mm × 20µm) • Calibration: ASTM D1946
             </div>
           </div>
         </div>
@@ -1279,7 +1052,6 @@
   <script src="assets/js/data.js"></script>
   <script src="assets/js/particles.js"></script>
   <script src="assets/js/simulators.js"></script>
-  <script src="assets/js/lab-explorer.js"></script>
   <script src="assets/js/engineering-calc.js"></script>
   <script src="assets/js/app.js"></script>
 </body>
