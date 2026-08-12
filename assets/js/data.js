@@ -27,7 +27,7 @@ const portfolioData = {
     { value: "5+", label: "Industrial & Research Stints", icon: "factory", highlight: "CSIR-IIP, Lubes, Synthetics" },
     { value: "27", label: "Reaction Network Modeled", icon: "atom", highlight: "Aspen Plus RGibbs" },
     { value: "50%", label: "Heat Loss Reduction", icon: "flame", highlight: "Indorama Synthetics" },
-    { value: "1,200+", label: "Students Mentored", icon: "users", highlight: "STEM Science Outreach" }
+    { value: "500+", label: "Students Mentored", icon: "users", highlight: "STEM Science Outreach" }
   ],
 
   experiences: [
@@ -318,7 +318,7 @@ const portfolioData = {
       org: "Rainbow EduFest, Rotary Club of Jalna",
       period: "Feb 2023",
       icon: "heart",
-      description: "Led interactive live science experiments and STEM demonstrations across 15 schools, inspiring 1,200+ rural students in basic chemistry and engineering principles."
+      description: "Led interactive live science experiments and STEM demonstrations across 15 schools, inspiring 500+ students in basic chemistry and engineering principles."
     }
   ],
 
