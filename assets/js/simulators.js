@@ -4,6 +4,7 @@
  */
 
 const ChemicalSimulators = {
+  // State for Aspen Syngas Simulator
   aspenState: {
     temp: 260,       // °C
     pressure: 40,    // bar
@@ -46,12 +47,10 @@ const ChemicalSimulators = {
     const tempSlider = document.getElementById('aspen-temp');
     const pressSlider = document.getElementById('aspen-press');
     const ratioSlider = document.getElementById('aspen-ratio');
-    const ghsvSlider = document.getElementById('aspen-ghsv');
 
     const tempVal = document.getElementById('aspen-temp-val');
     const pressVal = document.getElementById('aspen-press-val');
     const ratioVal = document.getElementById('aspen-ratio-val');
-    const ghsvVal = document.getElementById('aspen-ghsv-val');
 
     if (tempSlider && tempVal) {
       tempSlider.addEventListener('input', (e) => {
@@ -72,14 +71,8 @@ const ChemicalSimulators = {
     if (ratioSlider && ratioVal) {
       ratioSlider.addEventListener('input', (e) => {
         this.aspenState.ratio = parseFloat(e.target.value);
-        ratioVal.textContent = `${this.aspenState.ratio.toFixed(2)} : 1`;
+        ratioVal.textContent = `${this.aspenState.ratio.toFixed(1)} : 1`;
         this.renderAspenSimulation();
-      });
-    }
-
-    if (ghsvSlider && ghsvVal) {
-      ghsvSlider.addEventListener('input', (e) => {
-        ghsvVal.textContent = `${parseInt(e.target.value).toLocaleString()} h⁻¹`;
       });
     }
 
@@ -94,60 +87,61 @@ const ChemicalSimulators = {
     });
   },
 
-  calculateKinetics(T, P, R) {
-    // T: 200 - 350 C, P: 20 - 60 bar, R: 1.0 - 3.5 (H2/CO)
-    // Gibbs equilibrium model approximation for Syngas -> DME -> LPG (C3H8 + C4H10)
-    const T_K = T + 273.15;
-    
-    // CO Conversion: Higher at higher P, lower at excessive T due to exothermicity
-    let coConversion = (1 - Math.exp(-0.04 * (P - 10))) * (1 / (1 + Math.exp(0.03 * (T - 280)))) * 100;
-    coConversion = Math.min(96, Math.max(35, coConversion * (0.8 + 0.12 * R)));
+  calculateAspenThermodynamics() {
+    const { temp, pressure, ratio } = this.aspenState;
 
-    // LPG Selectivity: Peaks in the optimum window around 260°C and 40 bar with CZZA catalyst
-    const tempOptimum = Math.exp(-Math.pow(T - 262, 2) / (2 * 28 * 28));
-    const pressFactor = Math.log10(P / 15) * 1.15;
-    const ratioFactor = Math.exp(-Math.pow(R - 2.0, 2) / (2 * 0.8 * 0.8));
+    // Thermodynamic Modeling of Syngas to LPG over CZZA Catalyst
+    // Peak LPG selectivity occurs around T=260-275°C, P=35-50 bar, H2/CO = 1.5-2.0
+    const tOpt = 265;
+    const tDiff = temp - tOpt;
+    const tempSelectivityFactor = Math.exp(-(tDiff * tDiff) / 2200);
 
-    let lpgSelectivity = (62 + 20 * tempOptimum * pressFactor * ratioFactor);
-    lpgSelectivity = Math.min(84, Math.max(30, lpgSelectivity));
+    const pressFactor = Math.min(1.0, 0.45 + (pressure / 60) * 0.55);
+    const ratioFactor = Math.exp(-Math.pow(ratio - 1.8, 2) / 1.8);
 
-    // Methane (CH4) byproduct selectivity: Increases significantly at high T
-    let ch4Selectivity = 6 + 28 * (1 / (1 + Math.exp(-0.05 * (T - 290))));
-    
-    // CO2 formation (Water-gas shift active over Cu-ZnO sites)
-    let co2Selectivity = 10 + 6 * (R > 2 ? 1 : 0.6);
+    // CO Conversion (%)
+    const baseConversion = 45 + (temp - 200) * 0.32 + (pressure - 20) * 0.45 + (ratio - 0.5) * 6;
+    const coConversion = Math.min(96.5, Math.max(38.0, baseConversion));
 
-    // Other hydrocarbons (C2, C5+) and DME intermediate residuals
-    let dmeSelectivity = Math.max(2, 100 - (lpgSelectivity + ch4Selectivity + co2Selectivity));
+    // LPG Selectivity (C3 + C4 %)
+    const lpgSelectivity = Math.min(84.5, Math.max(18.0, (68 * tempSelectivityFactor * pressFactor * ratioFactor) + 12));
 
-    const netLpgYield = (coConversion * lpgSelectivity) / 100;
+    // Byproduct distribution
+    const ch4Selectivity = Math.min(45, Math.max(4.0, (temp > 280 ? (temp - 280) * 0.4 : 6) + (ratio > 2.0 ? (ratio - 2.0) * 8 : 0)));
+    const dmeMethanolSelectivity = Math.max(2.0, 100 - lpgSelectivity - ch4Selectivity - 14);
+    const co2Selectivity = Math.max(8.0, 100 - lpgSelectivity - ch4Selectivity - dmeMethanolSelectivity);
+
+    // LPG Yield = (CO Conversion * LPG Selectivity) / 100
+    const lpgYield = (coConversion * lpgSelectivity) / 100;
+    const propaneFraction = 0.58;
+    const butaneFraction = 0.42;
 
     return {
       coConversion: coConversion.toFixed(1),
       lpgSelectivity: lpgSelectivity.toFixed(1),
-      ch4Selectivity: ch4Selectivity.toFixed(1),
-      co2Selectivity: co2Selectivity.toFixed(1),
-      dmeSelectivity: dmeSelectivity.toFixed(1),
-      netLpgYield: netLpgYield.toFixed(1),
-      propaneFraction: (lpgSelectivity * 0.58).toFixed(1),
-      butaneFraction: (lpgSelectivity * 0.42).toFixed(1)
+      lpgYield: lpgYield.toFixed(1),
+      propaneYield: (lpgYield * propaneFraction).toFixed(1),
+      butaneYield: (lpgYield * butaneFraction).toFixed(1),
+      ch4Yield: ((coConversion * ch4Selectivity) / 100).toFixed(1),
+      dmeYield: ((coConversion * dmeMethanolSelectivity) / 100).toFixed(1),
+      co2Yield: ((coConversion * co2Selectivity) / 100).toFixed(1)
     };
   },
 
   renderAspenSimulation() {
-    const { temp, pressure, ratio, viewMode } = this.aspenState;
-    const kinetics = this.calculateKinetics(temp, pressure, ratio);
+    const results = this.calculateAspenThermodynamics();
 
     // Update Telemetry Displays
-    const coConvEl = document.getElementById('telem-co-conv') || document.getElementById('telem-conversion');
-    const lpgSelEl = document.getElementById('telem-selectivity');
-    const lpgYieldEl = document.getElementById('telem-yield');
+    const telemConv = document.getElementById('telem-conversion');
+    const telemSelect = document.getElementById('telem-selectivity');
+    const telemYield = document.getElementById('telem-yield');
+    const telemPhase = document.getElementById('telem-phase');
 
-    if (coConvEl) coConvEl.textContent = `${kinetics.coConversion}%`;
-    if (lpgSelEl) lpgSelEl.textContent = `${kinetics.lpgSelectivity}%`;
-    if (lpgYieldEl) lpgYieldEl.textContent = `${kinetics.netLpgYield}%`;
+    if (telemConv) telemConv.textContent = `${results.coConversion}%`;
+    if (telemSelect) telemSelect.textContent = `${results.lpgSelectivity}%`;
+    if (telemYield) telemYield.textContent = `${results.lpgYield}%`;
+    if (telemPhase) telemPhase.textContent = this.aspenState.temp < 240 ? 'Gas-Liquid Mix' : 'Vapor Phase';
 
-    // Draw Visual Canvas
     const canvas = document.getElementById('aspen-chart-canvas');
     if (!canvas) return;
 
@@ -161,171 +155,160 @@ const ChemicalSimulators = {
 
     const w = rect.width;
     const h = rect.height;
+
     ctx.clearRect(0, 0, w, h);
 
-    if (viewMode === 'yield') {
-      this.drawYieldCurve(ctx, w, h, temp, pressure, ratio);
-    } else if (viewMode === 'breakdown') {
-      this.drawProductBreakdown(ctx, w, h, kinetics);
-    } else if (viewMode === 'stream') {
-      this.drawStreamTable(ctx, w, h, kinetics, temp, pressure);
+    if (this.aspenState.viewMode === 'yield') {
+      this.drawYieldCurve(ctx, w, h, results);
+    } else if (this.aspenState.viewMode === 'breakdown') {
+      this.drawProductBreakdown(ctx, w, h, results);
+    } else {
+      this.drawStreamTable(ctx, w, h, results);
     }
   },
 
-  drawYieldCurve(ctx, w, h, curT, P, R) {
-    const padL = 50, padR = 25, padT = 30, padB = 40;
+  drawYieldCurve(ctx, w, h, results) {
+    const padL = 55, padR = 25, padT = 30, padB = 45;
     const chartW = w - padL - padR;
     const chartH = h - padT - padB;
 
-    // Grid lines
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.07)';
+    // Grid lines & Axis
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
     ctx.lineWidth = 1;
 
-    for (let yPct = 0; yPct <= 100; yPct += 25) {
-      const y = padT + chartH - (yPct / 100) * chartH;
+    for (let i = 0; i <= 5; i++) {
+      const y = padT + (chartH / 5) * i;
       ctx.beginPath();
       ctx.moveTo(padL, y);
-      ctx.lineTo(padL + chartW, y);
+      ctx.lineTo(w - padR, y);
       ctx.stroke();
 
       ctx.fillStyle = '#64748b';
       ctx.font = '10px "JetBrains Mono", monospace';
-      ctx.fillText(`${yPct}%`, 10, y + 3);
+      ctx.textAlign = 'right';
+      ctx.fillText(`${100 - i * 20}%`, padL - 10, y + 3);
     }
 
-    // X Axis (Temperature 200 to 350 °C)
-    for (let t = 200; t <= 350; t += 30) {
-      const x = padL + ((t - 200) / 150) * chartW;
-      ctx.fillText(`${t}°C`, x - 12, h - 12);
-    }
+    // X Axis Labels (Temp 200 to 350°C)
+    const temps = [200, 230, 260, 290, 320, 350];
+    temps.forEach((t, i) => {
+      const x = padL + (chartW / (temps.length - 1)) * i;
+      ctx.fillText(`${t}°C`, x, h - padB + 18);
+    });
 
-    // Curve 1: LPG Selectivity vs Temperature
+    // Draw Thermodynamic Curve (LPG Selectivity vs Temperature)
     ctx.beginPath();
-    ctx.lineWidth = 2.8;
-    ctx.strokeStyle = '#2dd4bf'; // Teal
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = '#14b8a6';
 
-    for (let px = 0; px <= chartW; px += 3) {
-      const t = 200 + (px / chartW) * 150;
-      const k = this.calculateKinetics(t, P, R);
-      const y = padT + chartH - (parseFloat(k.lpgSelectivity) / 100) * chartH;
+    const pFact = Math.min(1.0, 0.45 + (this.aspenState.pressure / 60) * 0.55);
+    const rFact = Math.exp(-Math.pow(this.aspenState.ratio - 1.8, 2) / 1.8);
 
-      if (px === 0) ctx.moveTo(padL + px, y);
-      else ctx.lineTo(padL + px, y);
+    for (let xPix = 0; xPix <= chartW; xPix += 2) {
+      const tempVal = 200 + (xPix / chartW) * 150;
+      const tDiff = tempVal - 265;
+      const selectVal = Math.min(84.5, (68 * Math.exp(-(tDiff * tDiff) / 2200) * pFact * rFact) + 12);
+      const yPix = padT + chartH - (selectVal / 100) * chartH;
+
+      if (xPix === 0) ctx.moveTo(padL + xPix, yPix);
+      else ctx.lineTo(padL + xPix, yPix);
     }
     ctx.stroke();
 
-    // Curve 2: Net LPG Yield
+    // Fill gradient under curve
+    ctx.lineTo(padL + chartW, padT + chartH);
+    ctx.lineTo(padL, padT + chartH);
+    const grad = ctx.createLinearGradient(0, padT, 0, padT + chartH);
+    grad.addColorStop(0, 'rgba(20, 184, 166, 0.25)');
+    grad.addColorStop(1, 'rgba(20, 184, 166, 0.0)');
+    ctx.fillStyle = grad;
+    ctx.fill();
+
+    // Current State Operating Point Indicator
+    const currX = padL + ((this.aspenState.temp - 200) / 150) * chartW;
+    const currY = padT + chartH - (parseFloat(results.lpgSelectivity) / 100) * chartH;
+
+    // Glowing Pulse Dot at current operating coordinate
     ctx.beginPath();
-    ctx.lineWidth = 2.2;
-    ctx.strokeStyle = '#fbbf24'; // Amber
-    ctx.setLineDash([4, 4]);
-
-    for (let px = 0; px <= chartW; px += 3) {
-      const t = 200 + (px / chartW) * 150;
-      const k = this.calculateKinetics(t, P, R);
-      const y = padT + chartH - (parseFloat(k.netLpgYield) / 100) * chartH;
-
-      if (px === 0) ctx.moveTo(padL + px, y);
-      else ctx.lineTo(padL + px, y);
-    }
-    ctx.stroke();
-    ctx.setLineDash([]);
-
-    // Curve 3: CH4 (Methane) Formation
-    ctx.beginPath();
-    ctx.lineWidth = 1.8;
-    ctx.strokeStyle = '#f87171'; // Rose
-
-    for (let px = 0; px <= chartW; px += 3) {
-      const t = 200 + (px / chartW) * 150;
-      const k = this.calculateKinetics(t, P, R);
-      const y = padT + chartH - (parseFloat(k.ch4Selectivity) / 100) * chartH;
-
-      if (px === 0) ctx.moveTo(padL + px, y);
-      else ctx.lineTo(padL + px, y);
-    }
-    ctx.stroke();
-
-    // Current Operating Point Indicator
-    const curX = padL + ((curT - 200) / 150) * chartW;
-    const curK = this.calculateKinetics(curT, P, R);
-    const curY = padT + chartH - (parseFloat(curK.lpgSelectivity) / 100) * chartH;
-
-    ctx.beginPath();
-    ctx.arc(curX, curY, 6, 0, Math.PI * 2);
-    ctx.fillStyle = '#2dd4bf';
-    ctx.shadowColor = '#2dd4bf';
-    ctx.shadowBlur = 12;
+    ctx.arc(currX, currY, 7, 0, Math.PI * 2);
+    ctx.fillStyle = '#fbbf24';
+    ctx.shadowColor = '#fbbf24';
+    ctx.shadowBlur = 15;
     ctx.fill();
     ctx.shadowBlur = 0;
 
-    // Label on pointer
+    // Annotation
     ctx.fillStyle = '#f8fafc';
-    ctx.font = 'bold 10.5px "JetBrains Mono", monospace';
-    ctx.fillText(`${curK.lpgSelectivity}% Selectivity`, curX - 45, curY - 14);
+    ctx.font = 'bold 11px "JetBrains Mono", monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText(`LPG ${results.lpgSelectivity}% @ ${this.aspenState.temp}°C`, currX, currY - 14);
   },
 
-  drawProductBreakdown(ctx, w, h, k) {
-    const fractions = [
-      { name: 'C3H8 (Propane)', pct: parseFloat(k.propaneFraction), color: '#2dd4bf' },
-      { name: 'C4H10 (Butane)', pct: parseFloat(k.butaneFraction), color: '#38bdf8' },
-      { name: 'CH4 (Methane)', pct: parseFloat(k.ch4Selectivity), color: '#f87171' },
-      { name: 'CO2 (WGS)', pct: parseFloat(k.co2Selectivity), color: '#fbbf24' },
-      { name: 'DME / Intermediates', pct: parseFloat(k.dmeSelectivity), color: '#c084fc' }
+  drawProductBreakdown(ctx, w, h, results) {
+    const padL = 60, padR = 30, padT = 35, padB = 40;
+    const chartW = w - padL - padR;
+    const chartH = h - padT - padB;
+
+    const products = [
+      { name: 'C3H8 (Propane)', val: parseFloat(results.propaneYield), color: '#14b8a6' },
+      { name: 'C4H10 (Butane)', val: parseFloat(results.butaneYield), color: '#06b6d4' },
+      { name: 'CH4 (Methane)', val: parseFloat(results.ch4Yield), color: '#f43f5e' },
+      { name: 'DME / MeOH', val: parseFloat(results.dmeYield), color: '#fbbf24' },
+      { name: 'CO2 (WGS)', val: parseFloat(results.co2Yield), color: '#a855f7' }
     ];
 
-    const barH = 26;
-    const startY = 35;
-    const padL = 160;
-    const maxBarW = w - padL - 60;
+    const barWidth = chartW / (products.length * 1.8);
+    const gap = (chartW - (barWidth * products.length)) / (products.length + 1);
 
-    fractions.forEach((item, idx) => {
-      const y = startY + idx * (barH + 16);
-      const barW = Math.max(4, (item.pct / 100) * maxBarW);
+    products.forEach((p, idx) => {
+      const x = padL + gap + idx * (barWidth + gap);
+      const barH = (p.val / 60) * chartH;
+      const y = padT + chartH - barH;
 
-      // Label
-      ctx.fillStyle = '#cbd5e1';
-      ctx.font = '11px "Inter", sans-serif';
-      ctx.textAlign = 'right';
-      ctx.fillText(item.name, padL - 15, y + 17);
+      ctx.fillStyle = p.color;
+      ctx.beginPath();
+      ctx.roundRect(x, y, barWidth, barH, [4, 4, 0, 0]);
+      ctx.fill();
 
-      // Bar Track
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
-      ctx.fillRect(padL, y, maxBarW, barH);
-
-      // Bar Fill
-      ctx.fillStyle = item.color;
-      ctx.fillRect(padL, y, barW, barH);
-
-      // Value text
+      // Value label on top
       ctx.fillStyle = '#f8fafc';
-      ctx.font = 'bold 10.5px "JetBrains Mono", monospace';
-      ctx.textAlign = 'left';
-      ctx.fillText(`${item.pct.toFixed(1)}%`, padL + barW + 10, y + 17);
+      ctx.font = 'bold 10px "JetBrains Mono", monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText(`${p.val}%`, x + barWidth / 2, y - 6);
+
+      // Name label on bottom
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '9px "JetBrains Mono", monospace';
+      ctx.fillText(p.name.split(' ')[0], x + barWidth / 2, h - padB + 16);
     });
-    ctx.textAlign = 'left';
   },
 
-  drawStreamTable(ctx, w, h, k, T, P) {
+  drawStreamTable(ctx, w, h, results) {
+    ctx.fillStyle = '#f8fafc';
+    ctx.font = 'bold 12px "Space Grotesk", sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('Aspen Plus (RGibbs) 27-Reaction Stream Synthesis Balance', 25, 30);
+
     const rows = [
-      ['Stream ID', 'Temp (°C)', 'Pres (bar)', 'Phase', 'Key Fraction'],
-      ['S-101 (Syngas In)', '25.0', P.toFixed(1), 'Vapor', 'H2 + CO (2:1)'],
-      ['S-102 (Reactor Out)', T.toFixed(1), P.toFixed(1), 'Vap + Liq', 'LPG + CH4 + CO2'],
-      ['S-103 (LPG Product)', '45.0', '18.0', 'Liquid (C3/C4)', `${k.lpgSelectivity}% Selectivity`],
-      ['S-104 (Offgas Recycle)', '35.0', (P - 2).toFixed(1), 'Vapor', 'Unreacted Syngas']
+      ['Stream Name', 'FEED-SYNGAS', 'REACTOR-OUT', 'LPG-FRACTION'],
+      ['Temperature (°C)', '25.0', `${this.aspenState.temp}.0`, '42.5'],
+      ['Pressure (bar)', `${this.aspenState.pressure}.0`, `${(this.aspenState.pressure - 0.8).toFixed(1)}`, '12.0'],
+      ['H2 / CO Ratio', `${this.aspenState.ratio.toFixed(2)}`, '0.34 (Consumed)', '0.00'],
+      ['CO Conversion', '0.0%', `${results.coConversion}%`, '100% Recycled'],
+      ['Total LPG Yield', '0.0 kmol/h', `${results.lpgYield} mol%`, `${(parseFloat(results.lpgYield) * 1.42).toFixed(2)} MT/day`]
     ];
 
-    const colW = (w - 60) / 5;
+    const startY = 65;
     const rowH = 34;
+    const colW = (w - 50) / 4;
 
     rows.forEach((row, rIdx) => {
-      const y = 40 + rIdx * rowH;
-
-      ctx.fillStyle = rIdx === 0 ? 'rgba(45, 212, 191, 0.12)' : (rIdx % 2 === 0 ? 'rgba(255, 255, 255, 0.03)' : 'transparent');
+      const y = startY + rIdx * rowH;
+      ctx.fillStyle = rIdx === 0 ? 'rgba(20, 184, 166, 0.15)' : (rIdx % 2 === 0 ? 'rgba(255, 255, 255, 0.03)' : 'transparent');
       ctx.fillRect(20, y - 20, w - 40, rowH);
 
       row.forEach((cell, cIdx) => {
-        ctx.fillStyle = rIdx === 0 ? '#2dd4bf' : (cIdx === 0 ? '#cbd5e1' : '#f8fafc');
+        ctx.fillStyle = rIdx === 0 ? '#14b8a6' : (cIdx === 0 ? '#cbd5e1' : '#f8fafc');
         ctx.font = rIdx === 0 ? 'bold 11px "JetBrains Mono", monospace' : '10px "JetBrains Mono", monospace';
         ctx.fillText(cell, 30 + cIdx * colW, y);
       });

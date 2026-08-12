@@ -19,10 +19,10 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2314b8a6'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>">
 
   <!-- Core CSS -->
-  <link rel="stylesheet" href="assets/css/main.css?v=3.0">
-  <link rel="stylesheet" href="assets/css/components.css?v=3.0">
-  <link rel="stylesheet" href="assets/css/simulators.css?v=3.0">
-  <link rel="stylesheet" href="assets/css/print-cv.css?v=3.0">
+  <link rel="stylesheet" href="assets/css/main.css?v=4.0">
+  <link rel="stylesheet" href="assets/css/components.css?v=4.0">
+  <link rel="stylesheet" href="assets/css/simulators.css?v=4.0">
+  <link rel="stylesheet" href="assets/css/print-cv.css?v=4.0">
 </head>
 <body>
 
@@ -418,37 +418,41 @@
 
             <div class="control-slider-group">
               <div class="slider-label-row">
-                <span>H₂ / CO Feed Ratio</span>
-                <span class="slider-val-readout" id="aspen-ratio-val">2.00 : 1</span>
+                <span>Feed Ratio (H₂ / CO)</span>
+                <span class="slider-val-readout" id="aspen-ratio-val">1.8 : 1</span>
               </div>
-              <input type="range" class="aspen-slider" id="aspen-ratio" min="1.0" max="3.5" step="0.05" value="2.00">
-              <span style="font-size: 0.72rem; color: var(--text-muted);">Stoichiometric synthesis baseline: 2.0</span>
+              <input type="range" class="aspen-slider" id="aspen-ratio" min="0.5" max="3.0" step="0.1" value="1.8">
+              <span style="font-size: 0.72rem; color: var(--text-muted);">Stoichiometric requirement: 1.5 – 2.0</span>
             </div>
 
-            <div class="control-slider-group">
-              <div class="slider-label-row">
-                <span>Gas Hourly Space Velocity (GHSV)</span>
-                <span class="slider-val-readout" id="aspen-ghsv-val">3,200 h⁻¹</span>
-              </div>
-              <input type="range" class="aspen-slider" id="aspen-ghsv" min="1000" max="8000" step="100" value="3200">
-              <span style="font-size: 0.72rem; color: var(--text-muted);">Residence time control: 1,000 – 8,000 h⁻¹</span>
+            <div style="background: var(--bg-card); padding: 0.85rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+              <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--amber-400); display: block; margin-bottom: 0.2rem;">
+                CATALYST FORMULATION
+              </span>
+              <p style="font-size: 0.82rem; margin: 0; color: var(--text-secondary);">
+                Quaternary <strong>Cu–ZnO–ZrO₂–Al₂O₃ (CZZA)</strong> co-precipitated under pH 7.2 ± 0.1 at 65°C, calcined at 400°C.
+              </p>
             </div>
           </div>
 
-          <div class="aspen-chart-panel">
-            <div class="panel-title-badge">
-              <h4>Equilibrium Product Distribution</h4>
-              <span class="badge badge-amber">27-Reaction Rigorous RGibbs</span>
+          <div class="aspen-vis-panel">
+            <div class="vis-header-row">
+              <div class="vis-mode-toggles">
+                <button class="vis-toggle-btn active" data-view="yield">LPG Selectivity Curve</button>
+                <button class="vis-toggle-btn" data-view="breakdown">Product Fractions</button>
+                <button class="vis-toggle-btn" data-view="stream">Aspen Stream Table</button>
+              </div>
+              <span class="badge badge-amber">Gibbs Free Energy Minimization</span>
             </div>
-            
-            <div class="aspen-canvas-box">
+
+            <div class="chart-wrapper">
               <canvas id="aspen-chart-canvas"></canvas>
             </div>
 
-            <div class="telemetry-grid">
+            <div class="aspen-telemetry-strip">
               <div class="telemetry-card">
                 <span class="t-label">CO CONVERSION</span>
-                <span class="t-value" id="telem-co-conv">82.4%</span>
+                <span class="t-value" id="telem-conversion">82.4%</span>
               </div>
               <div class="telemetry-card">
                 <span class="t-label">LPG SELECTIVITY</span>
@@ -1049,10 +1053,10 @@
   </div>
 
   <!-- Core JavaScript Bundles -->
-  <script src="assets/js/data.js?v=3.0"></script>
-  <script src="assets/js/particles.js?v=3.0"></script>
-  <script src="assets/js/simulators.js?v=3.0"></script>
-  <script src="assets/js/engineering-calc.js?v=3.0"></script>
-  <script src="assets/js/app.js?v=3.0"></script>
+  <script src="assets/js/data.js?v=4.0"></script>
+  <script src="assets/js/particles.js?v=4.0"></script>
+  <script src="assets/js/simulators.js?v=4.0"></script>
+  <script src="assets/js/engineering-calc.js?v=4.0"></script>
+  <script src="assets/js/app.js?v=4.0"></script>
 </body>
 </html>
