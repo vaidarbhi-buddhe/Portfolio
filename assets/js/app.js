@@ -252,22 +252,40 @@ const App = {
             </div>
             <div>
               <h3>${cat.category}</h3>
-              <p style="font-size: 0.82rem; color: var(--teal-400); margin: 0;">${cat.skills.length} Core Competencies</p>
+              <p style="font-size: 0.82rem; color: var(--teal-400); margin: 0;">${cat.skills.length} Technical Competencies</p>
             </div>
           </div>
-          <div class="skill-items-list">
-            ${cat.skills.map(s => `
-              <div class="skill-item">
-                <div class="skill-row-header">
-                  <span class="skill-name">${s.name}</span>
-                  <span class="skill-pct">${s.level}%</span>
+          <div class="skills-card-grid">
+            ${cat.skills.map(s => {
+              const blocks = s.tier === 'Expert' ? 5 : s.tier === 'Advanced' ? 4 : 3;
+              return `
+              <div class="skill-node-card">
+                <div class="skill-node-top">
+                  <div class="skill-node-name">
+                    <span class="skill-beacon"></span>
+                    <strong>${s.name}</strong>
+                  </div>
+                  <span class="skill-tier-badge tier-${(s.tier || 'advanced').toLowerCase()}">${s.tier || 'Advanced'}</span>
                 </div>
-                <div class="skill-bar-track">
-                  <div class="skill-bar-fill" style="width: ${s.level}%;"></div>
+                <p class="skill-node-desc">${s.desc}</p>
+                <div class="skill-node-bottom">
+                  <span class="skill-applied-tag">${s.appliedAt || 'Industrial Application'}</span>
+                  <div class="skill-quantum-blocks" title="Engineering Mastery: ${s.tier}">
+                    ${[1, 2, 3, 4, 5].map(i => `<span class="q-block ${i <= blocks ? 'filled' : ''}"></span>`).join('')}
+                  </div>
                 </div>
-                <div class="skill-desc">${s.desc}</div>
+                ${s.simLink ? `
+                  <div style="margin-top: 0.55rem; padding-top: 0.5rem; border-top: 1px dashed var(--border-subtle); display: flex; justify-content: flex-end;">
+                    <a href="${s.simLink}" class="skill-sim-link">
+                      <span>Test in Live Lab</span>
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                      </svg>
+                    </a>
+                  </div>
+                ` : ''}
               </div>
-            `).join('')}
+            `;}).join('')}
           </div>
         </div>
       `).join('');
