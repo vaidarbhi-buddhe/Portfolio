@@ -164,7 +164,7 @@ body.loading-lock {
 }
 
 .fluid-wave {
-  animation: fluid-slosh 3s ease-in-out infinite alternate;
+  animation: fluid-slosh 4.5s ease-in-out infinite alternate;
   transform-origin: center;
 }
 
@@ -178,15 +178,15 @@ body.loading-lock {
 .bubble {
   fill: rgba(255, 255, 255, 0.85);
   filter: drop-shadow(0 0 4px var(--teal-400));
-  animation: bubble-rise 2.2s infinite ease-in;
+  animation: bubble-rise 3.2s infinite ease-in;
 }
 
-.b1 { cx: 78; cy: 170; r: 3.5; animation-delay: 0s; animation-duration: 1.8s; }
-.b2 { cx: 92; cy: 165; r: 2.2; animation-delay: 0.4s; animation-duration: 2.1s; }
-.b3 { cx: 84; cy: 175; r: 4;   animation-delay: 0.8s; animation-duration: 1.9s; }
-.b4 { cx: 100; cy: 170; r: 2.8; animation-delay: 1.1s; animation-duration: 2.3s; }
-.b5 { cx: 68; cy: 168; r: 2.5; animation-delay: 0.6s; animation-duration: 2.0s; }
-.b6 { cx: 88; cy: 160; r: 3.2; animation-delay: 1.4s; animation-duration: 1.7s; }
+.b1 { cx: 78; cy: 170; r: 3.5; animation-delay: 0s; animation-duration: 2.8s; }
+.b2 { cx: 92; cy: 165; r: 2.2; animation-delay: 0.6s; animation-duration: 3.1s; }
+.b3 { cx: 84; cy: 175; r: 4;   animation-delay: 1.2s; animation-duration: 2.9s; }
+.b4 { cx: 100; cy: 170; r: 2.8; animation-delay: 1.8s; animation-duration: 3.4s; }
+.b5 { cx: 68; cy: 168; r: 2.5; animation-delay: 0.9s; animation-duration: 3.0s; }
+.b6 { cx: 88; cy: 160; r: 3.2; animation-delay: 2.2s; animation-duration: 2.6s; }
 
 @keyframes bubble-rise {
   0% {
