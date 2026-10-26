@@ -125,7 +125,7 @@ const App = {
           <div class="exp-header-row">
             <div class="exp-org-info">
               <h3>${exp.company}</h3>
-              <div class="exp-role-title">${exp.role} • <span>${exp.location}</span></div>
+              <div class="exp-role-title">${exp.role} • <span>${exp.location}</span>${exp.guide ? ` • <span style="color: var(--amber-400); font-weight: 500;">Guide: ${exp.guide}</span>` : ''}</div>
             </div>
             <div class="exp-meta-pill">
               <span class="badge badge-teal">${exp.badge}</span>

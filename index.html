@@ -19,12 +19,120 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2314b8a6'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>">
 
   <!-- Core CSS -->
-  <link rel="stylesheet" href="assets/css/main.css?v=4.0">
-  <link rel="stylesheet" href="assets/css/components.css?v=4.0">
-  <link rel="stylesheet" href="assets/css/simulators.css?v=4.0">
-  <link rel="stylesheet" href="assets/css/print-cv.css?v=4.0">
+  <link rel="stylesheet" href="assets/css/loader.css?v=5.0">
+  <link rel="stylesheet" href="assets/css/main.css?v=5.0">
+  <link rel="stylesheet" href="assets/css/components.css?v=5.0">
+  <link rel="stylesheet" href="assets/css/simulators.css?v=5.0">
+  <link rel="stylesheet" href="assets/css/print-cv.css?v=5.0">
 </head>
-<body>
+<body class="loading-lock">
+
+  <!-- ========================================================================
+       Chemical Reaction Loading Screen (Kinetics & Equilibrium Simulation)
+       ======================================================================== -->
+  <div id="chemical-reaction-loader" aria-label="Loading Chemical Process Portfolio">
+    <div class="rxn-bg-glow"></div>
+    <div class="rxn-grid-lines"></div>
+
+    <div class="rxn-stage">
+      <div class="rxn-header">
+        <div class="rxn-badge">
+          <span class="rxn-badge-dot"></span>
+          <span>Catalytic Reaction In Progress</span>
+        </div>
+        <h2 class="rxn-engineer-title">Vaidarbhi Buddhe • <span>Chemical Engineer</span></h2>
+      </div>
+
+      <!-- Chemical Apparatus: Erlenmeyer Reactor with Fluid & Effervescent Bubbles -->
+      <div class="rxn-apparatus-wrapper">
+        <div class="rxn-molecular-ring">
+          <span class="rxn-molecule-pill">CZZA Active Sites</span>
+        </div>
+
+        <svg class="rxn-flask-svg" viewBox="0 0 170 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="fluidGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.85" />
+              <stop offset="50%" stop-color="#14b8a6" stop-opacity="0.9" />
+              <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.8" />
+            </linearGradient>
+          </defs>
+
+          <!-- Condensation Vapor Wisps leaving Neck -->
+          <path class="vapor-wisp" d="M78 25 C 75 18, 85 10, 80 4" />
+          <path class="vapor-wisp" d="M88 28 C 92 20, 84 12, 90 6" style="animation-delay: 0.8s;" />
+
+          <!-- Flask Interior Liquid -->
+          <path id="rxn-fluid-surface" class="flask-fluid fluid-wave" 
+                d="M52 135 C68 132, 102 138, 118 135 L142 182 C145 188, 140 194, 134 194 L36 194 C30 194, 25 188, 28 182 Z" 
+                fill="url(#fluidGrad)" />
+
+          <!-- Catalyst Pellet Active Sites (Bottom of Flask) -->
+          <circle class="catalyst-pellet" cx="48" cy="188" r="3" />
+          <circle class="catalyst-pellet" cx="62" cy="190" r="3.5" style="animation-delay: 0.4s;" />
+          <circle class="catalyst-pellet" cx="78" cy="187" r="4" style="animation-delay: 0.9s;" />
+          <circle class="catalyst-pellet" cx="95" cy="191" r="3" style="animation-delay: 0.2s;" />
+          <circle class="catalyst-pellet" cx="110" cy="188" r="3.5" style="animation-delay: 0.7s;" />
+          <circle class="catalyst-pellet" cx="124" cy="189" r="2.8" style="animation-delay: 1.1s;" />
+
+          <!-- Effervescent Rising Bubbles -->
+          <circle class="bubble b1" />
+          <circle class="bubble b2" />
+          <circle class="bubble b3" />
+          <circle class="bubble b4" />
+          <circle class="bubble b5" />
+          <circle class="bubble b6" />
+
+          <!-- Flask Outline Glass Body -->
+          <path class="flask-glass" 
+                d="M74 30 L74 65 L26 178 C21 190, 30 196, 42 196 L128 196 C140 196, 149 190, 144 178 L96 65 L96 30 Z" />
+          <!-- Flask Lip Rim -->
+          <path class="flask-glass" d="M70 30 L100 30" />
+
+          <!-- Measurement Graduation Ticks -->
+          <line class="flask-markings" x1="58" y1="165" x2="68" y2="165" />
+          <line class="flask-markings" x1="66" y1="145" x2="74" y2="145" />
+          <line class="flask-markings" x1="74" y1="125" x2="80" y2="125" />
+          <line class="flask-markings" x1="80" y1="105" x2="85" y2="105" />
+        </svg>
+      </div>
+
+      <!-- Chemical Reaction Formula Equation Banner -->
+      <div class="rxn-equation-strip">
+        <span class="rxn-reactant">CO + 2H₂</span>
+        <span class="rxn-arrow">⇄</span>
+        <span class="rxn-intermediate">CH₃OH</span>
+        <span class="rxn-arrow">➔</span>
+        <span class="rxn-intermediate">DME</span>
+        <span class="rxn-arrow">➔</span>
+        <span class="rxn-product">LPG (C₃H₈ + C₄H₁₀)</span>
+      </div>
+
+      <!-- Dynamic Reaction Status Terminal -->
+      <div class="rxn-status-box">
+        <div class="rxn-status-text" id="rxn-status-text">Initializing Syngas Reactor Feed (H₂/CO = 2.0)...</div>
+      </div>
+
+      <!-- Fluid Pipeline Progress Bar -->
+      <div class="rxn-pipe-track">
+        <div class="rxn-pipe-fill" id="rxn-pipe-fill"></div>
+      </div>
+
+      <!-- Telemetry Row -->
+      <div class="rxn-telemetry-row">
+        <span>Reactor: Aspen RGibbs @ 40 bar / 260°C</span>
+        <span class="rxn-pct-val" id="rxn-pct-val">0%</span>
+      </div>
+
+      <!-- Skip Button -->
+      <button class="rxn-skip-btn" id="rxn-skip-btn">
+        <span>Skip Simulation</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+  </div>
 
   <!-- ========================================================================
        Header & Navigation Bar
@@ -100,7 +208,7 @@
         </div>
 
         <p class="hero-bio">
-          Student at the prestigious <strong>Institute of Chemical Technology (ICT Mumbai - MARJ Jalna)</strong>. Combining rigorous thermodynamics, Aspen Plus process simulation, heterogeneous catalyst synthesis, and plant-floor energy optimization to solve modern industrial challenges.
+          Final-year Integrated M.Tech Chemical Engineering student at the prestigious <strong>Institute of Chemical Technology (ICT Mumbai - MARJ Jalna)</strong> (CGPA: 8.73) with hands-on experience across refinery research, lubricant manufacturing, energy-efficiency projects, and process operations. Skilled in Aspen Plus, Aspen HYSYS, Python, and data analysis.
         </p>
         <div class="hero-cta-group">
           <a href="#simulators" class="btn btn-primary">
@@ -155,6 +263,7 @@
               <h3>Vaidarbhi Buddhe</h3>
               <p>Chemical & Petrochemical Engineer</p>
               <div class="mini-pills">
+                <span class="badge badge-teal">Dow Intern</span>
                 <span class="badge badge-teal">CSIR Intern</span>
                 <span class="badge badge-amber">Six Sigma</span>
                 <span class="badge badge-cyan">Aspen Plus</span>
@@ -244,9 +353,9 @@
       <div class="about-grid">
         <div class="about-narrative">
           <div class="about-objective-card glass-card">
-            <h3>Career Objective</h3>
+            <h3>Professional Summary</h3>
             <p>
-              Aspiring Chemical Engineer with strong industrial and research experience, seeking to contribute to process engineering, process optimisation, data analysis, and sustainable manufacturing. Eager to apply analytical skills, simulation tools, and engineering knowledge to enhance process safety, operational efficiency, energy performance, and sustainability across the chemical and petrochemical industry.
+              Final-year Integrated M.Tech Chemical Engineering student (CGPA: 8.73) with hands-on experience across refinery research, lubricant manufacturing, energy-efficiency projects, and process operations. Skilled in Aspen Plus, Aspen HYSYS, Python, and data analysis, with experience in catalyst development, process simulation, production supervision, and continuous improvement. Interested in Process Engineering, Process Optimisation, Manufacturing, and Energy & Petrochemical Operations.
             </p>
           </div>
 
@@ -564,6 +673,34 @@
         <p class="section-subtitle">
           Hands-on process engineering, plant operations supervision, energy auditing, and thermodynamic modeling across petrochemical, chemical, and polymer sectors.
         </p>
+      </div>
+
+      <!-- Master's Thesis Spotlight -->
+      <div class="thesis-spotlight-card glass-card" style="margin-bottom: 2.25rem; border-left: 4px solid var(--teal-500); padding: 1.85rem; border-radius: var(--radius-lg); background: linear-gradient(135deg, rgba(20, 184, 166, 0.08) 0%, rgba(18, 28, 46, 0.8) 100%);">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 0.85rem;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.4rem;">
+              <span class="badge badge-teal">Master’s Thesis Research</span>
+              <span class="badge badge-amber">Mar 2026 – Present</span>
+            </div>
+            <h3 style="font-size: 1.25rem; margin: 0; color: var(--text-primary); font-family: var(--font-heading);">
+              Development of a Dynamic Model for Process Monitoring and Fault Detection
+            </h3>
+            <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.35rem; font-family: var(--font-mono);">
+              Institute of Chemical Technology (ICT Mumbai) • <span style="color: var(--teal-400);">Major Guide: Dr. Debashish Kundu</span> • <span>Minor Guide: Dr. Supriyo Kumar Mondal</span>
+            </div>
+          </div>
+        </div>
+        <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">
+          Focuses on developing an advanced process simulation framework integrated with AI/ML techniques to analyse dynamic plant behavior, identify operational anomalies, and support fault detection and diagnosis. The project aims to improve process reliability, operational efficiency, and energy performance through simulation-driven analysis and data-driven insights.
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+          <span class="badge">Dynamic Process Simulation</span>
+          <span class="badge">Fault Detection & Diagnosis (FDD)</span>
+          <span class="badge">AI/ML in Chemical Engineering</span>
+          <span class="badge">Plant Anomaly Identification</span>
+          <span class="badge">Operational Reliability</span>
+        </div>
       </div>
 
       <div class="experience-timeline" id="experience-timeline-container">
@@ -901,9 +1038,9 @@
         </div>
 
         <div class="cv-section-print">
-          <h2 class="cv-heading-print">Career Objective</h2>
+          <h2 class="cv-heading-print">Professional Summary</h2>
           <p style="font-size: 9.5pt; color: #334155; margin-bottom: 0;">
-            Aspiring Chemical Engineer with strong industrial and research experience, seeking to contribute to process engineering, process optimisation, data analysis, and sustainable manufacturing. Eager to apply analytical skills, simulation tools, and engineering knowledge to enhance process safety, operational efficiency, energy performance, and sustainability across the chemical and petrochemical industry.
+            Final-year Integrated M.Tech Chemical Engineering student (CGPA: 8.73) with hands-on experience across refinery research, lubricant manufacturing, energy-efficiency projects, and process operations. Skilled in Aspen Plus, Aspen HYSYS, Python, and data analysis, with experience in catalyst development, process simulation, production supervision, and continuous improvement. Interested in Process Engineering, Process Optimisation, Manufacturing, and Energy & Petrochemical Operations.
           </p>
         </div>
 
@@ -911,30 +1048,58 @@
           <h2 class="cv-heading-print">Education</h2>
           <div class="cv-entry-print">
             <div class="cv-entry-header-print">
-              <span>Institute of Chemical Technology, MARJ Jalna</span>
+              <span>Institute of Chemical Technology (ICT Mumbai)</span>
               <span>2022 – Expected 2027</span>
             </div>
-            <div class="cv-entry-sub-print">Integrated M.Tech in Chemical Engineering (Major) – Minor: Petroleum and Petrochemical Engineering</div>
-            <div style="font-size: 9pt; color: #475569;">Overall CGPA: 8.73 | (Class Rank: 3/45)</div>
+            <div class="cv-entry-sub-print">Integrated M.Tech., Chemical Engineering (Major); Minor: Petroleum and Petrochemical Engineering</div>
+            <div style="font-size: 9pt; color: #475569;">CGPA: 8.73 / 10.00 (Trimester 11) | Top Academic Standing</div>
           </div>
           <div class="cv-entry-print">
             <div class="cv-entry-header-print">
-              <span>J M Patel Arts, Commerce and Science College</span>
-              <span>2021 – 2022</span>
+              <span>J. M. Patel College of Arts, Science and Commerce</span>
+              <span>2022</span>
             </div>
-            <div class="cv-entry-sub-print">H.S.C. – 88.17% (Science Stream)</div>
+            <div class="cv-entry-sub-print">H.S.C. (Science), Maharashtra State Board – 88.17%</div>
           </div>
           <div class="cv-entry-print">
             <div class="cv-entry-header-print">
               <span>Nutan Kanya High School</span>
-              <span>2019 – 2020</span>
+              <span>2020</span>
             </div>
-            <div class="cv-entry-sub-print">S.S.C. – 100% (Rank 1 Distinction)</div>
+            <div class="cv-entry-sub-print">S.S.C., Maharashtra State Board – 100% (Gold Standard)</div>
+          </div>
+        </div>
+
+        <div class="cv-section-print">
+          <h2 class="cv-heading-print">Master’s Thesis Project</h2>
+          <div class="cv-entry-print">
+            <div class="cv-entry-header-print">
+              <span>Institute of Chemical Technology (ICT Mumbai)</span>
+              <span>Mar 2026 – Present</span>
+            </div>
+            <div class="cv-entry-sub-print">Thesis: “Development of a Dynamic Model for Process Monitoring and Fault Detection”</div>
+            <div style="font-size: 8.5pt; color: #475569; margin-bottom: 4px;">Major Guide: Dr. Debashish Kundu | Minor Guide: Dr. Supriyo Kumar Mondal</div>
+            <ul class="cv-entry-bullets-print">
+              <li>Developing a process simulation framework integrated with AI/ML techniques to analyse dynamic plant behavior, identify operational anomalies, and support fault detection and diagnosis.</li>
+              <li>Aims to improve process reliability, operational efficiency, and energy performance through simulation-driven analysis and data-driven insights.</li>
+            </ul>
           </div>
         </div>
 
         <div class="cv-section-print">
           <h2 class="cv-heading-print">Research & Industrial Experience</h2>
+
+          <div class="cv-entry-print">
+            <div class="cv-entry-header-print">
+              <span>Dow India Technology Centre (DITC), Navi Mumbai (MH)</span>
+              <span>Jul 2026 – Oct 2026</span>
+            </div>
+            <div class="cv-entry-sub-print">Project: “Data Interpretation for EOR Field Datasets: Decline Curve Fitting and Incremental Oil Determination” • Guide: Dr. Neeraj Rohilla</div>
+            <ul class="cv-entry-bullets-print">
+              <li>Analyzed production histories of 5 synthetic oil wells at Dow India Technology Centre (DITC), selecting DITC-5 for decline curve analysis using engineering assessment and production trend interpretation.</li>
+              <li>Developed and validated exponential, harmonic, and hyperbolic decline models using Python; selected the harmonic model based on the lowest blind-forecast errors (RMSE: 315.10, MAE: 292.06) to estimate ~527,000 barrels of apparent incremental oil.</li>
+            </ul>
+          </div>
           
           <div class="cv-entry-print">
             <div class="cv-entry-header-print">
@@ -1053,10 +1218,11 @@
   </div>
 
   <!-- Core JavaScript Bundles -->
-  <script src="assets/js/data.js?v=4.0"></script>
-  <script src="assets/js/particles.js?v=4.0"></script>
-  <script src="assets/js/simulators.js?v=4.0"></script>
-  <script src="assets/js/engineering-calc.js?v=4.0"></script>
-  <script src="assets/js/app.js?v=4.0"></script>
+  <script src="assets/js/loader.js?v=5.0"></script>
+  <script src="assets/js/data.js?v=5.0"></script>
+  <script src="assets/js/particles.js?v=5.0"></script>
+  <script src="assets/js/simulators.js?v=5.0"></script>
+  <script src="assets/js/engineering-calc.js?v=5.0"></script>
+  <script src="assets/js/app.js?v=5.0"></script>
 </body>
 </html>

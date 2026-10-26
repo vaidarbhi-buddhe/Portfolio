@@ -19,18 +19,53 @@ const portfolioData = {
     address: "Jalna, Maharashtra, India",
     linkedin: "https://linkedin.com/in/vaidarbhi-buddhe",
     linkedinDisplay: "linkedin.com/in/vaidarbhi-buddhe",
-    objective: "Aspiring Chemical Engineer with strong industrial and research experience, seeking to contribute to process engineering, process optimisation, data analysis, and sustainable manufacturing. Eager to apply analytical skills, simulation tools, and engineering knowledge to enhance process safety, operational efficiency, energy performance, and sustainability across the chemical and petrochemical industry."
+    summary: "Final-year Integrated M.Tech Chemical Engineering student (CGPA: 8.73) with hands-on experience across refinery research, lubricant manufacturing, energy-efficiency projects, and process operations. Skilled in Aspen Plus, Aspen HYSYS, Python, and data analysis, with experience in catalyst development, process simulation, production supervision, and continuous improvement. Interested in Process Engineering, Process Optimisation, Manufacturing, and Energy & Petrochemical Operations.",
+    objective: "Final-year Integrated M.Tech Chemical Engineering student (CGPA: 8.73) with hands-on experience across refinery research, lubricant manufacturing, energy-efficiency projects, and process operations. Skilled in Aspen Plus, Aspen HYSYS, Python, and data analysis, with experience in catalyst development, process simulation, production supervision, and continuous improvement. Interested in Process Engineering, Process Optimisation, Manufacturing, and Energy & Petrochemical Operations."
   },
 
   stats: [
     { value: "8.73", label: "CGPA (Rank 3/45)", icon: "award", highlight: "Academic Top 7%" },
-    { value: "5+", label: "Industrial & Research Stints", icon: "factory", highlight: "CSIR-IIP, Lubes, Synthetics" },
+    { value: "6", label: "Industrial & Research Stints", icon: "factory", highlight: "Dow, CSIR-IIP, Lubes, Synthetics" },
     { value: "27", label: "Reaction Network Modeled", icon: "atom", highlight: "Aspen Plus RGibbs" },
-    { value: "50%", label: "Heat Loss Reduction", icon: "flame", highlight: "Indorama Synthetics" },
+    { value: "527k", label: "Barrels Incremental Oil", icon: "droplet", highlight: "Dow EOR DCA Modeling" },
     { value: "500+", label: "Students Mentored", icon: "users", highlight: "STEM Science Outreach" }
   ],
 
+  thesis: {
+    title: "Development of a Dynamic Model for Process Monitoring and Fault Detection",
+    degree: "Master's Thesis – Integrated M.Tech Chemical Engineering",
+    period: "Mar 2026 – Present",
+    majorGuide: "Dr. Debashish Kundu",
+    minorGuide: "Dr. Supriyo Kumar Mondal",
+    institution: "Institute of Chemical Technology (ICT Mumbai)",
+    description: "Developing a process simulation framework integrated with AI/ML techniques to analyse dynamic plant behavior, identify operational anomalies, and support fault detection and diagnosis. The project aims to improve process reliability, operational efficiency, and energy performance through simulation-driven analysis and data-driven insights."
+  },
+
   experiences: [
+    {
+      id: "dow-ditc",
+      company: "Dow India Technology Centre (DITC)",
+      location: "Navi Mumbai, Maharashtra",
+      role: "Project Intern – EOR & Data Analytics",
+      period: "Jul 2026 – Oct 2026",
+      category: "Data Science & EOR",
+      badge: "Dow Tech Centre",
+      icon: "trending-up",
+      projectTitle: "Data Interpretation for EOR Field Datasets: Decline Curve Fitting and Incremental Oil Determination",
+      guide: "Dr. Neeraj Rohilla",
+      highlights: [
+        "Analyzed historical production histories of 5 synthetic oil wells at Dow India Technology Centre (DITC), selecting well DITC-5 for decline curve analysis based on engineering assessment and production trend interpretation.",
+        "Developed and validated exponential, harmonic, and hyperbolic decline models using Python to evaluate Enhanced Oil Recovery (EOR) performance.",
+        "Selected the harmonic decline model based on minimized blind-forecast error metrics (RMSE: 315.10, MAE: 292.06).",
+        "Estimated ~527,000 barrels of apparent incremental oil recovery using rigorous decline curve fitting and reservoir engineering methods."
+      ],
+      technologies: ["Python", "Decline Curve Analysis (DCA)", "Harmonic Modeling", "Enhanced Oil Recovery (EOR)", "RMSE / MAE Analytics", "Reservoir Engineering"],
+      metrics: [
+        { label: "Incremental Oil", val: "~527,000 Barrels" },
+        { label: "Optimal Model", val: "Harmonic DCA" },
+        { label: "Blind-Forecast Error", val: "RMSE: 315.10 | MAE: 292.06" }
+      ]
+    },
     {
       id: "csir-iip",
       company: "CSIR – Indian Institute of Petroleum (IIP)",

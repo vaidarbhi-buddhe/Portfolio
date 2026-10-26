@@ -10,15 +10,15 @@
 
 ---
 
-## 👩‍🔬 About Me
+## 👩‍🔬 Professional Summary
 
-Aspiring Chemical Engineer with strong industrial and research experience, focused on process engineering, process optimisation, data analysis, and sustainable manufacturing. Passionate about applying analytical skills, simulation tools, and engineering knowledge to improve process safety, operational efficiency, energy performance, and sustainability across the chemical and petrochemical industry.
+Final-year Integrated M.Tech Chemical Engineering student (CGPA: 8.73) with hands-on experience across refinery research, lubricant manufacturing, energy-efficiency projects, and process operations. Skilled in Aspen Plus, Aspen HYSYS, Python, and data analysis, with experience in catalyst development, process simulation, production supervision, and continuous improvement. Interested in Process Engineering, Process Optimisation, Manufacturing, and Energy & Petrochemical Operations.
 
 ---
 
 ## 🎓 Education
 
-**Institute of Chemical Technology, MARJ Jalna** — Integrated M.Tech, Chemical Engineering (Minor: Petroleum & Petrochemical Engineering)
+**Institute of Chemical Technology, MARJ Jalna** — Integrated M.Tech, Chemical Engineering (Minor: Petroleum & Petrochemical Engineering)  
 CGPA: 8.73 · Class Rank: 3/45 · 2022 – Expected 2027
 
 **J M Patel Arts, Commerce and Science College** — H.S.C. (Science Stream: 88.17%) · 2021 – 2022
@@ -27,7 +27,19 @@ CGPA: 8.73 · Class Rank: 3/45 · 2022 – Expected 2027
 
 ---
 
+## 🔬 Master’s Thesis
+
+**Development of a Dynamic Model for Process Monitoring and Fault Detection** — *Mar 2026 – Present*  
+*Institute of Chemical Technology (ICT Mumbai)*  
+*Major Guide: Dr. Debashish Kundu | Minor Guide: Dr. Supriyo Kumar Mondal*  
+Developing a process simulation framework integrated with AI/ML techniques to analyse dynamic plant behavior, identify operational anomalies, and support fault detection and diagnosis.
+
+---
+
 ## 🧪 Research & Industrial Experience
+
+**Dow India Technology Centre (DITC), Navi Mumbai** — *Jul 2026 – Oct 2026*  
+Project Intern: Data interpretation for Enhanced Oil Recovery (EOR) field datasets. Developed exponential, harmonic, and hyperbolic decline curve analysis (DCA) models in Python; harmonic model forecast ~527,000 barrels of apparent incremental oil (RMSE: 315.10, MAE: 292.06). Guide: Dr. Neeraj Rohilla.
 
 **CSIR – Indian Institute of Petroleum (IIP), Dehradun** — *Nov 2025 – Feb 2026*
 Research Intern: Thermodynamic and experimental analysis for syngas-to-LPG conversion; prepared CZZA catalysts, ran GC analysis, and simulated a 27-reaction network in Aspen Plus.
