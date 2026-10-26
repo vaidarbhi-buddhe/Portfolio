@@ -10,6 +10,7 @@ const App = {
     this.applyTheme('dark');
     this.setupMobileMenu();
     this.setupScrollSpy();
+    this.setupHeroDeck();
     this.setupModals();
     this.setupContactForm();
     this.renderDynamicContent();
@@ -70,6 +71,29 @@ const App = {
         link.classList.remove('active');
         if (link.getAttribute('href') === `#${current}`) {
           link.classList.add('active');
+        }
+      });
+    });
+  },
+
+  /* ------------------------------------------------------------------------
+     2.1 Hero Interactive Chemical Deck
+     ------------------------------------------------------------------------ */
+  setupHeroDeck() {
+    const tabs = document.querySelectorAll('.hero-deck-tab');
+    const panes = document.querySelectorAll('.hero-deck-pane');
+    if (!tabs.length || !panes.length) return;
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const deckId = tab.dataset.deck;
+        tabs.forEach(t => t.classList.remove('active'));
+        panes.forEach(p => p.classList.remove('active'));
+
+        tab.classList.add('active');
+        const target = document.getElementById(`deck-${deckId}`);
+        if (target) {
+          target.classList.add('active');
         }
       });
     });

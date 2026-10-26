@@ -472,6 +472,283 @@
 }
 
 /* --------------------------------------------------------------------------
+   Hero Executive Workstation Deck & Tabs
+   -------------------------------------------------------------------------- */
+.hero-deck-container {
+  background: rgba(10, 16, 28, 0.75);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.hero-deck-nav {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 0.65rem;
+  overflow-x: auto;
+}
+
+.hero-deck-tab {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+}
+
+.hero-deck-tab:hover {
+  color: var(--teal-400);
+  background: rgba(20, 184, 166, 0.08);
+}
+
+.hero-deck-tab.active {
+  background: rgba(20, 184, 166, 0.15);
+  border-color: rgba(20, 184, 166, 0.4);
+  color: var(--teal-400);
+  box-shadow: 0 0 10px rgba(20, 184, 166, 0.2);
+}
+
+.hero-deck-pane {
+  display: none;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.hero-deck-pane.active {
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   Executive Engineering Bento Grid
+   -------------------------------------------------------------------------- */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.bento-tile {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.bento-tile:hover {
+  border-color: var(--border-glow);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg), 0 0 20px rgba(45, 212, 191, 0.1);
+}
+
+.bento-span-12 { grid-column: span 12; }
+.bento-span-8 { grid-column: span 8; }
+.bento-span-7 { grid-column: span 7; }
+.bento-span-6 { grid-column: span 6; }
+.bento-span-5 { grid-column: span 5; }
+.bento-span-4 { grid-column: span 4; }
+
+.bento-header-tag {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.85rem;
+}
+
+.bento-tile h3 {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  margin-bottom: 0.6rem;
+  line-height: 1.35;
+}
+
+.bento-tile p {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.bento-metrics-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.bento-metric-cell {
+  background: rgba(10, 16, 28, 0.6);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xs);
+  padding: 0.6rem 0.75rem;
+  text-align: center;
+}
+
+.bento-metric-cell span {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.bento-metric-cell strong {
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  color: var(--teal-400);
+}
+
+/* --------------------------------------------------------------------------
+   Interactive Research & Industrial Experience Workstation
+   -------------------------------------------------------------------------- */
+.exp-workstation {
+  display: grid;
+  grid-template-columns: 330px 1fr;
+  gap: 1.75rem;
+  align-items: start;
+}
+
+.exp-nav-deck {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.exp-selector-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 1.15rem 1.25rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.exp-selector-btn::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: transparent;
+  transition: background var(--transition-fast);
+}
+
+.exp-selector-btn:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(45, 212, 191, 0.3);
+  transform: translateX(3px);
+}
+
+.exp-selector-btn.active {
+  background: rgba(20, 184, 166, 0.12);
+  border-color: var(--teal-500);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+}
+
+.exp-selector-btn.active::before {
+  background: var(--teal-400);
+}
+
+.exp-btn-company {
+  font-family: var(--font-heading);
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.exp-btn-role {
+  font-size: 0.82rem;
+  color: var(--teal-400);
+}
+
+.exp-btn-meta {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.exp-display-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-xl);
+  padding: 2.25rem;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.exp-display-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 1.5rem;
+}
+
+.exp-display-title {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  color: var(--text-primary);
+  margin-bottom: 0.4rem;
+}
+
+.exp-display-sub {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.exp-display-project {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  color: var(--amber-400);
+  margin-bottom: 1.25rem;
+  padding: 0.75rem 1rem;
+  background: rgba(245, 158, 11, 0.08);
+  border-left: 3px solid var(--amber-500);
+  border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+}
+
+@media (max-width: 960px) {
+  .bento-span-8, .bento-span-7, .bento-span-6, .bento-span-5, .bento-span-4 {
+    grid-column: span 12;
+  }
+  .exp-workstation {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --------------------------------------------------------------------------
    About Section & Pillars
    -------------------------------------------------------------------------- */
 .about-grid {

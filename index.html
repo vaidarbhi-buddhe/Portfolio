@@ -19,32 +19,49 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2314b8a6'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>">
 
   <!-- Core CSS -->
-  <link rel="stylesheet" href="assets/css/loader.css?v=6.0">
-  <link rel="stylesheet" href="assets/css/main.css?v=6.0">
-  <link rel="stylesheet" href="assets/css/components.css?v=6.0">
-  <link rel="stylesheet" href="assets/css/simulators.css?v=6.0">
-  <link rel="stylesheet" href="assets/css/print-cv.css?v=6.0">
+  <link rel="stylesheet" href="assets/css/loader.css?v=8.0">
+  <link rel="stylesheet" href="assets/css/main.css?v=8.0">
+  <link rel="stylesheet" href="assets/css/components.css?v=8.0">
+  <link rel="stylesheet" href="assets/css/simulators.css?v=8.0">
+  <link rel="stylesheet" href="assets/css/print-cv.css?v=8.0">
 </head>
 <body class="loading-lock">
 
   <!-- ========================================================================
-       Chemical Reaction Loading Screen (Kinetics & Equilibrium Simulation)
+       Chemical Reaction Loading Screen (Interactive Synthesis Lab)
        ======================================================================== -->
   <div id="chemical-reaction-loader" aria-label="Loading Chemical Process Portfolio">
     <div class="rxn-bg-glow"></div>
     <div class="rxn-grid-lines"></div>
+    <canvas id="rxn-click-canvas"></canvas>
 
     <div class="rxn-stage">
       <div class="rxn-header">
         <div class="rxn-badge">
           <span class="rxn-badge-dot"></span>
-          <span>Catalytic Reaction In Progress</span>
+          <span>Interactive Chemical Synthesis Lab</span>
         </div>
-        <h2 class="rxn-engineer-title">Vaidarbhi Buddhe • <span>Chemical Engineer</span></h2>
+        <h2 class="rxn-engineer-title">Vaidarbhi Buddhe • <span>Chemical Process Engineer</span></h2>
+      </div>
+
+      <!-- Live Dynamic Gauges Strip -->
+      <div class="rxn-gauges-strip">
+        <div class="rxn-gauge-box">
+          <span class="gauge-lbl">Temperature</span>
+          <span class="gauge-val" id="gauge-temp-val">25 °C</span>
+        </div>
+        <div class="rxn-gauge-box">
+          <span class="gauge-lbl">Pressure</span>
+          <span class="gauge-val" id="gauge-press-val">1.0 bar</span>
+        </div>
+        <div class="rxn-gauge-box">
+          <span class="gauge-lbl">LPG Conversion</span>
+          <span class="gauge-val" id="rxn-pct-val" style="color: var(--amber-400);">0%</span>
+        </div>
       </div>
 
       <!-- Chemical Apparatus: Erlenmeyer Reactor with Fluid & Effervescent Bubbles -->
-      <div class="rxn-apparatus-wrapper">
+      <div class="rxn-apparatus-wrapper" id="rxn-flask-wrapper" title="Click to stir reaction & trigger effervescence">
         <div class="rxn-molecular-ring">
           <span class="rxn-molecule-pill">CZZA Active Sites</span>
         </div>
@@ -97,6 +114,24 @@
         </svg>
       </div>
 
+      <!-- Click Hint -->
+      <div class="rxn-click-hint">
+        <span>👆 Click apparatus or tap reagents below to catalyze reaction</span>
+      </div>
+
+      <!-- Interactive Reagents Injection Toolbar -->
+      <div class="rxn-reagents-toolbar">
+        <button class="rxn-reagent-btn" id="reagent-syngas" title="Inject Syngas Feed">
+          <span>🧪 + Feed Syngas (CO+2H₂)</span>
+        </button>
+        <button class="rxn-reagent-btn" id="reagent-heat" title="Preheat Reactor">
+          <span>🔥 + Heat to 260°C & 40 bar</span>
+        </button>
+        <button class="rxn-reagent-btn" id="reagent-catalyst" title="Drop CZZA Catalyst">
+          <span>✨ + Charge CZZA Catalyst</span>
+        </button>
+      </div>
+
       <!-- Chemical Reaction Formula Equation Banner -->
       <div class="rxn-equation-strip">
         <span class="rxn-reactant">CO + 2H₂</span>
@@ -118,19 +153,18 @@
         <div class="rxn-pipe-fill" id="rxn-pipe-fill"></div>
       </div>
 
-      <!-- Telemetry Row -->
-      <div class="rxn-telemetry-row">
-        <span>Reactor: Aspen RGibbs @ 40 bar / 260°C</span>
-        <span class="rxn-pct-val" id="rxn-pct-val">0%</span>
+      <!-- Bottom Interactive Controls Strip -->
+      <div class="rxn-bottom-strip">
+        <button class="rxn-skip-btn" id="rxn-skip-btn">
+          <span>Skip to Portfolio →</span>
+        </button>
+        <button class="rxn-accelerate-btn" id="rxn-ignite-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+          <span>Ignite Rapid Synthesis</span>
+        </button>
       </div>
-
-      <!-- Skip Button -->
-      <button class="rxn-skip-btn" id="rxn-skip-btn">
-        <span>Skip Simulation</span>
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <polyline points="9 18 15 12 9 6"></polyline>
-        </svg>
-      </button>
     </div>
   </div>
 
@@ -264,20 +298,27 @@
             </div>
           </div>
 
-          <!-- Live Reactor Status Component -->
-          <div class="reactor-schematic">
-            <div class="schematic-header">
-              <span>REACTOR R-101 (Aspen RGibbs Equilibrium)</span>
-              <div class="live-pulse">
-                <span class="pulse-dot"></span>
-                <span>Active Simulation</span>
-              </div>
+          <!-- Live Interactive Chemical Engineering Deck -->
+          <div class="hero-deck-container">
+            <div class="hero-deck-nav">
+              <button class="hero-deck-tab active" data-deck="syngas">⚗️ Syngas-to-LPG</button>
+              <button class="hero-deck-tab" data-deck="eor">🛢️ Dow EOR Model</button>
+              <button class="hero-deck-tab" data-deck="thesis">🧠 Fault Detection</button>
             </div>
-            <div class="schematic-body">
+
+            <!-- Pane 1: Syngas to LPG (CSIR-IIP) -->
+            <div class="hero-deck-pane active" id="deck-syngas">
+              <div class="schematic-header">
+                <span>CSIR-IIP • REACTOR R-101 (Aspen RGibbs)</span>
+                <div class="live-pulse">
+                  <span class="pulse-dot"></span>
+                  <span>Active Simulation</span>
+                </div>
+              </div>
               <div class="reaction-equation">
                 CO + 2H₂ ⇌ CH₃OH ➔ DME ➔ LPG (C₃H₈ + C₄H₁₀)
               </div>
-              <div class="reactor-telemetry">
+              <div class="reactor-telemetry" style="margin-top: 0.75rem;">
                 <div class="telem-item">
                   <span class="telem-label">CATALYST</span>
                   <span class="telem-val">CZZA Quaternary</span>
@@ -287,8 +328,64 @@
                   <span class="telem-val">27 Reactions</span>
                 </div>
                 <div class="telem-item">
-                  <span class="telem-label">HEAT SAVED</span>
-                  <span class="telem-val">50% Reduction</span>
+                  <span class="telem-label">CO CONV.</span>
+                  <span class="telem-val">82.4%</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pane 2: Dow India EOR Decline Modeling -->
+            <div class="hero-deck-pane" id="deck-eor">
+              <div class="schematic-header">
+                <span>DOW INDIA TECH CENTRE • EOR ANALYTICS</span>
+                <div class="live-pulse">
+                  <span class="pulse-dot" style="background: var(--cyan-400); box-shadow: 0 0 8px var(--cyan-400);"></span>
+                  <span style="color: var(--cyan-400);">Harmonic DCA</span>
+                </div>
+              </div>
+              <div class="reaction-equation" style="color: var(--cyan-400); background: rgba(14, 165, 233, 0.08); border-left-color: var(--cyan-500);">
+                DCA: q(t) = qᵢ / (1 + b·Dᵢ·t) • Blind-Forecast Error Minimized
+              </div>
+              <div class="reactor-telemetry" style="margin-top: 0.75rem;">
+                <div class="telem-item">
+                  <span class="telem-label">TARGET WELL</span>
+                  <span class="telem-val">DITC-5</span>
+                </div>
+                <div class="telem-item">
+                  <span class="telem-label">EST. OIL</span>
+                  <span class="telem-val">~527k BBL</span>
+                </div>
+                <div class="telem-item">
+                  <span class="telem-label">RMSE ERROR</span>
+                  <span class="telem-val">315.10</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pane 3: Master's Thesis Dynamic Fault Detection -->
+            <div class="hero-deck-pane" id="deck-thesis">
+              <div class="schematic-header">
+                <span>ICT MUMBAI • MASTER'S THESIS</span>
+                <div class="live-pulse">
+                  <span class="pulse-dot" style="background: var(--amber-400); box-shadow: 0 0 8px var(--amber-400);"></span>
+                  <span style="color: var(--amber-400);">AI/ML FDD</span>
+                </div>
+              </div>
+              <div class="reaction-equation" style="color: var(--amber-400); background: rgba(245, 158, 11, 0.08); border-left-color: var(--amber-500);">
+                Dynamic Process Simulation + AI/ML Plant Fault Diagnosis
+              </div>
+              <div class="reactor-telemetry" style="margin-top: 0.75rem;">
+                <div class="telem-item">
+                  <span class="telem-label">GUIDE</span>
+                  <span class="telem-val">Dr. D. Kundu</span>
+                </div>
+                <div class="telem-item">
+                  <span class="telem-label">MINOR GUIDE</span>
+                  <span class="telem-val">Dr. S. K. Mondal</span>
+                </div>
+                <div class="telem-item">
+                  <span class="telem-label">CORE DOMAIN</span>
+                  <span class="telem-val">Dynamic FDD</span>
                 </div>
               </div>
             </div>
@@ -343,106 +440,153 @@
         </p>
       </div>
 
-      <div class="about-grid">
-        <div class="about-narrative">
-          <div class="about-objective-card glass-card">
-            <h3>Professional Summary</h3>
-            <p>
-              Final-year Integrated M.Tech Chemical Engineering student (CGPA: 8.73) with hands-on experience across refinery research, lubricant manufacturing, energy-efficiency projects, and process operations. Skilled in Aspen Plus, Aspen HYSYS, Python, and data analysis, with experience in catalyst development, process simulation, production supervision, and continuous improvement. Interested in Process Engineering, Process Optimisation, Manufacturing, and Energy & Petrochemical Operations.
-            </p>
+      <!-- Executive Engineering Bento Grid Layout -->
+      <div class="bento-grid">
+        <!-- Tile 1 (Span 8): Professional Profile & Career Philosophy -->
+        <div class="bento-tile bento-span-8" style="border-left: 4px solid var(--teal-500);">
+          <div class="bento-header-tag">
+            <span class="badge badge-teal">Core Profile • ICT Mumbai</span>
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);">CGPA 8.73 (Rank 3/45)</span>
           </div>
-
-          <div class="about-pillars-grid">
-            <div class="pillar-item">
-              <div class="pillar-icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <line x1="2" y1="12" x2="22" y2="12"></line>
-                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                </svg>
-              </div>
-              <h4>Process Simulation</h4>
-              <p>Aspen Plus (RGibbs, RadFrac), Aspen HYSYS, DWSIM, and reaction network modeling.</p>
+          <h3>Professional Summary & Career Objective</h3>
+          <p>
+            Final-year Integrated M.Tech Chemical Engineering student (CGPA: 8.73) with hands-on experience across refinery research, lubricant manufacturing, energy-efficiency projects, and process operations. Skilled in Aspen Plus, Aspen HYSYS, Python, and data analysis, with experience in catalyst development, process simulation, production supervision, and continuous improvement. Interested in Process Engineering, Process Optimisation, Manufacturing, and Energy & Petrochemical Operations.
+          </p>
+          <div class="bento-metrics-row">
+            <div class="bento-metric-cell">
+              <span>ACADEMIC STANDING</span>
+              <strong>CGPA 8.73</strong>
             </div>
-
-            <div class="pillar-item">
-              <div class="pillar-icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
-                </svg>
-              </div>
-              <h4>Energy Optimization</h4>
-              <p>CF-HTM heat transfer analysis, insulation upgrades, and carbon emission abatement.</p>
+            <div class="bento-metric-cell">
+              <span>CLASS MERIT</span>
+              <strong>Rank 3 / 45</strong>
             </div>
-
-            <div class="pillar-item">
-              <div class="pillar-icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
-                </svg>
-              </div>
-              <h4>Catalysis & Lab QA</h4>
-              <p>CZZA quaternary catalyst synthesis, Gas Chromatography (GC), and Karl Fischer titration.</p>
+            <div class="bento-metric-cell">
+              <span>EXPERIENCE</span>
+              <strong>6 Stints</strong>
             </div>
-
-            <div class="pillar-item">
-              <div class="pillar-icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-                </svg>
-              </div>
-              <h4>Plant Operations & Lean</h4>
-              <p>Lean Six Sigma, PLC automated blending systems, production audits, and Kaizen floor workflows.</p>
+            <div class="bento-metric-cell">
+              <span>HIGH SCHOOL</span>
+              <strong>100% S.S.C.</strong>
             </div>
           </div>
         </div>
 
-        <div class="factsheet-panel">
-          <div class="factsheet-card glass-card">
-            <h4 style="margin-bottom: 1rem; color: var(--teal-400);">Snapshot Profile</h4>
-            <div class="fact-row">
-              <span class="fact-label">CURRENT DEGREE</span>
-              <span class="fact-val">Integrated M.Tech (Chem Eng)</span>
+        <!-- Tile 2 (Span 4): Dow India EOR Project -->
+        <div class="bento-tile bento-span-4" style="background: linear-gradient(135deg, rgba(14, 165, 233, 0.08) 0%, var(--bg-card) 100%);">
+          <div class="bento-header-tag">
+            <span class="badge badge-cyan">Dow India Technology Centre</span>
+            <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--cyan-400);">Jul–Oct 2026</span>
+          </div>
+          <h3>EOR Decline Curve Analysis (DCA)</h3>
+          <p style="font-size: 0.88rem;">
+            Analyzed synthetic oil well histories at DITC. Developed Python DCA models; selected harmonic model based on minimum blind-forecast error (RMSE: 315.10, MAE: 292.06) to estimate ~527,000 barrels of incremental oil.
+          </p>
+          <div class="bento-metrics-row">
+            <div class="bento-metric-cell">
+              <span>INCREMENTAL OIL</span>
+              <strong style="color: var(--cyan-400);">~527k BBL</strong>
             </div>
-            <div class="fact-row">
-              <span class="fact-label">ACADEMIC MINOR</span>
-              <span class="fact-val">Petroleum & Petrochem Eng</span>
-            </div>
-            <div class="fact-row">
-              <span class="fact-label">INSTITUTION</span>
-              <span class="fact-val">ICT Mumbai (MARJ Jalna)</span>
-            </div>
-            <div class="fact-row">
-              <span class="fact-label">ACADEMIC STANDING</span>
-              <span class="fact-val" style="color: var(--amber-400);">CGPA 8.73 (Rank 3/45)</span>
-            </div>
-            <div class="fact-row">
-              <span class="fact-label">HIGHER SECONDARY (H.S.C.)</span>
-              <span class="fact-val" style="color: var(--teal-400);">88.17% (Science)</span>
-            </div>
-            <div class="fact-row">
-              <span class="fact-label">HIGH SCHOOL (S.S.C.)</span>
-              <span class="fact-val" style="color: var(--emerald-400);">100% (Rank 1 Distinction)</span>
-            </div>
-            <div class="fact-row">
-              <span class="fact-label">LOCATION</span>
-              <span class="fact-val">Jalna, Maharashtra</span>
+            <div class="bento-metric-cell">
+              <span>MODEL</span>
+              <strong style="color: var(--cyan-400);">Harmonic</strong>
             </div>
           </div>
+        </div>
 
-          <div class="factsheet-card glass-card">
-            <h4 style="margin-bottom: 0.5rem; color: var(--teal-400);">Languages & Interests</h4>
-            <div class="fact-row">
-              <span class="fact-label">LANGUAGES</span>
-              <span class="fact-val">English, Marathi, Hindi</span>
+        <!-- Tile 3 (Span 7): Master's Thesis Project -->
+        <div class="bento-tile bento-span-7" style="border-left: 4px solid var(--amber-500);">
+          <div class="bento-header-tag">
+            <span class="badge badge-amber">Master's Thesis Research</span>
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--amber-400);">Mar 2026 – Present</span>
+          </div>
+          <h3>Development of a Dynamic Model for Process Monitoring & Fault Detection</h3>
+          <p>
+            Developing a dynamic process simulation framework integrated with AI/ML techniques to analyse plant behavior, identify operational anomalies, and support fault detection and diagnosis (FDD) to improve process reliability and energy performance.
+          </p>
+          <div style="font-size: 0.82rem; color: var(--text-muted); font-family: var(--font-mono); margin-bottom: 0.75rem;">
+            ICT Mumbai • <span style="color: var(--amber-400);">Major Guide: Dr. Debashish Kundu</span> • <span>Minor Guide: Dr. Supriyo Kumar Mondal</span>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+            <span class="badge">Dynamic Simulation</span>
+            <span class="badge">AI/ML in ChemEng</span>
+            <span class="badge">Fault Diagnosis</span>
+            <span class="badge">Plant Reliability</span>
+          </div>
+        </div>
+
+        <!-- Tile 4 (Span 5): CSIR-IIP Flagship Catalysis -->
+        <div class="bento-tile bento-span-5" style="border-left: 4px solid var(--teal-400);">
+          <div class="bento-header-tag">
+            <span class="badge badge-teal">CSIR-IIP Dehradun</span>
+            <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--teal-400);">Nov 2025–Feb 2026</span>
+          </div>
+          <h3>Syngas-to-LPG Catalysis & Simulation</h3>
+          <p style="font-size: 0.88rem;">
+            Synthesized CZZA quaternary catalysts via pH-controlled co-precipitation. Modeled 27-reaction Gibbs thermodynamic equilibrium network in Aspen Plus.
+          </p>
+          <div class="bento-metrics-row">
+            <div class="bento-metric-cell">
+              <span>REACTIONS</span>
+              <strong>27 Modeled</strong>
             </div>
-            <span class="fact-label" style="display: block; margin-top: 0.75rem;">INTERESTS & ACTIVITIES</span>
-            <div class="interests-pill-box">
-              <span class="badge badge-teal">Journaling</span>
-              <span class="badge badge-amber">Sketching Schematics</span>
-              <span class="badge badge-cyan">Travelling & Heritage</span>
-              <span class="badge">State-Level Rugby</span>
-              <span class="badge">Science Outreach</span>
+            <div class="bento-metric-cell">
+              <span>CATALYST</span>
+              <strong>CZZA Site</strong>
+            </div>
+            <div class="bento-metric-cell">
+              <span>ANALYSIS</span>
+              <strong>GC (FID/TCD)</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tile 5 (Span 6): Technical Software & Systems Matrix -->
+        <div class="bento-tile bento-span-6">
+          <div class="bento-header-tag">
+            <span class="badge">Chemical Engineering Toolchain</span>
+          </div>
+          <h3>Software, Analytics & Industrial Systems</h3>
+          <p style="font-size: 0.88rem; margin-bottom: 0.75rem;">
+            Proficient across rigorous process simulators, computational mathematical packages, and industrial quality standards.
+          </p>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.45rem;">
+            <span class="badge badge-teal">Aspen Plus (RGibbs/RadFrac)</span>
+            <span class="badge badge-teal">Aspen HYSYS</span>
+            <span class="badge badge-teal">DWSIM</span>
+            <span class="badge badge-cyan">Python (NumPy/Pandas)</span>
+            <span class="badge badge-cyan">MATLAB</span>
+            <span class="badge badge-amber">Gas Chromatography (GC)</span>
+            <span class="badge badge-amber">HPLC</span>
+            <span class="badge badge-amber">Karl Fischer Titration</span>
+            <span class="badge">Six Sigma White Belt</span>
+            <span class="badge">PLC Blending</span>
+            <span class="badge">SAP ERP</span>
+          </div>
+        </div>
+
+        <!-- Tile 6 (Span 6): Academic Record & Honors -->
+        <div class="bento-tile bento-span-6">
+          <div class="bento-header-tag">
+            <span class="badge">Institutional Distinctions</span>
+          </div>
+          <h3>Academic Track Record & Honors</h3>
+          <div style="display: flex; flex-direction: column; gap: 0.65rem; margin-top: 0.5rem;">
+            <div class="fact-row" style="padding: 0.35rem 0;">
+              <span class="fact-label">Integrated M.Tech (Chem Eng)</span>
+              <span class="fact-val" style="color: var(--amber-400);">CGPA: 8.73 (Rank 3/45, Top 7%)</span>
+            </div>
+            <div class="fact-row" style="padding: 0.35rem 0;">
+              <span class="fact-label">Higher Secondary Certificate (H.S.C.)</span>
+              <span class="fact-val" style="color: var(--teal-400);">88.17% (Science Stream)</span>
+            </div>
+            <div class="fact-row" style="padding: 0.35rem 0;">
+              <span class="fact-label">Secondary School Certificate (S.S.C.)</span>
+              <span class="fact-val" style="color: var(--emerald-400);">100% (Rank 1 Gold Standard)</span>
+            </div>
+            <div class="fact-row" style="padding: 0.35rem 0;">
+              <span class="fact-label">Honorary Award</span>
+              <span class="fact-val" style="color: var(--cyan-400);">Vedvalli Vaidyanathan Girl Student Award</span>
             </div>
           </div>
         </div>
@@ -1211,11 +1355,11 @@
   </div>
 
   <!-- Core JavaScript Bundles -->
-  <script src="assets/js/loader.js?v=6.0"></script>
-  <script src="assets/js/data.js?v=6.0"></script>
-  <script src="assets/js/particles.js?v=6.0"></script>
-  <script src="assets/js/simulators.js?v=6.0"></script>
-  <script src="assets/js/engineering-calc.js?v=6.0"></script>
-  <script src="assets/js/app.js?v=6.0"></script>
+  <script src="assets/js/loader.js?v=8.0"></script>
+  <script src="assets/js/data.js?v=8.0"></script>
+  <script src="assets/js/particles.js?v=8.0"></script>
+  <script src="assets/js/simulators.js?v=8.0"></script>
+  <script src="assets/js/engineering-calc.js?v=8.0"></script>
+  <script src="assets/js/app.js?v=8.0"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 /* ==========================================================================
    VAIDARBHI BUDDHE - CHEMICAL ENGINEERING PORTFOLIO
-   Chemical Reaction Preloader & Process Ignition Screen
+   Interactive Chemical Synthesis Laboratory & Reactor Preloader
    ========================================================================== */
 
 body.loading-lock {
@@ -11,7 +11,7 @@ body.loading-lock {
   position: fixed;
   inset: 0;
   z-index: 999999;
-  background: radial-gradient(circle at 50% 45%, #111b2e 0%, #090e18 70%, #05080f 100%);
+  background: radial-gradient(circle at 50% 40%, #111d33 0%, #0a1120 60%, #050811 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,34 +19,36 @@ body.loading-lock {
   overflow: hidden;
   font-family: var(--font-sans);
   color: var(--text-primary);
-  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), 
-              visibility 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), 
+              visibility 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
+  user-select: none;
+  cursor: crosshair;
 }
 
 #chemical-reaction-loader.loader-hidden {
   opacity: 0;
   visibility: hidden;
-  transform: scale(1.04);
+  transform: scale(1.05);
   pointer-events: none;
 }
 
-/* Background Atmospheric Grid & Glow */
+/* Background Atmosphere & Grid */
 .rxn-bg-glow {
   position: absolute;
-  width: 480px;
-  height: 480px;
+  width: 550px;
+  height: 550px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(45, 212, 191, 0.16) 0%, rgba(14, 165, 233, 0.08) 50%, transparent 70%);
-  filter: blur(50px);
+  background: radial-gradient(circle, rgba(45, 212, 191, 0.18) 0%, rgba(14, 165, 233, 0.09) 45%, transparent 70%);
+  filter: blur(60px);
   pointer-events: none;
-  animation: pulse-ambient 4s ease-in-out infinite alternate;
+  animation: pulse-ambient 4.5s ease-in-out infinite alternate;
 }
 
 @keyframes pulse-ambient {
-  0% { transform: scale(0.9) translate(-5%, -5%); opacity: 0.6; }
-  100% { transform: scale(1.15) translate(5%, 5%); opacity: 1; }
+  0% { transform: scale(0.9) translate(-4%, -4%); opacity: 0.5; }
+  100% { transform: scale(1.15) translate(4%, 4%); opacity: 1; }
 }
 
 .rxn-grid-lines {
@@ -55,10 +57,18 @@ body.loading-lock {
   background-image: 
     linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 36px 36px;
+  background-size: 32px 32px;
   mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
   -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
   pointer-events: none;
+}
+
+/* Particle Spark Canvas for Interactive Clicks */
+#rxn-click-canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
 }
 
 /* Main Reaction Stage Container */
@@ -68,15 +78,15 @@ body.loading-lock {
   flex-direction: column;
   align-items: center;
   z-index: 2;
-  max-width: 580px;
-  width: 92%;
+  max-width: 660px;
+  width: 94%;
   padding: 1.5rem;
   text-align: center;
 }
 
 /* Header & Discipline Tag */
 .rxn-header {
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.85rem;
 }
 
 .rxn-badge {
@@ -85,33 +95,33 @@ body.loading-lock {
   gap: 0.5rem;
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--teal-400);
   background: rgba(20, 184, 166, 0.12);
   border: 1px solid rgba(20, 184, 166, 0.3);
-  padding: 0.35rem 0.85rem;
+  padding: 0.35rem 0.9rem;
   border-radius: 9999px;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.45rem;
 }
 
 .rxn-badge-dot {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: var(--teal-400);
-  box-shadow: 0 0 8px var(--teal-400);
+  box-shadow: 0 0 10px var(--teal-400);
   animation: rxn-dot-pulse 1.2s infinite ease-in-out;
 }
 
 @keyframes rxn-dot-pulse {
   0%, 100% { opacity: 0.4; transform: scale(0.85); }
-  50% { opacity: 1; transform: scale(1.25); }
+  50% { opacity: 1; transform: scale(1.3); }
 }
 
 .rxn-engineer-title {
   font-family: var(--font-heading);
-  font-size: 1.35rem;
+  font-size: 1.45rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--text-primary);
@@ -125,15 +135,59 @@ body.loading-lock {
   background-clip: text;
 }
 
-/* Chemical Apparatus Vessel (SVG) */
-.rxn-apparatus-wrapper {
-  position: relative;
-  width: 170px;
-  height: 200px;
-  margin: 0.75rem auto 1.5rem auto;
+/* Live Telemetry Gauges Row */
+.rxn-gauges-strip {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 1.25rem;
+  margin-bottom: 0.9rem;
+  width: 100%;
+}
+
+.rxn-gauge-box {
+  background: rgba(18, 28, 46, 0.75);
+  border: 1px solid var(--border-glass);
+  padding: 0.45rem 0.85rem;
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 95px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+}
+
+.gauge-lbl {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.gauge-val {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--teal-400);
+  transition: color 0.3s ease;
+}
+
+/* Chemical Apparatus Vessel (SVG) */
+.rxn-apparatus-wrapper {
+  position: relative;
+  width: 160px;
+  height: 190px;
+  margin: 0.4rem auto 0.9rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.rxn-apparatus-wrapper:hover .flask-glass {
+  stroke: var(--teal-400);
+  filter: drop-shadow(0 0 16px rgba(45, 212, 191, 0.45));
 }
 
 .rxn-flask-svg {
@@ -145,11 +199,12 @@ body.loading-lock {
 /* Glass Outline & Graduation Marks */
 .flask-glass {
   fill: none;
-  stroke: rgba(255, 255, 255, 0.3);
+  stroke: rgba(255, 255, 255, 0.35);
   stroke-width: 2.5;
   stroke-linecap: round;
   stroke-linejoin: round;
-  filter: drop-shadow(0 0 10px rgba(45, 212, 191, 0.2));
+  filter: drop-shadow(0 0 10px rgba(45, 212, 191, 0.25));
+  transition: all 0.3s ease;
 }
 
 .flask-markings {
@@ -160,11 +215,11 @@ body.loading-lock {
 
 /* Reacting Fluid with Wave Motion */
 .flask-fluid {
-  transition: fill 1.2s ease;
+  transition: fill 0.8s ease, d 0.8s ease;
 }
 
 .fluid-wave {
-  animation: fluid-slosh 4.5s ease-in-out infinite alternate;
+  animation: fluid-slosh 4s ease-in-out infinite alternate;
   transform-origin: center;
 }
 
@@ -178,70 +233,60 @@ body.loading-lock {
 .bubble {
   fill: rgba(255, 255, 255, 0.85);
   filter: drop-shadow(0 0 4px var(--teal-400));
-  animation: bubble-rise 3.2s infinite ease-in;
+  animation: bubble-rise 2.8s infinite ease-in;
 }
 
-.b1 { cx: 78; cy: 170; r: 3.5; animation-delay: 0s; animation-duration: 2.8s; }
-.b2 { cx: 92; cy: 165; r: 2.2; animation-delay: 0.6s; animation-duration: 3.1s; }
-.b3 { cx: 84; cy: 175; r: 4;   animation-delay: 1.2s; animation-duration: 2.9s; }
-.b4 { cx: 100; cy: 170; r: 2.8; animation-delay: 1.8s; animation-duration: 3.4s; }
-.b5 { cx: 68; cy: 168; r: 2.5; animation-delay: 0.9s; animation-duration: 3.0s; }
-.b6 { cx: 88; cy: 160; r: 3.2; animation-delay: 2.2s; animation-duration: 2.6s; }
+.b1 { cx: 78; cy: 170; r: 3.5; animation-delay: 0s; animation-duration: 2.6s; }
+.b2 { cx: 92; cy: 165; r: 2.2; animation-delay: 0.5s; animation-duration: 2.9s; }
+.b3 { cx: 84; cy: 175; r: 4;   animation-delay: 1.1s; animation-duration: 2.7s; }
+.b4 { cx: 100; cy: 170; r: 2.8; animation-delay: 1.7s; animation-duration: 3.2s; }
+.b5 { cx: 68; cy: 168; r: 2.5; animation-delay: 0.8s; animation-duration: 2.8s; }
+.b6 { cx: 88; cy: 160; r: 3.2; animation-delay: 2.1s; animation-duration: 2.5s; }
 
 @keyframes bubble-rise {
-  0% {
-    transform: translateY(0) scale(0.7);
-    opacity: 0;
-  }
-  20% {
-    opacity: 0.9;
-  }
-  80% {
-    opacity: 0.8;
-  }
-  100% {
-    transform: translateY(-85px) scale(1.15);
-    opacity: 0;
-  }
+  0% { transform: translateY(0) scale(0.7); opacity: 0; }
+  20% { opacity: 0.9; }
+  80% { opacity: 0.8; }
+  100% { transform: translateY(-85px) scale(1.15); opacity: 0; }
 }
 
 /* Catalyst Bed at Base of Flask */
 .catalyst-pellet {
   fill: var(--amber-400);
-  opacity: 0.75;
-  filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.6));
+  opacity: 0.8;
+  filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.65));
   animation: catalyst-glow 2s infinite alternate ease-in-out;
 }
 
 @keyframes catalyst-glow {
   0% { opacity: 0.5; transform: scale(0.95); }
-  100% { opacity: 0.95; transform: scale(1.05); }
+  100% { opacity: 1; transform: scale(1.1); }
 }
 
 /* Escaping Vapor Condensation at Flask Neck */
 .vapor-wisp {
-  stroke: rgba(45, 212, 191, 0.6);
+  stroke: rgba(45, 212, 191, 0.65);
   stroke-width: 1.5;
   stroke-linecap: round;
   fill: none;
-  animation: vapor-drift 2.5s infinite ease-out;
+  animation: vapor-drift 2.8s infinite ease-out;
 }
 
 @keyframes vapor-drift {
   0% { opacity: 0; transform: translateY(0) scaleX(0.8); }
-  50% { opacity: 0.7; }
+  50% { opacity: 0.75; }
   100% { opacity: 0; transform: translateY(-30px) scaleX(1.4); }
 }
 
 /* Orbiting Molecule Rings */
 .rxn-molecular-ring {
   position: absolute;
-  width: 230px;
-  height: 230px;
+  width: 220px;
+  height: 220px;
   border-radius: 50%;
-  border: 1px dashed rgba(45, 212, 191, 0.2);
+  border: 1px dashed rgba(45, 212, 191, 0.22);
   pointer-events: none;
-  animation: orbit-rotate 16s linear infinite;
+  animation: orbit-rotate 18s linear infinite;
 }
 
 .rxn-molecule-pill {
@@ -265,6 +310,74 @@ body.loading-lock {
   to { transform: rotate(360deg); }
 }
 
+/* Interactive Click Hint Pill */
+.rxn-click-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--amber-400);
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  margin-bottom: 0.75rem;
+  animation: pulse-hint 2s infinite ease-in-out;
+}
+
+@keyframes pulse-hint {
+  0%, 100% { opacity: 0.7; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-2px); }
+}
+
+/* Interactive Reagent Action Buttons */
+.rxn-reagents-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.rxn-reagent-btn {
+  background: rgba(18, 28, 46, 0.85);
+  border: 1px solid var(--border-glass);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.5rem 0.85rem;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.rxn-reagent-btn:hover {
+  background: rgba(20, 184, 166, 0.15);
+  border-color: var(--teal-500);
+  color: var(--teal-400);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(20, 184, 166, 0.25);
+}
+
+.rxn-reagent-btn:active {
+  transform: translateY(1px);
+}
+
+.rxn-reagent-btn.btn-active {
+  background: rgba(20, 184, 166, 0.25);
+  border-color: var(--teal-400);
+  color: #fff;
+  box-shadow: 0 0 12px rgba(45, 212, 191, 0.4);
+}
+
 /* Reaction Formula Equation Banner */
 .rxn-equation-strip {
   display: flex;
@@ -273,55 +386,33 @@ body.loading-lock {
   gap: 0.5rem;
   flex-wrap: wrap;
   font-family: var(--font-mono);
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   background: rgba(18, 28, 46, 0.7);
   border: 1px solid var(--border-glass);
-  padding: 0.6rem 1.1rem;
+  padding: 0.55rem 1rem;
   border-radius: var(--radius-sm);
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.85rem;
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
 }
 
-.rxn-reactant {
-  color: #38bdf8;
-  font-weight: 600;
-}
-
-.rxn-arrow {
-  color: var(--text-muted);
-  font-weight: 700;
-  animation: arrow-glow 1.5s infinite alternate;
-}
-
-@keyframes arrow-glow {
-  0% { color: var(--text-muted); text-shadow: none; }
-  100% { color: var(--amber-400); text-shadow: 0 0 8px var(--amber-400); }
-}
-
-.rxn-intermediate {
-  color: var(--amber-400);
-  font-weight: 600;
-}
-
-.rxn-product {
-  color: var(--teal-400);
-  font-weight: 700;
-  text-shadow: 0 0 10px rgba(45, 212, 191, 0.4);
-}
+.rxn-reactant { color: #38bdf8; font-weight: 600; }
+.rxn-arrow { color: var(--text-muted); font-weight: 700; }
+.rxn-intermediate { color: var(--amber-400); font-weight: 600; }
+.rxn-product { color: var(--teal-400); font-weight: 700; text-shadow: 0 0 10px rgba(45, 212, 191, 0.4); }
 
 /* Chemical Process Status Terminal */
 .rxn-status-box {
   width: 100%;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 .rxn-status-text {
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   color: var(--text-secondary);
-  height: 22px;
-  line-height: 22px;
-  transition: opacity 0.25s ease;
+  height: 24px;
+  line-height: 24px;
+  transition: opacity 0.2s ease;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -330,7 +421,7 @@ body.loading-lock {
 /* Process Fluid Pipeline Progress Bar */
 .rxn-pipe-track {
   width: 100%;
-  height: 8px;
+  height: 9px;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid var(--border-glass);
   border-radius: 9999px;
@@ -344,7 +435,7 @@ body.loading-lock {
   width: 0%;
   background: linear-gradient(90deg, #0ea5e9 0%, #14b8a6 50%, #f59e0b 100%);
   border-radius: 9999px;
-  transition: width 0.12s linear;
+  transition: width 0.08s linear;
   box-shadow: 0 0 14px rgba(20, 184, 166, 0.6);
   position: relative;
 }
@@ -366,33 +457,22 @@ body.loading-lock {
   100% { opacity: 0.3; }
 }
 
-/* Telemetry Stats Row */
-.rxn-telemetry-row {
+/* Bottom Controls Strip: Skip & Launch */
+.rxn-bottom-strip {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
-  margin-top: 0.5rem;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--text-muted);
+  margin-top: 1rem;
 }
 
-.rxn-pct-val {
-  color: var(--teal-400);
-  font-weight: 700;
-  font-size: 0.88rem;
-}
-
-/* Skip Option */
 .rxn-skip-btn {
-  margin-top: 1.25rem;
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   color: var(--text-muted);
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  padding: 0.35rem 0.9rem;
+  padding: 0.4rem 0.95rem;
   border-radius: 9999px;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -402,20 +482,48 @@ body.loading-lock {
 }
 
 .rxn-skip-btn:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.06);
   border-color: var(--teal-500);
   color: var(--teal-400);
 }
 
+.rxn-accelerate-btn {
+  background: linear-gradient(135deg, var(--teal-500), var(--cyan-600));
+  border: none;
+  color: #060b14;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.78rem;
+  padding: 0.45rem 1rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  box-shadow: 0 0 16px var(--teal-glow);
+  transition: all 0.2s ease;
+}
+
+.rxn-accelerate-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 20px rgba(45, 212, 191, 0.5);
+}
+
 @media (max-width: 640px) {
   .rxn-apparatus-wrapper {
-    width: 140px;
-    height: 170px;
-    margin: 0.5rem auto 1rem auto;
+    width: 130px;
+    height: 160px;
+  }
+  .rxn-reagents-toolbar {
+    gap: 0.4rem;
+  }
+  .rxn-reagent-btn {
+    font-size: 0.72rem;
+    padding: 0.4rem 0.65rem;
   }
   .rxn-equation-strip {
-    font-size: 0.75rem;
-    padding: 0.45rem 0.75rem;
+    font-size: 0.72rem;
+    padding: 0.4rem 0.65rem;
   }
   .rxn-status-text {
     font-size: 0.72rem;
