@@ -1484,9 +1484,23 @@
   padding: 1.5rem;
 }
 
-.modal-backdrop.open {
-  display: flex;
+.modal-backdrop.open,
+#exp-modal.open,
+#cv-modal.open {
+  display: flex !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
   animation: modal-fade-in 0.25s ease-out forwards;
+}
+
+#exp-modal,
+#cv-modal {
+  z-index: 9999999 !important;
+}
+
+body.modal-open {
+  overflow: hidden !important;
 }
 
 @keyframes modal-fade-in {
@@ -1517,6 +1531,8 @@
   align-items: center;
   justify-content: center;
   font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 20;
   transition: all var(--transition-fast);
 }
 

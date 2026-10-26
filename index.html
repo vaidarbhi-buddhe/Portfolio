@@ -19,11 +19,11 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2314b8a6'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>">
 
   <!-- Core CSS -->
-  <link rel="stylesheet" href="assets/css/loader.css?v=9.0">
-  <link rel="stylesheet" href="assets/css/main.css?v=9.0">
-  <link rel="stylesheet" href="assets/css/components.css?v=9.0">
-  <link rel="stylesheet" href="assets/css/simulators.css?v=9.0">
-  <link rel="stylesheet" href="assets/css/print-cv.css?v=9.0">
+  <link rel="stylesheet" href="assets/css/loader.css?v=10.0">
+  <link rel="stylesheet" href="assets/css/main.css?v=10.0">
+  <link rel="stylesheet" href="assets/css/components.css?v=10.0">
+  <link rel="stylesheet" href="assets/css/simulators.css?v=10.0">
+  <link rel="stylesheet" href="assets/css/print-cv.css?v=10.0">
 </head>
 <body class="loading-lock">
 
@@ -866,7 +866,7 @@
       </div>
 
       <!-- Master's Thesis Spotlight (Compact & Interactive) -->
-      <div class="thesis-spotlight-card glass-card exp-card-clickable" data-exp-id="thesis" role="button" tabindex="0" aria-haspopup="dialog" style="margin-bottom: 2rem; border-left: 4px solid var(--teal-500); padding: 1.5rem 1.85rem; cursor: pointer;">
+      <div class="thesis-spotlight-card glass-card exp-card-clickable" data-exp-id="thesis" onclick="openExperienceModal('thesis')" role="button" tabindex="0" aria-haspopup="dialog" style="margin-bottom: 2rem; border-left: 4px solid var(--teal-500); padding: 1.5rem 1.85rem; cursor: pointer;">
         <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 0.5rem;">
           <div>
             <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.35rem;">
@@ -881,7 +881,7 @@
               Institute of Chemical Technology (ICT Mumbai) • <span style="color: var(--teal-400);">Major Guide: Dr. Debashish Kundu</span> • <span>Minor Guide: Dr. Supriyo Kumar Mondal</span>
             </div>
           </div>
-          <button class="btn btn-outline-amber btn-sm exp-modal-btn" data-exp-id="thesis" aria-label="Pop out thesis details">
+          <button type="button" class="btn btn-outline-amber btn-sm exp-modal-btn" onclick="event.stopPropagation(); openExperienceModal('thesis')" data-exp-id="thesis" aria-label="Pop out thesis details">
             <span>View Full Thesis Scope</span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
@@ -1186,9 +1186,9 @@
   <!-- ========================================================================
        Interactive Experience Pop-Out Window Modal
        ======================================================================== -->
-  <div class="modal-backdrop" id="exp-modal" role="dialog" aria-modal="true" aria-labelledby="exp-modal-title">
+  <div class="modal-backdrop" id="exp-modal" role="dialog" aria-modal="true" aria-labelledby="exp-modal-title" onclick="if(event.target === this) closeExperienceModal()">
     <div class="modal-dialog glass-card exp-modal-dialog">
-      <button class="modal-close-btn" id="exp-modal-close" aria-label="Close Project Details">✕</button>
+      <button type="button" class="modal-close-btn" id="exp-modal-close" onclick="closeExperienceModal()" aria-label="Close Project Details">✕</button>
       <div id="exp-modal-content">
         <!-- Rendered dynamically via JavaScript -->
       </div>
@@ -1432,11 +1432,11 @@
   </div>
 
   <!-- Core JavaScript Bundles -->
-  <script src="assets/js/loader.js?v=9.0"></script>
-  <script src="assets/js/data.js?v=9.0"></script>
-  <script src="assets/js/particles.js?v=9.0"></script>
-  <script src="assets/js/simulators.js?v=9.0"></script>
-  <script src="assets/js/engineering-calc.js?v=9.0"></script>
-  <script src="assets/js/app.js?v=9.0"></script>
+  <script src="assets/js/loader.js?v=10.0"></script>
+  <script src="assets/js/data.js?v=10.0"></script>
+  <script src="assets/js/particles.js?v=10.0"></script>
+  <script src="assets/js/simulators.js?v=10.0"></script>
+  <script src="assets/js/engineering-calc.js?v=10.0"></script>
+  <script src="assets/js/app.js?v=10.0"></script>
 </body>
 </html>

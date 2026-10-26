@@ -121,7 +121,7 @@ const App = {
     const expContainer = document.getElementById('experience-timeline-container');
     if (expContainer) {
       expContainer.innerHTML = portfolioData.experiences.map((exp, idx) => `
-        <div class="exp-card glass-card exp-card-compact exp-card-clickable" data-exp-id="${exp.id}" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Open case study for ${exp.company}">
+        <div class="exp-card glass-card exp-card-compact exp-card-clickable" data-exp-id="${exp.id}" onclick="openExperienceModal('${exp.id}')" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Open case study for ${exp.company}">
           <div class="exp-node">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
@@ -145,7 +145,7 @@ const App = {
               <span class="badge badge-amber" style="font-size: 0.75rem;">${exp.metrics[0].label}: ${exp.metrics[0].val}</span>
               <span class="exp-preview-tech">${exp.technologies.slice(0, 3).join(' • ')}</span>
             </div>
-            <button class="btn-popout-prompt" data-exp-id="${exp.id}" aria-label="View case study">
+            <button type="button" class="btn-popout-prompt" onclick="event.stopPropagation(); openExperienceModal('${exp.id}')" data-exp-id="${exp.id}" aria-label="View case study for ${exp.company}">
               <span>View Case Study</span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
@@ -371,8 +371,9 @@ const App = {
 
     // Collect all experiences including thesis
     const allItems = [portfolioData.thesis, ...portfolioData.experiences];
-    const currIdx = allItems.findIndex(i => i.id === expId);
-    if (currIdx === -1) return;
+    const cleanId = String(expId || '').trim();
+    let currIdx = allItems.findIndex(i => i.id === cleanId);
+    if (currIdx === -1) currIdx = 0; // Safe fallback
 
     const item = allItems[currIdx];
     const prevItem = currIdx > 0 ? allItems[currIdx - 1] : allItems[allItems.length - 1];
@@ -435,23 +436,38 @@ const App = {
       ` : ''}
 
       <div class="exp-modal-footer-nav">
-        <button class="modal-nav-btn prev-exp-btn" data-target-id="${prevItem.id}">
+        <button type="button" class="modal-nav-btn prev-exp-btn" onclick="openExperienceModal('${prevItem.id}')" data-target-id="${prevItem.id}">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="15 18 9 12 15 6"></polyline>
           </svg>
           <span>${prevItem.company || 'Master’s Thesis'}</span>
         </button>
         <span class="modal-counter-text">${currIdx + 1} of ${allItems.length}</span>
-        <button class="modal-nav-btn next-exp-btn" data-target-id="${nextItem.id}">
+        <button type="button" class="modal-nav-btn next-exp-btn" onclick="openExperienceModal('${nextItem.id}')" data-target-id="${nextItem.id}">
           <span>${nextItem.company || 'Master’s Thesis'}</span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="9 18 15 12 9 6"></polyline>
           </svg>
         </button>
       </div>
+
+      <div style="display: flex; justify-content: center; margin-top: 1.25rem;">
+        <button type="button" class="btn btn-secondary btn-sm" onclick="closeExperienceModal()">
+          <span>Close Window (Esc)</span>
+        </button>
+      </div>
     `;
 
     modal.classList.add('open');
+    document.body.classList.add('modal-open');
+  },
+
+  closeExperienceModal() {
+    const modal = document.getElementById('exp-modal');
+    if (modal) {
+      modal.classList.remove('open');
+      document.body.classList.remove('modal-open');
+    }
   },
 
   /* ------------------------------------------------------------------------
@@ -534,7 +550,11 @@ const App = {
 };
 
 window.showToast = (msg, type) => App.showToast(msg, type);
+window.openExperienceModal = (id) => App.openExperienceModal(id);
+window.closeExperienceModal = () => App.closeExperienceModal();
 
-document.addEventListener('DOMContentLoaded', () => {
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => App.init());
+} else {
   App.init();
-});
+}
