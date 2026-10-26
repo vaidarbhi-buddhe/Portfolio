@@ -209,45 +209,173 @@ const portfolioData = {
       category: "Process Simulation & Modeling",
       icon: "cpu",
       skills: [
-        { name: "Aspen Plus (RGibbs, RadFrac, RYield)", tier: "Expert", level: 95, desc: "Thermodynamic equilibrium, kinetic reactor modeling, sensitivity analysis, 27-reaction networks", appliedAt: "CSIR-IIP RGibbs Synthesis", simLink: "#simulators" },
-        { name: "Aspen HYSYS", tier: "Advanced", level: 88, desc: "Petroleum refining simulations, flash separators, distillation columns, compressor loops", appliedAt: "Refinery Column Simulation", simLink: "#simulators" },
-        { name: "DWSIM Flowsheeting", tier: "Advanced", level: 85, desc: "Open-source chemical flowsheet development, CAPE-OPEN thermodynamic packages", appliedAt: "CAPE-OPEN Process Flowsheets" },
-        { name: "Python (NumPy, SciPy, Pandas)", tier: "Expert", level: 90, desc: "Process analytics, decline curve analysis (DCA), regression modeling, reactor optimization", appliedAt: "Dow India EOR Modeling (~527k BBL)" },
-        { name: "MATLAB & Symbolic Math", tier: "Advanced", level: 85, desc: "Differential equations for heat/mass transfer, ODE solvers, symbolic reaction kinetics", appliedAt: "Transport Phenomena Modeling" }
+        { 
+          name: "Aspen Plus (RGibbs, RadFrac, RYield)", 
+          tier: "Lead Specialist", 
+          domain: "Thermodynamic Kinetics", 
+          desc: "Thermodynamic equilibrium modeling, kinetic reactor design, and sensitivity analysis across 27-reaction networks.", 
+          appliedAt: "CSIR-IIP RGibbs Synthesis", 
+          simLink: "#simulators" 
+        },
+        { 
+          name: "Aspen HYSYS", 
+          tier: "Advanced Practitioner", 
+          domain: "Refining & Separations", 
+          desc: "Petroleum refining simulations, flash separators, multi-stage distillation columns, and compressor recycle loops.", 
+          appliedAt: "Refinery Column Simulation", 
+          simLink: "#simulators" 
+        },
+        { 
+          name: "DWSIM Flowsheeting", 
+          tier: "Advanced Practitioner", 
+          domain: "Flowsheet Architecture", 
+          desc: "Open-source chemical flowsheet synthesis, CAPE-OPEN thermodynamic packages, and property estimation.", 
+          appliedAt: "CAPE-OPEN Process Flowsheets" 
+        },
+        { 
+          name: "Python (NumPy, SciPy, Pandas)", 
+          tier: "Lead Specialist", 
+          domain: "Data & Decline Analytics", 
+          desc: "Process data analytics, Python decline curve analysis (DCA), regression modeling, and reactor optimization scripts.", 
+          appliedAt: "Dow India EOR Modeling (~527k BBL)" 
+        },
+        { 
+          name: "MATLAB & Symbolic Math", 
+          tier: "Advanced Practitioner", 
+          domain: "Transport Phenomena", 
+          desc: "Differential equations for heat/mass transfer, ODE numerical solvers, and symbolic reaction kinetics modeling.", 
+          appliedAt: "Transport Phenomena Modeling" 
+        }
       ]
     },
     {
       category: "Core Chemical & Petrochemical Engineering",
       icon: "git-merge",
       skills: [
-        { name: "Reaction Engineering & Catalysis", tier: "Expert", level: 94, desc: "Quaternary CZZA catalyst synthesis, pH co-precipitation, calcination, kinetic selectivity", appliedAt: "CSIR-IIP Quaternary CZZA Catalyst" },
-        { name: "Heat Transfer & Insulation Design", tier: "Expert", level: 92, desc: "CF-HTM systems, heat exchangers, LMTD/NTU methods, calcium silicate retrofits", appliedAt: "Indorama HTM Line (50% Loss Cut)" },
-        { name: "Mass Transfer & Separations", tier: "Advanced", level: 88, desc: "Distillation, absorption, solvent extraction, high-speed centrifugation, sparkler filters", appliedAt: "Downstream Solid-Liquid Unit Ops" },
-        { name: "Material & Energy Balances", tier: "Expert", level: 95, desc: "Steady-state and unsteady-state industrial plant mass and energy balance reconciliation", appliedAt: "Plant Production Audits & Material Balances" },
-        { name: "Process Safety & Hazard (HAZOP)", tier: "Advanced", level: 86, desc: "Exothermic reaction runaway prevention, pressure relief, HAZOP fundamentals, metallurgy", appliedAt: "Glass-Lined & SS316 Agitated Vessels" },
-        { name: "Decline Curve Analysis (DCA)", tier: "Expert", level: 92, desc: "Exponential, hyperbolic, and harmonic EOR models, RMSE/MAE blind-forecast optimization", appliedAt: "Dow India Tech Centre Well DITC-5" }
+        { 
+          name: "Reaction Engineering & Catalysis", 
+          tier: "Lead Specialist", 
+          domain: "Catalytic Synthesis", 
+          desc: "Quaternary CZZA catalyst synthesis, pH-controlled co-precipitation, calcination, and kinetic selectivity optimization.", 
+          appliedAt: "CSIR-IIP Quaternary CZZA Catalyst" 
+        },
+        { 
+          name: "Heat Transfer & Insulation Design", 
+          tier: "Lead Specialist", 
+          domain: "Thermal Efficiency", 
+          desc: "CF-HTM systems, heat exchangers, LMTD/NTU methods, and calcium silicate refractory insulation retrofits.", 
+          appliedAt: "Indorama HTM Line (50% Loss Cut)" 
+        },
+        { 
+          name: "Mass Transfer & Separations", 
+          tier: "Advanced Practitioner", 
+          domain: "Separation Unit Ops", 
+          desc: "Distillation, gas absorption, solvent extraction, high-speed centrifugation, and sparkler filter operations.", 
+          appliedAt: "Downstream Solid-Liquid Unit Ops" 
+        },
+        { 
+          name: "Material & Energy Balances", 
+          tier: "Lead Specialist", 
+          domain: "Plant Reconciliation", 
+          desc: "Steady-state and unsteady-state industrial plant mass and energy balance reconciliation, yield auditing, and loss reduction.", 
+          appliedAt: "Plant Production Audits & Balances" 
+        },
+        { 
+          name: "Process Safety & Hazard (HAZOP)", 
+          tier: "Advanced Practitioner", 
+          domain: "Plant Safety & Metallurgy", 
+          desc: "Exothermic reaction runaway prevention, pressure relief, HAZOP fundamentals, and SS316/glass-lined vessel safety.", 
+          appliedAt: "Glass-Lined & SS316 Agitated Vessels" 
+        },
+        { 
+          name: "Decline Curve Analysis (DCA)", 
+          tier: "Lead Specialist", 
+          domain: "Reservoir Forecasting", 
+          desc: "Exponential, hyperbolic, and harmonic EOR models, RMSE/MAE blind-forecast optimization, and reserve estimation.", 
+          appliedAt: "Dow India Tech Centre Well DITC-5" 
+        }
       ]
     },
     {
       category: "Analytical & Laboratory Techniques",
       icon: "activity",
       skills: [
-        { name: "Gas Chromatography (GC)", tier: "Expert", level: 90, desc: "TCD/FID detector calibration, hydrocarbon gas analysis, retention time profiling", appliedAt: "CSIR-IIP Hydrocarbon Product Assays" },
-        { name: "Karl Fischer (KF) Titration", tier: "Expert", level: 92, desc: "Volumetric moisture analysis, factor standardization, ppm-level water determination", appliedAt: "Clarion Organics Intermediate Moisture QA" },
-        { name: "HPLC Liquid Chromatography", tier: "Advanced", level: 82, desc: "Liquid intermediate purity verification, concentration assays, column separation", appliedAt: "Pharma Intermediate Purity Workflow" },
-        { name: "Viscosity Testing & Tribology", tier: "Advanced", level: 86, desc: "Kinematic viscosity bath, capillary viscometers for industrial lubricant formulations", appliedAt: "Ultra Plus Lubes Formulation Testing" },
-        { name: "Flash Point & Cold Flow Tests", tier: "Advanced", level: 88, desc: "Pensky-Martens closed cup flash point, pour point of petroleum fractions", appliedAt: "Petroleum Product Specifications" }
+        { 
+          name: "Gas Chromatography (GC)", 
+          tier: "Lead Specialist", 
+          domain: "Hydrocarbon Assays", 
+          desc: "TCD/FID detector calibration, hydrocarbon gas composition analysis, and retention time profiling.", 
+          appliedAt: "CSIR-IIP Hydrocarbon Product Assays" 
+        },
+        { 
+          name: "Karl Fischer (KF) Titration", 
+          tier: "Lead Specialist", 
+          domain: "Moisture Quantification", 
+          desc: "Volumetric moisture analysis, factor standardization, and ppm-level water determination in chemical intermediates.", 
+          appliedAt: "Clarion Organics Intermediate Moisture QA" 
+        },
+        { 
+          name: "HPLC Liquid Chromatography", 
+          tier: "Advanced Practitioner", 
+          domain: "Purity & Assay Verification", 
+          desc: "Liquid intermediate purity verification, concentration assays, and column retention separation workflows.", 
+          appliedAt: "Pharma Intermediate Purity Workflow" 
+        },
+        { 
+          name: "Viscosity Testing & Tribology", 
+          tier: "Advanced Practitioner", 
+          domain: "Lubricant Rheology", 
+          desc: "Kinematic viscosity bath calibration and capillary viscometer testing for industrial lubricant formulations.", 
+          appliedAt: "Ultra Plus Lubes Formulation Testing" 
+        },
+        { 
+          name: "Flash Point & Cold Flow Tests", 
+          tier: "Advanced Practitioner", 
+          domain: "Petroleum Standards", 
+          desc: "Pensky-Martens closed cup flash point, cloud point, and pour point characterization of petroleum fractions.", 
+          appliedAt: "Petroleum Product Specifications" 
+        }
       ]
     },
     {
       category: "Industrial Operations & Lean Systems",
       icon: "settings",
       skills: [
-        { name: "Six Sigma White Belt Certified", tier: "Expert", level: 90, desc: "DMAIC methodology, root-cause defect elimination, process variation control", appliedAt: "Kaizen & Plant Loss Mitigation" },
-        { name: "PLC-Controlled Blending Operations", tier: "Advanced", level: 86, desc: "Automated manifold sequencing, valve interlocks, batch recipe management", appliedAt: "Ultra Plus Lubes PLC Lines (12 Operators)" },
-        { name: "Kaizen & 5S Loss Reduction", tier: "Advanced", level: 88, desc: "Shop-floor 5S, gemba walks, operational loss tracking, nozzle wastage mitigation", appliedAt: "Indorama Kaizen Workshops" },
-        { name: "Injection Moulding Diagnostics", tier: "Advanced", level: 84, desc: "Cavity thermodynamics, melt rheology, defect elimination (flash, sink, voids, warpage)", appliedAt: "Sanjay Techno Polymer Troubleshooting" },
-        { name: "SAP ERP Systems & P&ID", tier: "Proficient", level: 80, desc: "Production order flows, plant inventory tracking, piping & instrumentation diagrams", appliedAt: "Plant Dispatch & Material Flows" }
+        { 
+          name: "Six Sigma White Belt Certified", 
+          tier: "Certified Specialist", 
+          domain: "DMAIC Quality Control", 
+          desc: "DMAIC methodology, root-cause defect elimination, process variation control, and quality assurance.", 
+          appliedAt: "Kaizen & Plant Loss Mitigation" 
+        },
+        { 
+          name: "PLC-Controlled Blending Operations", 
+          tier: "Advanced Practitioner", 
+          domain: "Automated Plant Controls", 
+          desc: "Automated manifold sequencing, valve interlocks, batch recipe management, and shop-floor team coordination.", 
+          appliedAt: "Ultra Plus Lubes PLC Lines (12 Operators)" 
+        },
+        { 
+          name: "Kaizen & 5S Loss Reduction", 
+          tier: "Advanced Practitioner", 
+          domain: "Lean Manufacturing", 
+          desc: "Shop-floor 5S implementation, gemba walks, operational waste tracking, and filling nozzle loss mitigation.", 
+          appliedAt: "Indorama Kaizen Workshops" 
+        },
+        { 
+          name: "Injection Moulding Diagnostics", 
+          tier: "Advanced Practitioner", 
+          domain: "Polymer Processing", 
+          desc: "Cavity thermodynamics, melt rheology, and systematic elimination of flash, sink marks, voids, and warpage.", 
+          appliedAt: "Sanjay Techno Polymer Troubleshooting" 
+        },
+        { 
+          name: "SAP ERP Systems & P&ID", 
+          tier: "Industrial Specialist", 
+          domain: "ERP & Instrumentation", 
+          desc: "Production order flows, plant inventory tracking, piping & instrumentation diagram (P&ID) schematics.", 
+          appliedAt: "Plant Dispatch & Material Flows" 
+        }
       ]
     }
   ],

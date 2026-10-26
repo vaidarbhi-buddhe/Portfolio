@@ -257,7 +257,7 @@ const App = {
           </div>
           <div class="skills-card-grid">
             ${cat.skills.map(s => {
-              const blocks = s.tier === 'Expert' ? 5 : s.tier === 'Advanced' ? 4 : 3;
+              const tierBadgeClass = s.tier.includes('Lead') ? 'tier-lead' : s.tier.includes('Certified') ? 'tier-certified' : 'tier-advanced';
               return `
               <div class="skill-node-card">
                 <div class="skill-node-top">
@@ -265,20 +265,21 @@ const App = {
                     <span class="skill-beacon"></span>
                     <strong>${s.name}</strong>
                   </div>
-                  <span class="skill-tier-badge tier-${(s.tier || 'advanced').toLowerCase()}">${s.tier || 'Advanced'}</span>
+                  <span class="skill-tier-badge ${tierBadgeClass}">${s.tier}</span>
                 </div>
                 <p class="skill-node-desc">${s.desc}</p>
                 <div class="skill-node-bottom">
-                  <span class="skill-applied-tag">${s.appliedAt || 'Industrial Application'}</span>
-                  <div class="skill-quantum-blocks" title="Engineering Mastery: ${s.tier}">
-                    ${[1, 2, 3, 4, 5].map(i => `<span class="q-block ${i <= blocks ? 'filled' : ''}"></span>`).join('')}
-                  </div>
+                  <span class="skill-domain-pill">
+                    <span class="pill-dot"></span>
+                    ${s.domain}
+                  </span>
+                  <span class="skill-applied-tag">${s.appliedAt}</span>
                 </div>
                 ${s.simLink ? `
-                  <div style="margin-top: 0.55rem; padding-top: 0.5rem; border-top: 1px dashed var(--border-subtle); display: flex; justify-content: flex-end;">
+                  <div class="skill-action-row">
                     <a href="${s.simLink}" class="skill-sim-link">
-                      <span>Test in Live Lab</span>
-                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <span>Launch Interactive Lab</span>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                         <polygon points="5 3 19 12 5 21 5 3"></polygon>
                       </svg>
                     </a>
