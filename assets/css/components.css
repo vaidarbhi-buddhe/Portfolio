@@ -1525,6 +1525,405 @@
   border-color: var(--rose-400);
 }
 
+/* --------------------------------------------------------------------------
+   Aesthetic Professional Summary (Bento Tile 1)
+   -------------------------------------------------------------------------- */
+.summary-lead-text {
+  font-size: 0.96rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 1.15rem;
+}
+
+.summary-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.85rem;
+  margin-bottom: 1.15rem;
+}
+
+@media (max-width: 768px) {
+  .summary-pillars-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.summary-pillar-card {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 0.95rem;
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  transition: all var(--transition-fast);
+}
+
+.summary-pillar-card:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(45, 212, 191, 0.25);
+  transform: translateY(-2px);
+}
+
+.pillar-icon {
+  font-size: 1.25rem;
+  line-height: 1;
+  padding-top: 2px;
+}
+
+.pillar-content strong {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 0.86rem;
+  color: var(--teal-400);
+  margin-bottom: 0.25rem;
+}
+
+.pillar-content p {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.summary-target-strip {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(10, 14, 22, 0.5);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 0.95rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.target-strip-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--amber-400);
+  letter-spacing: 0.05em;
+}
+
+.target-pills {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.target-pill {
+  font-family: var(--font-sans);
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-pill);
+}
+
+/* --------------------------------------------------------------------------
+   Minimized Interactive Experience Cards
+   -------------------------------------------------------------------------- */
+.exp-interactive-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: rgba(45, 212, 191, 0.06);
+  border: 1px solid rgba(45, 212, 191, 0.2);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1.15rem;
+  margin-bottom: 1.75rem;
+  font-size: 0.86rem;
+  color: var(--teal-400);
+}
+
+.exp-card-compact {
+  padding: 1.35rem 1.75rem;
+  margin-left: 60px;
+  margin-bottom: 1.25rem;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.exp-card-compact .exp-node {
+  width: 50px;
+  height: 50px;
+  left: -60px;
+  top: 1.25rem;
+  font-size: 1.1rem;
+}
+
+.exp-card-clickable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.exp-card-clickable:hover {
+  transform: translateX(4px);
+  border-color: var(--teal-500);
+  box-shadow: var(--shadow-lg), 0 0 24px rgba(45, 212, 191, 0.12);
+}
+
+.exp-teaser-text {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin: 0.4rem 0 0.85rem 0;
+}
+
+.exp-card-bottom-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.exp-preview-tags {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.exp-preview-tech {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+
+.btn-popout-prompt {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(45, 212, 191, 0.1);
+  border: 1px solid rgba(45, 212, 191, 0.3);
+  color: var(--teal-400);
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-popout-prompt:hover {
+  background: var(--teal-500);
+  color: #fff;
+  border-color: var(--teal-400);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(20, 184, 166, 0.3);
+}
+
+/* --------------------------------------------------------------------------
+   Interactive Experience Pop-out Window Modal
+   -------------------------------------------------------------------------- */
+.exp-modal-dialog {
+  max-width: 820px;
+  width: 95%;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #11141d;
+  border: 1px solid var(--border-glow);
+  box-shadow: 0 25px 65px rgba(0, 0, 0, 0.75), 0 0 35px rgba(45, 212, 191, 0.12);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem 2.5rem;
+  position: relative;
+}
+
+.exp-modal-header {
+  margin-bottom: 1.25rem;
+}
+
+.exp-modal-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.6rem;
+}
+
+.exp-modal-period {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-left: auto;
+}
+
+.exp-modal-org-title {
+  font-family: var(--font-heading);
+  font-size: 1.7rem;
+  color: var(--text-primary);
+  margin-bottom: 0.35rem;
+}
+
+.exp-modal-role-line {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.exp-modal-guide {
+  color: var(--amber-400);
+  font-weight: 500;
+}
+
+.exp-modal-project-box {
+  background: rgba(20, 184, 166, 0.08);
+  border-left: 4px solid var(--teal-500);
+  padding: 0.85rem 1.15rem;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  margin-bottom: 1.35rem;
+}
+
+.project-box-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--teal-400);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.2rem;
+}
+
+.exp-modal-project-box h3 {
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  font-weight: 600;
+  margin: 0;
+}
+
+.exp-modal-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.exp-modal-metric-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+}
+
+.exp-modal-metric-card span {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+
+.exp-modal-metric-card strong {
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  color: var(--amber-400);
+}
+
+.exp-modal-section-title {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 0.85rem;
+}
+
+.exp-modal-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.exp-modal-bullets li {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.exp-modal-bullets .bullet-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(20, 184, 166, 0.15);
+  color: var(--teal-400);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.exp-modal-tech-stack {
+  margin-bottom: 1.75rem;
+  padding-top: 1.15rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.tech-stack-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.6rem;
+}
+
+.exp-modal-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.exp-modal-footer-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-subtle);
+  margin-top: 1rem;
+}
+
+.modal-nav-btn {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  padding: 0.5rem 0.95rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all var(--transition-fast);
+}
+
+.modal-nav-btn:hover {
+  background: rgba(45, 212, 191, 0.12);
+  border-color: var(--teal-500);
+  color: var(--teal-400);
+}
+
+.modal-counter-text {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
 /* Responsive Media Queries */
 @media (max-width: 1024px) {
   .hero-grid {
@@ -1593,20 +1992,40 @@
   .stat-box:not(:last-child)::after {
     display: none;
   }
-  .exp-card {
+  .exp-card, .exp-card-compact {
     margin-left: 20px;
-    padding: 1.5rem;
+    padding: 1.15rem 1.25rem;
   }
   .experience-timeline::before {
     left: 8px;
   }
-  .exp-node {
+  .exp-node, .exp-card-compact .exp-node {
     left: -28px;
-    width: 42px;
-    height: 42px;
-    font-size: 1rem;
+    width: 38px;
+    height: 38px;
+    font-size: 0.95rem;
   }
   .open-cv-btn span {
     display: inline;
+  }
+  .exp-modal-dialog {
+    padding: 1.5rem 1.25rem;
+  }
+  .exp-modal-org-title {
+    font-size: 1.35rem;
+  }
+  .exp-modal-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+  .exp-modal-footer-nav {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: stretch;
+  }
+  .modal-nav-btn {
+    justify-content: center;
+  }
+  .modal-counter-text {
+    text-align: center;
   }
 }

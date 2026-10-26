@@ -117,13 +117,13 @@ const App = {
       `).join('');
     }
 
-    // Render Experience Timeline
+    // Render Minimized Experience Cards (Click to Pop Out Case Study)
     const expContainer = document.getElementById('experience-timeline-container');
     if (expContainer) {
       expContainer.innerHTML = portfolioData.experiences.map((exp, idx) => `
-        <div class="exp-card glass-card" data-exp-id="${exp.id}">
+        <div class="exp-card glass-card exp-card-compact exp-card-clickable" data-exp-id="${exp.id}" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Open case study for ${exp.company}">
           <div class="exp-node">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
             </svg>
           </div>
@@ -137,22 +137,22 @@ const App = {
               <span class="exp-time">${exp.period}</span>
             </div>
           </div>
-          <div class="exp-project-title">
-            <h4>${exp.projectTitle}</h4>
-          </div>
-          <ul class="exp-bullets">
-            ${exp.highlights.map(h => `<li>${h}</li>`).join('')}
-          </ul>
-          <div class="exp-metrics-grid">
-            ${exp.metrics.map(m => `
-              <div class="exp-metric-item">
-                <span>${m.label}</span>
-                <strong>${m.val}</strong>
-              </div>
-            `).join('')}
-          </div>
-          <div class="exp-tags">
-            ${exp.technologies.map(t => `<span class="badge">${t}</span>`).join('')}
+          <p class="exp-teaser-text">
+            ${exp.teaser || exp.projectTitle}
+          </p>
+          <div class="exp-card-bottom-row">
+            <div class="exp-preview-tags">
+              <span class="badge badge-amber" style="font-size: 0.75rem;">${exp.metrics[0].label}: ${exp.metrics[0].val}</span>
+              <span class="exp-preview-tech">${exp.technologies.slice(0, 3).join(' • ')}</span>
+            </div>
+            <button class="btn-popout-prompt" data-exp-id="${exp.id}" aria-label="View case study">
+              <span>View Case Study</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+              </svg>
+            </button>
           </div>
         </div>
       `).join('');
@@ -285,7 +285,7 @@ const App = {
   },
 
   /* ------------------------------------------------------------------------
-     5. Modals (Print CV / CV Preview)
+     5. Modals (Print CV / Interactive Experience Pop-out Window)
      ------------------------------------------------------------------------ */
   setupModals() {
     const cvModal = document.getElementById('cv-modal');
@@ -312,12 +312,146 @@ const App = {
       }
     });
 
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.modal-backdrop.open').forEach(m => m.classList.remove('open'));
+      }
+    });
+
     const printBtn = document.getElementById('modal-print-cv-btn');
     if (printBtn) {
       printBtn.addEventListener('click', () => {
         window.print();
       });
     }
+
+    // Interactive Experience Pop-out Click Listeners
+    document.addEventListener('click', (e) => {
+      const trigger = e.target.closest('.exp-card-clickable, .btn-popout-prompt, .exp-modal-btn');
+      if (trigger) {
+        const expId = trigger.dataset.expId;
+        if (expId) {
+          e.preventDefault();
+          this.openExperienceModal(expId);
+        }
+      }
+
+      // Inside Modal Prev/Next Navigation
+      const navBtn = e.target.closest('.modal-nav-btn');
+      if (navBtn) {
+        const targetId = navBtn.dataset.targetId;
+        if (targetId) {
+          e.preventDefault();
+          this.openExperienceModal(targetId);
+        }
+      }
+    });
+
+    // Keyboard accessibility for cards
+    document.addEventListener('keydown', (e) => {
+      if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('exp-card-clickable')) {
+        const expId = e.target.dataset.expId;
+        if (expId) {
+          e.preventDefault();
+          this.openExperienceModal(expId);
+        }
+      }
+    });
+  },
+
+  /* ------------------------------------------------------------------------
+     5.1 Experience Pop-out Modal Orchestration
+     ------------------------------------------------------------------------ */
+  openExperienceModal(expId) {
+    if (typeof portfolioData === 'undefined') return;
+
+    const modal = document.getElementById('exp-modal');
+    const content = document.getElementById('exp-modal-content');
+    if (!modal || !content) return;
+
+    // Collect all experiences including thesis
+    const allItems = [portfolioData.thesis, ...portfolioData.experiences];
+    const currIdx = allItems.findIndex(i => i.id === expId);
+    if (currIdx === -1) return;
+
+    const item = allItems[currIdx];
+    const prevItem = currIdx > 0 ? allItems[currIdx - 1] : allItems[allItems.length - 1];
+    const nextItem = currIdx < allItems.length - 1 ? allItems[currIdx + 1] : allItems[0];
+
+    content.innerHTML = `
+      <div class="exp-modal-header">
+        <div class="exp-modal-meta-row">
+          <span class="badge badge-teal">${item.badge || 'Project Spotlight'}</span>
+          <span class="badge badge-cyan">${item.category || 'Process Engineering'}</span>
+          <span class="exp-modal-period">${item.period}</span>
+        </div>
+        <h2 id="exp-modal-title" class="exp-modal-org-title">${item.company || item.institution}</h2>
+        <div class="exp-modal-role-line">
+          <strong>${item.role || item.degree}</strong> • <span>${item.location || 'Jalna, Maharashtra'}</span>
+          ${item.guide ? ` • <span class="exp-modal-guide">Guide: ${item.guide}</span>` : ''}
+          ${item.majorGuide ? ` • <span class="exp-modal-guide">Major: ${item.majorGuide} | Minor: ${item.minorGuide}</span>` : ''}
+        </div>
+      </div>
+
+      <div class="exp-modal-project-box">
+        <span class="project-box-label">PROJECT SCOPE</span>
+        <h3>${item.projectTitle || item.title}</h3>
+      </div>
+
+      ${item.metrics && item.metrics.length ? `
+        <div class="exp-modal-metrics-grid">
+          ${item.metrics.map(m => `
+            <div class="exp-modal-metric-card">
+              <span>${m.label}</span>
+              <strong>${m.val}</strong>
+            </div>
+          `).join('')}
+        </div>
+      ` : ''}
+
+      <div class="exp-modal-body">
+        <h4 class="exp-modal-section-title">Key Engineering Responsibilities & Outcomes</h4>
+        <ul class="exp-modal-bullets">
+          ${item.highlights.map(h => `
+            <li>
+              <div class="bullet-dot">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </div>
+              <span>${h}</span>
+            </li>
+          `).join('')}
+        </ul>
+      </div>
+
+      ${item.technologies && item.technologies.length ? `
+        <div class="exp-modal-tech-stack">
+          <span class="tech-stack-label">APPLIED TECHNOLOGIES & TOOLS</span>
+          <div class="exp-modal-tags">
+            ${item.technologies.map(t => `<span class="badge">${t}</span>`).join('')}
+          </div>
+        </div>
+      ` : ''}
+
+      <div class="exp-modal-footer-nav">
+        <button class="modal-nav-btn prev-exp-btn" data-target-id="${prevItem.id}">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+          <span>${prevItem.company || 'Master’s Thesis'}</span>
+        </button>
+        <span class="modal-counter-text">${currIdx + 1} of ${allItems.length}</span>
+        <button class="modal-nav-btn next-exp-btn" data-target-id="${nextItem.id}">
+          <span>${nextItem.company || 'Master’s Thesis'}</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+    `;
+
+    modal.classList.add('open');
   },
 
   /* ------------------------------------------------------------------------

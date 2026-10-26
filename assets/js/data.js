@@ -32,13 +32,28 @@ const portfolioData = {
   ],
 
   thesis: {
+    id: "thesis",
     title: "Development of a Dynamic Model for Process Monitoring and Fault Detection",
     degree: "Master's Thesis – Integrated M.Tech Chemical Engineering",
     period: "Mar 2026 – Present",
     majorGuide: "Dr. Debashish Kundu",
     minorGuide: "Dr. Supriyo Kumar Mondal",
     institution: "Institute of Chemical Technology (ICT Mumbai)",
-    description: "Developing a process simulation framework integrated with AI/ML techniques to analyse dynamic plant behavior, identify operational anomalies, and support fault detection and diagnosis. The project aims to improve process reliability, operational efficiency, and energy performance through simulation-driven analysis and data-driven insights."
+    badge: "Master's Thesis",
+    teaser: "Developing a dynamic simulation framework integrated with AI/ML to detect plant operational anomalies, boosting process reliability and energy performance.",
+    description: "Developing a process simulation framework integrated with AI/ML techniques to analyse dynamic plant behavior, identify operational anomalies, and support fault detection and diagnosis. The project aims to improve process reliability, operational efficiency, and energy performance through simulation-driven analysis and data-driven insights.",
+    highlights: [
+      "Formulated dynamic process simulation models in chemical simulation environments to capture transient operational behaviors.",
+      "Integrated machine learning (AI/ML) algorithms for early anomaly detection and fault classification across process units.",
+      "Investigated disturbance propagation and mitigation strategies to optimize energy utilization and operational reliability.",
+      "Validated diagnostic frameworks against industrial chemical benchmark operations."
+    ],
+    technologies: ["Dynamic Simulation", "AI/ML in Chemical Engineering", "Fault Detection & Diagnosis (FDD)", "Plant Reliability", "Process Monitoring"],
+    metrics: [
+      { label: "Core Methodology", val: "Dynamic Simulation + AI/ML" },
+      { label: "Key Objective", val: "Process Fault Diagnosis (FDD)" },
+      { label: "Institution", val: "ICT Mumbai (MARJ)" }
+    ]
   },
 
   experiences: [
@@ -51,6 +66,7 @@ const portfolioData = {
       category: "Data Science & EOR",
       badge: "Dow Tech Centre",
       icon: "trending-up",
+      teaser: "Analyzed synthetic well histories and built Python DCA models, selecting harmonic modeling to estimate ~527,000 barrels of incremental oil.",
       projectTitle: "Data Interpretation for EOR Field Datasets: Decline Curve Fitting and Incremental Oil Determination",
       guide: "Dr. Neeraj Rohilla",
       highlights: [
@@ -75,6 +91,7 @@ const portfolioData = {
       category: "Research & Simulation",
       badge: "Flagship Research",
       icon: "flask",
+      teaser: "Synthesized quaternary CZZA catalysts and modeled a 27-reaction Gibbs equilibrium network for Syngas-to-LPG in Aspen Plus.",
       projectTitle: "Thermodynamic and Experimental Analysis for Syngas to LPG Conversion through Modified Route",
       highlights: [
         "Synthesized novel quaternary Cu–ZnO–ZrO₂–Al₂O₃ (CZZA) catalysts using precision co-precipitation method under stringent pH and temperature controls, followed by controlled calcination.",
@@ -98,6 +115,7 @@ const portfolioData = {
       category: "Plant Operations",
       badge: "Operations & PLC",
       icon: "cog",
+      teaser: "Supervised a 12-member plant production crew across PLC blending lines, conducting daily audits to eliminate oil transfer wastage.",
       projectTitle: "Plant-Floor Production Supervision & Oil Loss Mitigation Across Blending Lines",
       highlights: [
         "Supervised a 12-member production operations team across lubricant blending, automated filling, packing, and dispatch units.",
@@ -121,6 +139,7 @@ const portfolioData = {
       category: "Energy & Sustainability",
       badge: "Energy Conservation",
       icon: "zap",
+      teaser: "Evaluated CF-HTM line insulation upgrades to calcium silicate, achieving ~50% heat loss reduction and lower plant fuel emissions.",
       projectTitle: "Enhancing Energy Efficiency in CF-HTM Systems Through Insulation Upgrades",
       highlights: [
         "Analysed thermodynamic heat transfer in Continuous Filament High Temperature Media (CF-HTM) transfer lines for insulation material retrofit.",
@@ -145,6 +164,7 @@ const portfolioData = {
       category: "Polymer Engineering",
       badge: "Defect Troubleshooting",
       icon: "layers",
+      teaser: "Conducted defect root-cause analysis on high-throughput injection moulding operations to eliminate 6 critical polymer quality defects.",
       projectTitle: "Injection Moulding Operational Analysis & Defect Root-Cause Elimination",
       highlights: [
         "Studied high-throughput injection moulding machinery operations for technical engineering and commodity polymer grades.",
@@ -167,6 +187,7 @@ const portfolioData = {
       category: "Pharma & Unit Operations",
       badge: "Pharma Intermediates",
       icon: "beaker",
+      teaser: "Monitored pharma intermediate synthesis, unit separation operations, and performed Karl Fischer titrations for moisture QA.",
       projectTitle: "Pharma Intermediate Synthesis, Reaction Engineering & Laboratory QA Workflow",
       highlights: [
         "Studied industrial synthesis routes for high-value pharmaceutical intermediates, focusing on exothermic nitration, chemical reduction, and catalytic hydrogenation.",

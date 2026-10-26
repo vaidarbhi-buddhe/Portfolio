@@ -146,7 +146,7 @@ body.loading-lock {
 }
 
 .rxn-gauge-box {
-  background: rgba(18, 28, 46, 0.75);
+  background: rgba(18, 21, 30, 0.85);
   border: 1px solid var(--border-glass);
   padding: 0.45rem 0.85rem;
   border-radius: var(--radius-sm);
@@ -343,7 +343,7 @@ body.loading-lock {
 }
 
 .rxn-reagent-btn {
-  background: rgba(18, 28, 46, 0.85);
+  background: rgba(18, 21, 30, 0.88);
   border: 1px solid var(--border-glass);
   color: var(--text-secondary);
   font-family: var(--font-mono);
@@ -387,7 +387,7 @@ body.loading-lock {
   flex-wrap: wrap;
   font-family: var(--font-mono);
   font-size: 0.85rem;
-  background: rgba(18, 28, 46, 0.7);
+  background: rgba(18, 21, 30, 0.8);
   border: 1px solid var(--border-glass);
   padding: 0.55rem 1rem;
   border-radius: var(--radius-sm);
