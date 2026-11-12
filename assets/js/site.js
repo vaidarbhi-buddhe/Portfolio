@@ -310,15 +310,56 @@
   /* ---------- Skills, education, leadership ---------- */
   function drawSkills() {
     var tierClass = function (t) { return /Lead/.test(t) ? 'c2' : /Advanced/.test(t) ? 'c1' : 'c3'; };
-    $('skills-grid').innerHTML = D.skillsData.map(function (c) {
-      return '<div class="skill-group"><h3 class="reveal">' + esc(c.category) + '</h3><div class="skill-cards">' + c.skills.map(function (s, i) {
-        return '<article class="skill glow reveal" style="--d:' + (i % 4) + '">' +
-          '<div class="skill-tags"><span class="chip ' + tierClass(s.tier) + '">' + esc(s.tier) + '</span><span class="chip" style="color:var(--mute)">' + esc(s.domain) + '</span></div>' +
-          '<h4>' + esc(s.name) + '</h4><p>' + esc(s.desc) + '</p>' +
-          '<div class="skill-at"><span>Applied: ' + esc(s.appliedAt) + '</span>' + (s.simLink ? '<a href="#reactor">Try simulator</a>' : '') + '</div>' +
-        '</article>';
-      }).join('') + '</div></div>';
-    }).join('');
+    var short = ['Simulation & modelling', 'Core chemical engineering', 'Lab & analytical', 'Operations & lean'];
+    var tabs = $('sk-tabs'), panel = $('skills-grid'), ind = $('sk-ind');
+    tabs.insertAdjacentHTML('beforeend', D.skillsData.map(function (c, i) {
+      return '<button type="button" role="tab" class="sk-tab" id="sk-tab-' + i + '" aria-controls="skills-grid" aria-selected="' + (i === 0) + '" data-i="' + i + '">' +
+        '<span>' + esc(short[i] || c.category) + '</span><b>' + c.skills.length + '</b></button>';
+    }).join(''));
+
+    function moveInd(btn) {
+      ind.style.width = btn.offsetWidth + 'px';
+      ind.style.height = btn.offsetHeight + 'px';
+      ind.style.transform = 'translate(' + btn.offsetLeft + 'px,' + btn.offsetTop + 'px)';
+    }
+    function show(i) {
+      var c = D.skillsData[i];
+      $$('.sk-tab', tabs).forEach(function (t) {
+        var on = +t.getAttribute('data-i') === i;
+        t.setAttribute('aria-selected', on);
+        t.tabIndex = on ? 0 : -1;
+        if (on) { moveInd(t); panel.setAttribute('aria-labelledby', t.id); }
+      });
+      var lead = c.skills.filter(function (s) { return /Lead|Certified/.test(s.tier); }).length;
+      panel.innerHTML =
+        '<div class="sk-head"><h3>' + esc(c.category) + '</h3><p>' + c.skills.length + ' skills, ' + lead + ' at specialist level</p></div>' +
+        '<div class="sk-grid">' + c.skills.map(function (s, k) {
+          return '<article class="sk glow" style="--k:' + k + '">' +
+            '<div class="sk-top"><span class="chip ' + tierClass(s.tier) + '">' + esc(s.tier) + '</span>' +
+              (s.simLink ? '<a class="sk-sim" href="#reactor">Try simulator</a>' : '') + '</div>' +
+            '<h4>' + esc(s.name) + '</h4>' +
+            '<p class="sk-dom">' + esc(s.domain) + '</p>' +
+            '<p class="sk-desc">' + esc(s.desc) + '</p>' +
+            '<p class="sk-at"><span>Applied</span>' + esc(s.appliedAt) + '</p>' +
+          '</article>';
+        }).join('') + '</div>';
+    }
+    tabs.addEventListener('click', function (e) {
+      var t = e.target.closest('.sk-tab');
+      if (t) show(+t.getAttribute('data-i'));
+    });
+    tabs.addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      var all = $$('.sk-tab', tabs), cur = all.indexOf(document.activeElement);
+      if (cur < 0) return;
+      var nx = (cur + (e.key === 'ArrowRight' ? 1 : all.length - 1)) % all.length;
+      all[nx].focus(); show(nx); e.preventDefault();
+    });
+    window.addEventListener('resize', function () {
+      var on = tabs.querySelector('[aria-selected="true"]'); if (on) moveInd(on);
+    });
+    show(0);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { var on = tabs.querySelector('[aria-selected="true"]'); if (on) moveInd(on); });
   }
 
   function drawEdu() {
@@ -338,8 +379,28 @@
     $('lead-list').innerHTML = D.leadership.map(function (l, i) {
       return '<article class="lead-card glow reveal" style="--d:' + (i % 3) + '"><span class="when">' + esc(l.period) + '</span><h3>' + esc(l.role) + '</h3><p class="org">' + esc(l.org) + '</p><p>' + esc(l.description) + '</p></article>';
     }).join('');
-    $('lang-list').innerHTML = D.languages.map(function (l) { return '<li><b>' + esc(l.name) + '</b><span>' + esc(l.level) + '</span></li>'; }).join('');
-    $('interest-list').innerHTML = D.interests.map(function (l) { return '<li><b>' + esc(l.name) + '</b><span>' + esc(l.desc) + '</span></li>'; }).join('');
+    var GLYPH = { English: 'Aa', Marathi: 'म', Hindi: 'हि' };
+    var SCRIPT = { English: 'Latin script', Marathi: 'Devanagari script', Hindi: 'Devanagari script' };
+    $('lang-list').innerHTML = D.languages.map(function (l, i) {
+      var parts = l.level.split('/').map(function (x) { return x.trim(); });
+      return '<article class="lang glow reveal" style="--d:' + i + '">' +
+        '<span class="lang-glyph" aria-hidden="true">' + (GLYPH[l.name] || l.name.slice(0, 2)) + '</span>' +
+        '<div class="lang-body"><h4>' + esc(l.name) + '</h4><p class="lang-lvl">' + esc(parts[0]) + '</p>' +
+        (parts[1] ? '<p class="lang-sub">' + esc(parts[1]) + '</p>' : '') +
+        '<p class="lang-script">' + esc(SCRIPT[l.name] || '') + '</p></div></article>';
+    }).join('');
+
+    var ICON = {
+      book: '<path d="M6 8h20a4 4 0 0 1 4 4v28a4 4 0 0 0-4-4H6z"/><path d="M42 8H30a4 4 0 0 0-4 4v28a4 4 0 0 1 4-4h12z"/><path class="ic-line" d="M11 16h10M11 22h10M11 28h6"/>',
+      'pen-tool': '<path d="M10 38l4-12L32 8l8 8-18 18z"/><path d="M28 12l8 8"/><path class="ic-line" d="M6 42c6-2 10-2 16 0s10 2 16 0"/>',
+      compass: '<circle cx="24" cy="24" r="17"/><path class="ic-spin" d="M30 18l-4 10-8 2 4-10z"/><circle cx="24" cy="24" r="1.6" fill="currentColor"/>',
+      'message-square': '<path d="M8 10h22a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H18l-8 6v-6H8a4 4 0 0 1-4-4V14a4 4 0 0 1 4-4z"/><path d="M38 18h2a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4h-2v5l-7-5h-9"/><path class="ic-line" d="M11 18h14M11 22h9"/>'
+    };
+    $('interest-list').innerHTML = D.interests.map(function (l, i) {
+      return '<article class="hobby glow reveal" style="--d:' + i + '">' +
+        '<svg class="hobby-ic" viewBox="0 0 48 48" aria-hidden="true">' + (ICON[l.icon] || ICON.book) + '</svg>' +
+        '<h4>' + esc(l.name) + '</h4><p>' + esc(l.desc) + '</p></article>';
+    }).join('');
   }
 
   /* ---------- Motion: headings, reveals, cursor, canvas ---------- */

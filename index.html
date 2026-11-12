@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
-  <link rel="stylesheet" href="assets/css/site.css?v=20261112b">
+  <link rel="stylesheet" href="assets/css/site.css?v=20261112c">
 </head>
 <body class="is-loading">
   <a class="skip" href="#work">Skip to work history</a>
@@ -185,8 +185,9 @@
     <section class="section" id="skills">
       <div class="wrap">
         <h2 class="split">Technical skills matrix</h2>
-        <p class="section-note reveal">Tools and methods, each with its level, domain and where it was applied.</p>
-        <div id="skills-grid"></div>
+        <p class="section-note reveal">Tools and methods, each with its level, domain and where it was applied. Pick a discipline to switch the panel.</p>
+        <div class="sk-tabs reveal" role="tablist" aria-label="Skill categories" id="sk-tabs"><span class="sk-ind" id="sk-ind" aria-hidden="true"></span></div>
+        <div class="sk-panel" id="skills-grid" role="tabpanel" aria-live="polite"></div>
       </div>
     </section>
 
@@ -205,10 +206,10 @@
       <div class="wrap">
         <h2 class="split">Leadership & outreach</h2>
         <div class="lead" id="lead-list"></div>
-        <div class="extras">
-          <div class="reveal"><h3 class="sub">Languages</h3><ul class="mini" id="lang-list"></ul></div>
-          <div class="reveal"><h3 class="sub">Interests</h3><ul class="mini" id="interest-list"></ul></div>
-        </div>
+        <h3 class="sub reveal">Languages</h3>
+        <div class="langs" id="lang-list"></div>
+        <h3 class="sub reveal">Interests</h3>
+        <div class="hobbies" id="interest-list"></div>
       </div>
     </section>
 
@@ -267,8 +268,8 @@
 
   <noscript><p style="padding:2rem;color:#fff">This page draws its content with JavaScript. The full CV is at assets/documents/Vaidarbhi_Buddhe_Resume.pdf.</p></noscript>
 
-  <script src="assets/js/data.js?v=20261112b"></script>
-  <script src="assets/js/site.js?v=20261112b"></script>
-  <script src="assets/js/engineering-calc.js?v=20261112b"></script>
+  <script src="assets/js/data.js?v=20261112c"></script>
+  <script src="assets/js/site.js?v=20261112c"></script>
+  <script src="assets/js/engineering-calc.js?v=20261112c"></script>
 </body>
 </html>
