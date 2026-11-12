@@ -1,1451 +1,274 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vaidarbhi Buddhe | Chemical & Petrochemical Process Engineer | Portfolio</title>
-  
-  <!-- Cache Control Directives -->
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
-  
-  <!-- SEO & Social Meta Tags -->
-  <meta name="description" content="Official portfolio of Vaidarbhi Buddhe - Chemical Engineering Scholar at ICT Mumbai (MARJ Jalna) with Minor in Petroleum & Petrochemical Engineering. Research at CSIR-IIP, Industrial operations at Ultra Plus Lubes & Indorama Synthetics.">
-  <meta name="keywords" content="Vaidarbhi Buddhe, Chemical Engineering, ICT Mumbai, CSIR IIP, Aspen Plus, Process Simulation, Syngas to LPG, Heat Transfer, Petroleum Engineering, Gas Chromatography, Six Sigma">
+  <title>Vaidarbhi Buddhe | Chemical & Petrochemical Process Engineer</title>
+  <meta name="description" content="Portfolio of Vaidarbhi Buddhe, final-year Integrated M.Tech chemical engineer at ICT Mumbai (Marathwada Campus, Jalna). Process simulation, catalysis research at CSIR-IIP, EOR analytics at Dow, and plant operations.">
   <meta name="author" content="Vaidarbhi Buddhe">
-  
-  <!-- OpenGraph / Social Sharing -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Vaidarbhi Buddhe | Chemical & Petrochemical Process Engineer">
-  <meta property="og:description" content="Integrated M.Tech Chemical Engineering | ICT Mumbai (MARJ Jalna). Explore research in Syngas-to-LPG Aspen simulation, industrial energy optimization, and interactive process calculators.">
+  <meta property="og:description" content="Six plants and a thesis, drawn as one live process flow diagram. Process simulation, catalysis research, EOR analytics and plant operations.">
+  <meta name="theme-color" content="#000000">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23000'/><circle cx='16' cy='16' r='10' fill='none' stroke='%232CF5C4' stroke-width='3'/><path d='M6 16h20' stroke='%23FFB300' stroke-width='3'/></svg>">
 
-  <!-- Favicon Symbol SVG -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2314b8a6'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>">
-
-  <!-- Core CSS -->
-  <link rel="stylesheet" href="assets/css/loader.css?v=20261026-v15">
-  <link rel="stylesheet" href="assets/css/main.css?v=20261026-v15">
-  <link rel="stylesheet" href="assets/css/components.css?v=20261026-v15">
-  <link rel="stylesheet" href="assets/css/simulators.css?v=20261026-v15">
-  <link rel="stylesheet" href="assets/css/print-cv.css?v=20261026-v15">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+  <link rel="stylesheet" href="assets/css/site.css?v=20261112b">
 </head>
-<body class="loading-lock">
+<body class="is-loading">
+  <a class="skip" href="#work">Skip to work history</a>
 
-  <!-- ========================================================================
-       Chemical Reaction Loading Screen (Interactive Synthesis Lab)
-       ======================================================================== -->
-  <div id="chemical-reaction-loader" aria-label="Loading Chemical Process Portfolio">
-    <div class="rxn-bg-glow"></div>
-    <div class="rxn-grid-lines"></div>
-    <canvas id="rxn-click-canvas"></canvas>
-
-    <div class="rxn-stage">
-      <div class="rxn-header">
-        <div class="rxn-badge">
-          <span class="rxn-badge-dot"></span>
-          <span>Interactive Chemical Synthesis Lab</span>
-        </div>
-        <h2 class="rxn-engineer-title">Vaidarbhi Buddhe • <span>Chemical Process Engineer</span></h2>
-      </div>
-
-      <!-- Live Dynamic Gauges Strip -->
-      <div class="rxn-gauges-strip">
-        <div class="rxn-gauge-box">
-          <span class="gauge-lbl">Temperature</span>
-          <span class="gauge-val" id="gauge-temp-val">25 °C</span>
-        </div>
-        <div class="rxn-gauge-box">
-          <span class="gauge-lbl">Pressure</span>
-          <span class="gauge-val" id="gauge-press-val">1.0 bar</span>
-        </div>
-        <div class="rxn-gauge-box">
-          <span class="gauge-lbl">LPG Conversion</span>
-          <span class="gauge-val" id="rxn-pct-val" style="color: var(--amber-400);">0%</span>
-        </div>
-      </div>
-
-      <!-- Chemical Apparatus: Erlenmeyer Reactor with Fluid & Effervescent Bubbles -->
-      <div class="rxn-apparatus-wrapper" id="rxn-flask-wrapper" title="Click to stir reaction & trigger effervescence">
-        <div class="rxn-molecular-ring">
-          <span class="rxn-molecule-pill">CZZA Active Sites</span>
-        </div>
-
-        <svg class="rxn-flask-svg" viewBox="0 0 170 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="fluidGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.85" />
-              <stop offset="50%" stop-color="#14b8a6" stop-opacity="0.9" />
-              <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.8" />
-            </linearGradient>
-          </defs>
-
-          <!-- Condensation Vapor Wisps leaving Neck -->
-          <path class="vapor-wisp" d="M78 25 C 75 18, 85 10, 80 4" />
-          <path class="vapor-wisp" d="M88 28 C 92 20, 84 12, 90 6" style="animation-delay: 0.8s;" />
-
-          <!-- Flask Interior Liquid -->
-          <path id="rxn-fluid-surface" class="flask-fluid fluid-wave" 
-                d="M52 135 C68 132, 102 138, 118 135 L142 182 C145 188, 140 194, 134 194 L36 194 C30 194, 25 188, 28 182 Z" 
-                fill="url(#fluidGrad)" />
-
-          <!-- Catalyst Pellet Active Sites (Bottom of Flask) -->
-          <circle class="catalyst-pellet" cx="48" cy="188" r="3" />
-          <circle class="catalyst-pellet" cx="62" cy="190" r="3.5" style="animation-delay: 0.4s;" />
-          <circle class="catalyst-pellet" cx="78" cy="187" r="4" style="animation-delay: 0.9s;" />
-          <circle class="catalyst-pellet" cx="95" cy="191" r="3" style="animation-delay: 0.2s;" />
-          <circle class="catalyst-pellet" cx="110" cy="188" r="3.5" style="animation-delay: 0.7s;" />
-          <circle class="catalyst-pellet" cx="124" cy="189" r="2.8" style="animation-delay: 1.1s;" />
-
-          <!-- Effervescent Rising Bubbles -->
-          <circle class="bubble b1" />
-          <circle class="bubble b2" />
-          <circle class="bubble b3" />
-          <circle class="bubble b4" />
-          <circle class="bubble b5" />
-          <circle class="bubble b6" />
-
-          <!-- Flask Outline Glass Body -->
-          <path class="flask-glass" 
-                d="M74 30 L74 65 L26 178 C21 190, 30 196, 42 196 L128 196 C140 196, 149 190, 144 178 L96 65 L96 30 Z" />
-          <!-- Flask Lip Rim -->
-          <path class="flask-glass" d="M70 30 L100 30" />
-
-          <!-- Measurement Graduation Ticks -->
-          <line class="flask-markings" x1="58" y1="165" x2="68" y2="165" />
-          <line class="flask-markings" x1="66" y1="145" x2="74" y2="145" />
-          <line class="flask-markings" x1="74" y1="125" x2="80" y2="125" />
-          <line class="flask-markings" x1="80" y1="105" x2="85" y2="105" />
-        </svg>
-      </div>
-
-      <!-- Click Hint -->
-      <div class="rxn-click-hint">
-        <span>👆 Click apparatus or tap reagents below to catalyze reaction</span>
-      </div>
-
-      <!-- Interactive Reagents Injection Toolbar -->
-      <div class="rxn-reagents-toolbar">
-        <button class="rxn-reagent-btn" id="reagent-syngas" title="Inject Syngas Feed">
-          <span>🧪 + Feed Syngas (CO+2H₂)</span>
-        </button>
-        <button class="rxn-reagent-btn" id="reagent-heat" title="Preheat Reactor">
-          <span>🔥 + Heat to 260°C & 40 bar</span>
-        </button>
-        <button class="rxn-reagent-btn" id="reagent-catalyst" title="Drop CZZA Catalyst">
-          <span>✨ + Charge CZZA Catalyst</span>
-        </button>
-      </div>
-
-      <!-- Chemical Reaction Formula Equation Banner -->
-      <div class="rxn-equation-strip">
-        <span class="rxn-reactant">CO + 2H₂</span>
-        <span class="rxn-arrow">⇄</span>
-        <span class="rxn-intermediate">CH₃OH</span>
-        <span class="rxn-arrow">➔</span>
-        <span class="rxn-intermediate">DME</span>
-        <span class="rxn-arrow">➔</span>
-        <span class="rxn-product">LPG (C₃H₈ + C₄H₁₀)</span>
-      </div>
-
-      <!-- Dynamic Reaction Status Terminal -->
-      <div class="rxn-status-box">
-        <div class="rxn-status-text" id="rxn-status-text">Initializing Syngas Reactor Feed (H₂/CO = 2.0)...</div>
-      </div>
-
-      <!-- Fluid Pipeline Progress Bar -->
-      <div class="rxn-pipe-track">
-        <div class="rxn-pipe-fill" id="rxn-pipe-fill"></div>
-      </div>
-
-      <!-- Bottom Interactive Controls Strip -->
-      <div class="rxn-bottom-strip">
-        <button class="rxn-skip-btn" id="rxn-skip-btn">
-          <span>Skip to Portfolio →</span>
-        </button>
-        <button class="rxn-accelerate-btn" id="rxn-ignite-btn">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-          </svg>
-          <span>Ignite Rapid Synthesis</span>
-        </button>
-      </div>
+  <!-- Start-up loader -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader-in">
+      <svg class="loader-flask" viewBox="0 0 120 150">
+        <defs><clipPath id="flask-clip"><path d="M45 12h30v42l33 70a10 10 0 0 1-9 14H21a10 10 0 0 1-9-14l33-70z"/></clipPath>
+        <linearGradient id="flask-g" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#2CF5C4"/><stop offset=".6" stop-color="#FFB300"/><stop offset="1" stop-color="#FF3B6B"/></linearGradient></defs>
+        <g clip-path="url(#flask-clip)"><rect id="flask-fill" x="0" y="150" width="120" height="150" fill="url(#flask-g)"/>
+          <circle class="bub b1" cx="45" cy="130" r="4"/><circle class="bub b2" cx="66" cy="134" r="3"/><circle class="bub b3" cx="78" cy="128" r="5"/></g>
+        <path d="M45 12h30v42l33 70a10 10 0 0 1-9 14H21a10 10 0 0 1-9-14l33-70z" fill="none" stroke="#F2F5F7" stroke-width="3" stroke-linejoin="round"/>
+        <path d="M38 12h44" stroke="#F2F5F7" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <div class="loader-pct"><span id="loader-num">0</span>%</div>
+      <div class="loader-step" id="loader-step">Charging feed</div>
     </div>
   </div>
 
-  <!-- ========================================================================
-       Header & Navigation Bar
-       ======================================================================== -->
-  <header class="site-header">
-    <div class="container nav-container">
-      <a href="#hero" class="brand-logo">
-        <div class="logo-symbol">VB</div>
-        <div class="brand-text">
-          <span class="brand-name">Vaidarbhi Buddhe</span>
-          <span class="brand-discipline">Chemical & Petrochemical Engineer</span>
-        </div>
-      </a>
+  <canvas id="bg" aria-hidden="true"></canvas>
+  <div class="spot" id="spot" aria-hidden="true"></div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
 
-      <nav>
-        <ul class="nav-menu" id="nav-menu">
-          <li><a href="#about" class="nav-link">About</a></li>
-          <li><a href="#simulators" class="nav-link">Simulators</a></li>
-          <li><a href="#experience" class="nav-link">Experience</a></li>
-          <li><a href="#skills" class="nav-link">Skills</a></li>
-          <li><a href="#education" class="nav-link">Education</a></li>
-          <li><a href="#leadership" class="nav-link">Leadership</a></li>
-          <li><a href="#contact" class="nav-link">Contact</a></li>
-        </ul>
-      </nav>
-
-      <div class="nav-actions">
-        <a href="assets/documents/Vaidarbhi_Buddhe_Resume.pdf" download="Vaidarbhi_Buddhe_Resume.pdf" class="btn btn-primary btn-sm direct-download-cv" id="header-cv-download-btn">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
-          </svg>
-          <span>Download CV</span>
-        </a>
-        <button class="mobile-toggle" id="mobile-toggle" aria-label="Open Navigation Menu">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-          </svg>
-        </button>
-      </div>
-    </div>
+  <header class="top">
+    <a class="top-name" href="#top"><span class="logo">VB</span><span>Vaidarbhi Buddhe</span></a>
+    <nav class="top-nav" aria-label="Sections">
+      <a href="#work">Experience</a>
+      <a href="#reactor">Simulators</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#campus">Leadership</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn btn-solid top-cv" href="assets/documents/Vaidarbhi_Buddhe_Resume.pdf" download>Download CV</a>
   </header>
 
-  <!-- ========================================================================
-       Hero Section
-       ======================================================================== -->
-  <section class="hero-section" id="hero">
-    <canvas id="particle-canvas"></canvas>
-
-    <div class="container hero-grid">
-      <div class="hero-content">
-        <div class="hero-status-pill">
-          <span class="status-dot"></span>
-          <span>Open to Process Engineering & Simulation Roles</span>
+  <main id="top">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="wrap">
+        <p class="hero-role"><span class="dot"></span><span id="typed"></span><span class="caret"></span></p>
+        <div class="name-wrap" id="name-wrap">
+          <h1 class="name" aria-label="Vaidarbhi Buddhe"><span class="l1" id="name-l1">Vaidarbhi</span><span class="l2" id="name-l2">Buddhe</span></h1>
+          <div class="portrait" id="portrait"><img src="assets/images/vaidarbhi-buddhe.jpg" alt="Portrait of Vaidarbhi Buddhe" width="1024" height="1023"></div>
         </div>
 
-        <h1 class="hero-title">
-          Engineering Molecules into <span class="gradient-text">Sustainable Scale</span>
-        </h1>
-
-        <div class="hero-subtitle">
-          Integrated M.Tech Chemical Engineer • Minor: Petroleum & Petrochemical Engineering
-        </div>
-
-        <p class="hero-bio">
-          Final-year Integrated M.Tech Chemical Engineering student at the <strong>Institute of Chemical Technology (ICT Mumbai)</strong> with top academic merit (<strong>CGPA: 8.73 • Rank: 3/45</strong>). Hands-on in refinery research, catalyst synthesis, lubricant manufacturing, and computational decline curve analysis with Aspen Plus, Aspen HYSYS, and Python.
-        </p>
-        <div class="hero-cta-group">
-          <a href="#simulators" class="btn btn-primary">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polygon points="5 3 19 12 5 21 5 3"></polygon>
-            </svg>
-            <span>Run Interactive Simulators</span>
-          </a>
-          <a href="assets/documents/Vaidarbhi_Buddhe_Resume.pdf" download="Vaidarbhi_Buddhe_Resume.pdf" class="btn btn-outline-amber">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-              <polyline points="7 10 12 15 17 10"></polyline>
-              <line x1="12" y1="15" x2="12" y2="3"></line>
-            </svg>
-            <span>Download CV (PDF)</span>
-          </a>
-          <a href="#experience" class="btn btn-secondary">
-            <span>Explore Research</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-          </a>
-        </div>
-
-        <div class="hero-academic-bar">
-          <div class="inst-badge">
-            <div class="inst-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
-                <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
-              </svg>
-            </div>
-            <div class="inst-info">
-              <strong>Institute of Chemical Technology (ICT Mumbai)</strong>
-              <span>Marathwada Campus, Jalna • CGPA: 8.73 (Rank: 3/45)</span>
-            </div>
+        <div class="hero-intro">
+          <p class="lede" id="lede"></p>
+          <div class="hero-actions">
+            <a class="btn btn-solid" href="assets/documents/Vaidarbhi_Buddhe_Resume.pdf" download>Download CV</a>
+            <a class="btn" href="#contact">Get in touch</a>
+            <a class="btn" href="https://linkedin.com/in/vaidarbhi-buddhe" target="_blank" rel="noopener">LinkedIn</a>
           </div>
         </div>
       </div>
 
-      <!-- Hero Visual: Chemical Reactor & Catalyst Card -->
-      <div class="hero-visual-wrapper">
-        <div class="hero-profile-card glass-card">
-          <div class="profile-header">
-            <div class="avatar-wrapper">
-              <div class="avatar-inner">
-                <img src="assets/images/vaidarbhi-buddhe.jpg" alt="Vaidarbhi Buddhe - Chemical & Petrochemical Engineer" class="avatar-photo">
+      <div class="marquee" aria-hidden="true"><div class="marquee-track" id="marquee"></div></div>
+
+      <figure class="pfd reveal">
+        <figcaption class="wrap">
+          <strong>Live process flow diagram.</strong> Six internships and a thesis, in the order they happened. Click a unit to open its case study.
+        </figcaption>
+        <div class="pfd-scroll" tabindex="0" role="group" aria-label="Career flow diagram, scrolls sideways on small screens">
+          <svg id="pfd-svg" viewBox="0 0 1400 430" role="img" aria-label="Flow diagram of internships from 2023 to the present"></svg>
+        </div>
+      </figure>
+
+      <div class="wrap">
+        <div class="stats" id="stats"></div>
+      </div>
+    </section>
+
+    <!-- Work -->
+    <section class="section" id="work">
+      <div class="wrap">
+        <h2 class="split">Research & industrial experience</h2>
+        <p class="section-note reveal">Every unit on the diagram, most recent first. Open a card for the full case study.</p>
+        <div class="sheets" id="sheets"></div>
+      </div>
+    </section>
+
+    <!-- Reactor -->
+    <section class="section" id="reactor">
+      <div class="wrap">
+        <h2 class="split">Real-time process simulators</h2>
+        <p class="section-note reveal">Interactive models built around my syngas-to-LPG research at CSIR-IIP. Move the setpoints and watch the reactor respond.</p>
+
+        <div class="console reveal">
+          <form class="setpoints" id="setpoints" onsubmit="return false">
+            <div class="panel-title"><h3>Reactor operating controls</h3><span class="chip c1">CSIR-IIP route</span></div>
+            <label class="sp">
+              <span class="sp-head"><span>Reaction temperature</span><output id="sp-t-out">260 °C</output></span>
+              <input type="range" id="sp-t" min="200" max="350" step="1" value="260">
+              <span class="sp-hint">Optimum window: 255 to 275 °C for C₃–C₄ selectivity</span>
+            </label>
+            <label class="sp">
+              <span class="sp-head"><span>Operating pressure</span><output id="sp-p-out">40 bar</output></span>
+              <input type="range" id="sp-p" min="20" max="60" step="1" value="40">
+              <span class="sp-hint">Industrial synthesis regime: 30 to 50 bar</span>
+            </label>
+            <label class="sp">
+              <span class="sp-head"><span>Feed ratio, H₂ / CO</span><output id="sp-r-out">1.8 : 1</output></span>
+              <input type="range" id="sp-r" min="0.5" max="3" step="0.1" value="1.8">
+              <span class="sp-hint">Stoichiometric requirement: 1.5 to 2.0</span>
+            </label>
+            <p class="catalyst"><b>Catalyst formulation</b>Quaternary Cu–ZnO–ZrO₂–Al₂O₃ (CZZA), co-precipitated under pH 7.2 ± 0.1 at 65 °C, calcined at 400 °C.</p>
+            <button type="button" class="btn" id="sp-reset">Reset setpoints</button>
+          </form>
+
+          <div class="trend">
+            <div class="panel-title">
+              <div class="views" role="tablist" aria-label="Reactor view">
+                <button type="button" role="tab" class="view is-on" data-view="curve" aria-selected="true">LPG selectivity curve</button>
+                <button type="button" role="tab" class="view" data-view="bars" aria-selected="false">Product fractions</button>
+                <button type="button" role="tab" class="view" data-view="table" aria-selected="false">Aspen stream table</button>
               </div>
+              <span class="chip c2">Gibbs free energy minimization</span>
             </div>
-            <div class="profile-meta">
-              <h3>Vaidarbhi Buddhe</h3>
-              <p>Chemical & Petrochemical Engineer</p>
-              <div class="mini-pills">
-                <span class="badge badge-teal">Dow Intern</span>
-                <span class="badge badge-teal">CSIR Intern</span>
-                <span class="badge badge-amber">Six Sigma</span>
-                <span class="badge badge-cyan">Aspen Plus</span>
-              </div>
-            </div>
+            <div class="view-pane" id="pane-curve"><svg id="trend-svg" viewBox="0 0 640 340" role="img" aria-label="LPG selectivity against reactor temperature"></svg></div>
+            <div class="view-pane" id="pane-bars" hidden><ul id="product-bars"></ul></div>
+            <div class="view-pane" id="pane-table" hidden><table class="streamtab" id="stream-table"></table></div>
+            <dl class="readouts">
+              <div><dt>CO conversion</dt><dd id="ro-conv">–</dd></div>
+              <div><dt>LPG selectivity</dt><dd id="ro-sel">–</dd></div>
+              <div><dt>Net LPG yield</dt><dd id="ro-yield">–</dd></div>
+              <div><dt>Reactor phase</dt><dd id="ro-phase" class="small">–</dd></div>
+            </dl>
           </div>
+        </div>
+        <p class="disclaimer reveal">Simplified illustrative model of the trends from the study, for demonstration.</p>
 
-          <!-- Live Interactive Chemical Engineering Deck -->
-          <div class="hero-deck-container">
-            <div class="hero-deck-nav">
-              <button class="hero-deck-tab active" data-deck="syngas">⚗️ Syngas-to-LPG</button>
-              <button class="hero-deck-tab" data-deck="eor">🛢️ Dow EOR Model</button>
-              <button class="hero-deck-tab" data-deck="thesis">🧠 Fault Detection</button>
+        <div class="bench">
+          <div class="tool glow reveal">
+            <div class="panel-title"><h3>Reynolds number & flow regime</h3><span class="chip c1">Fluid dynamics</span></div>
+            <div class="tool-grid">
+              <label>Density ρ, kg/m³<input type="number" id="re-density" value="998"></label>
+              <label>Velocity v, m/s<input type="number" id="re-velocity" value="1.8" step="0.1"></label>
+              <label>Pipe diameter D, mm<input type="number" id="re-diameter" value="50"></label>
+              <label>Viscosity μ, cP<input type="number" id="re-viscosity" value="1.0" step="0.1"></label>
             </div>
-
-            <!-- Pane 1: Syngas to LPG (CSIR-IIP) -->
-            <div class="hero-deck-pane active" id="deck-syngas">
-              <div class="schematic-header">
-                <span>CSIR-IIP • REACTOR R-101 (Aspen RGibbs)</span>
-                <div class="live-pulse">
-                  <span class="pulse-dot"></span>
-                  <span>Active Simulation</span>
-                </div>
-              </div>
-              <div class="reaction-equation">
-                CO + 2H₂ ⇌ CH₃OH ➔ DME ➔ LPG (C₃H₈ + C₄H₁₀)
-              </div>
-              <div class="reactor-telemetry" style="margin-top: 0.75rem;">
-                <div class="telem-item">
-                  <span class="telem-label">CATALYST</span>
-                  <span class="telem-val">CZZA Quaternary</span>
-                </div>
-                <div class="telem-item">
-                  <span class="telem-label">EQUIL. NET</span>
-                  <span class="telem-val">27 Reactions</span>
-                </div>
-                <div class="telem-item">
-                  <span class="telem-label">CO CONV.</span>
-                  <span class="telem-val">82.4%</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Pane 2: Dow India EOR Decline Modeling -->
-            <div class="hero-deck-pane" id="deck-eor">
-              <div class="schematic-header">
-                <span>DOW INDIA TECH CENTRE • EOR ANALYTICS</span>
-                <div class="live-pulse">
-                  <span class="pulse-dot" style="background: var(--cyan-400); box-shadow: 0 0 8px var(--cyan-400);"></span>
-                  <span style="color: var(--cyan-400);">Harmonic DCA</span>
-                </div>
-              </div>
-              <div class="reaction-equation" style="color: var(--cyan-400); background: rgba(14, 165, 233, 0.08); border-left-color: var(--cyan-500);">
-                DCA: q(t) = qᵢ / (1 + b·Dᵢ·t) • Blind-Forecast Error Minimized
-              </div>
-              <div class="reactor-telemetry" style="margin-top: 0.75rem;">
-                <div class="telem-item">
-                  <span class="telem-label">TARGET WELL</span>
-                  <span class="telem-val">DITC-5</span>
-                </div>
-                <div class="telem-item">
-                  <span class="telem-label">EST. OIL</span>
-                  <span class="telem-val">~527k BBL</span>
-                </div>
-                <div class="telem-item">
-                  <span class="telem-label">RMSE ERROR</span>
-                  <span class="telem-val">315.10</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Pane 3: Master's Thesis Dynamic Fault Detection -->
-            <div class="hero-deck-pane" id="deck-thesis">
-              <div class="schematic-header">
-                <span>ICT MUMBAI • MASTER'S THESIS</span>
-                <div class="live-pulse">
-                  <span class="pulse-dot" style="background: var(--amber-400); box-shadow: 0 0 8px var(--amber-400);"></span>
-                  <span style="color: var(--amber-400);">AI/ML FDD</span>
-                </div>
-              </div>
-              <div class="reaction-equation" style="color: var(--amber-400); background: rgba(245, 158, 11, 0.08); border-left-color: var(--amber-500);">
-                Dynamic Process Simulation + AI/ML Plant Fault Diagnosis
-              </div>
-              <div class="reactor-telemetry" style="margin-top: 0.75rem;">
-                <div class="telem-item">
-                  <span class="telem-label">GUIDE</span>
-                  <span class="telem-val">Dr. D. Kundu</span>
-                </div>
-                <div class="telem-item">
-                  <span class="telem-label">MINOR GUIDE</span>
-                  <span class="telem-val">Dr. S. K. Mondal</span>
-                </div>
-                <div class="telem-item">
-                  <span class="telem-label">CORE DOMAIN</span>
-                  <span class="telem-val">Dynamic FDD</span>
-                </div>
-              </div>
-            </div>
+            <p class="tool-result"><strong id="re-val-out">89,820</strong><span id="re-regime-out" class="reynolds-regime-pill regime-turbulent">Turbulent flow</span></p>
           </div>
-
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted);">
-              📍 Jalna, Maharashtra
-            </span>
-            <a href="#contact" class="btn btn-outline-amber btn-sm">
-              <span>Connect Direct</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M5 12h14"></path>
-                <path d="m12 5 7 7-7 7"></path>
-              </svg>
-            </a>
+          <div class="tool glow reveal">
+            <div class="panel-title"><h3>Chemical engineering unit converter</h3><span class="chip c2">Multi-physics</span></div>
+            <div class="tool-grid">
+              <label class="span2">Physical dimension
+                <select id="conv-type-select">
+                  <option value="pressure">Pressure (bar, psi, kPa, atm, MPa)</option>
+                  <option value="temperature">Temperature (°C, K, °F)</option>
+                  <option value="flowrate">Volumetric flow rate (m³/h, L/min, gpm)</option>
+                  <option value="viscosity">Dynamic viscosity (cP, Pa·s, poise)</option>
+                  <option value="energy">Power & heat duty (kW, BTU/h, kcal/h, HP)</option>
+                </select>
+              </label>
+              <label class="span2">Input value<input type="number" id="conv-input-val" value="10"></label>
+              <label>From<select id="conv-from-unit"></select></label>
+              <label>To<select id="conv-to-unit"></select></label>
+            </div>
+            <p class="tool-result"><strong id="conv-result-val">0.00</strong></p>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ========================================================================
-       Live Metrics Ticker Strip
-       ======================================================================== -->
-  <section class="stats-strip">
-    <div class="container">
-      <div class="stats-card-container glass-card" id="stats-ticker-container">
-        <!-- Rendered dynamically by data.js & app.js -->
+    <!-- Skills -->
+    <section class="section" id="skills">
+      <div class="wrap">
+        <h2 class="split">Technical skills matrix</h2>
+        <p class="section-note reveal">Tools and methods, each with its level, domain and where it was applied.</p>
+        <div id="skills-grid"></div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ========================================================================
-       About Section & Engineering Profile
-       ======================================================================== -->
-  <section class="section about-section" id="about">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-tag">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-            <circle cx="12" cy="7" r="4"></circle>
-          </svg>
-          <span>Professional Profile</span>
-        </div>
-        <h2 class="section-title">
-          Engineering Philosophy & <span class="gradient-text">Career Focus</span>
-        </h2>
-        <p class="section-subtitle">
-          Driven by rigorous chemical engineering fundamentals from ICT Mumbai, seeking to accelerate process efficiency, catalytic innovation, and sustainable plant manufacturing.
-        </p>
+    <!-- Education -->
+    <section class="section" id="education">
+      <div class="wrap">
+        <h2 class="split">Education & credentials</h2>
+        <div class="edu" id="edu-list"></div>
+        <h3 class="sub reveal">Certifications & awards</h3>
+        <div class="certs" id="cert-list"></div>
       </div>
+    </section>
 
-      <!-- Executive Engineering Bento Grid Layout -->
-      <div class="bento-grid">
-        <!-- Tile 1 (Span 12): Professional Profile & Career Philosophy -->
-        <div class="bento-tile bento-span-12" style="border-left: 4px solid var(--teal-500);">
-          <div class="bento-header-tag">
-            <span class="badge badge-teal">Core Profile • ICT Mumbai</span>
-            <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);">Integrated M.Tech • CGPA 8.73 (Rank 3/45)</span>
-          </div>
-          
-          <h3 style="font-size: 1.35rem; margin-bottom: 0.6rem; color: var(--text-primary); font-family: var(--font-heading);">
-            Chemical & Petrochemical Process Engineer
-          </h3>
-
-          <p class="summary-lead-text">
-            Final-year Integrated M.Tech Chemical Engineering student at <strong>Institute of Chemical Technology (ICT Mumbai)</strong> with top academic merit (CGPA: 8.73, Rank: 3/45). Combines practical plant operations experience with rigorous chemical process simulation and engineering data analytics.
-          </p>
-
-          <!-- 3 Aesthetic Pillar Micro-Cards -->
-          <div class="summary-pillars-grid">
-            <div class="summary-pillar-card">
-              <div class="pillar-icon">⚗️</div>
-              <div class="pillar-content">
-                <strong>Simulation & Kinetics</strong>
-                <p>Aspen Plus (RGibbs/RadFrac), Aspen HYSYS, and thermodynamic equilibrium modeling across 27-reaction networks.</p>
-              </div>
-            </div>
-
-            <div class="summary-pillar-card">
-              <div class="pillar-icon">🏭</div>
-              <div class="pillar-content">
-                <strong>Plant Operations & Quality</strong>
-                <p>Lubricant blending supervision (12 operators), daily material audits, loss reduction, and Six Sigma White Belt.</p>
-              </div>
-            </div>
-
-            <div class="summary-pillar-card">
-              <div class="pillar-icon">📊</div>
-              <div class="pillar-content">
-                <strong>Analytics & Fault Detection</strong>
-                <p>Python DCA decline models, reservoir forecasting (~527k BBL), and AI/ML plant fault diagnosis (FDD).</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Target Career Focus Tags -->
-          <div class="summary-target-strip">
-            <span class="target-strip-label">CAREER FOCUS</span>
-            <div class="target-pills">
-              <span class="target-pill">Process Engineering</span>
-              <span class="target-pill">Process Optimization</span>
-              <span class="target-pill">Plant Operations & Manufacturing</span>
-              <span class="target-pill">Energy & Petrochemicals</span>
-            </div>
-          </div>
-
-          <div class="bento-metrics-row">
-            <div class="bento-metric-cell">
-              <span>ACADEMIC STANDING</span>
-              <strong>CGPA 8.73</strong>
-            </div>
-            <div class="bento-metric-cell">
-              <span>CLASS MERIT</span>
-              <strong>Rank 3 / 45</strong>
-            </div>
-            <div class="bento-metric-cell">
-              <span>EXPERIENCE</span>
-              <strong>6 Stints</strong>
-            </div>
-            <div class="bento-metric-cell">
-              <span>HIGH SCHOOL</span>
-              <strong>100% S.S.C.</strong>
-            </div>
-          </div>
-        </div>
-
-        <!-- Tile 2 (Span 6): Dow India EOR Project -->
-        <div class="bento-tile bento-span-6" style="background: linear-gradient(135deg, rgba(14, 165, 233, 0.08) 0%, var(--bg-card) 100%);">
-          <div class="bento-header-tag">
-            <span class="badge badge-cyan">Dow India Technology Centre</span>
-            <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--cyan-400);">Jul–Oct 2026</span>
-          </div>
-          <h3>EOR Decline Curve Analysis (DCA)</h3>
-          <p style="font-size: 0.88rem;">
-            Analyzed synthetic oil well histories at DITC. Developed Python DCA models; selected harmonic model based on minimum blind-forecast error (RMSE: 315.10, MAE: 292.06) to estimate ~527,000 barrels of incremental oil.
-          </p>
-          <div class="bento-metrics-row">
-            <div class="bento-metric-cell">
-              <span>INCREMENTAL OIL</span>
-              <strong style="color: var(--cyan-400);">~527k BBL</strong>
-            </div>
-            <div class="bento-metric-cell">
-              <span>MODEL</span>
-              <strong style="color: var(--cyan-400);">Harmonic</strong>
-            </div>
-            <div class="bento-metric-cell">
-              <span>FORECAST RMSE</span>
-              <strong style="color: var(--cyan-400);">315.10</strong>
-            </div>
-          </div>
-        </div>
-
-        <!-- Tile 4 (Span 6): CSIR-IIP Flagship Catalysis -->
-        <div class="bento-tile bento-span-6" style="border-left: 4px solid var(--teal-400);">
-          <div class="bento-header-tag">
-            <span class="badge badge-teal">CSIR-IIP Dehradun</span>
-            <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--teal-400);">Nov 2025–Feb 2026</span>
-          </div>
-          <h3>Syngas-to-LPG Catalysis & Simulation</h3>
-          <p style="font-size: 0.88rem;">
-            Synthesized CZZA quaternary catalysts via pH-controlled co-precipitation. Modeled 27-reaction Gibbs thermodynamic equilibrium network in Aspen Plus.
-          </p>
-          <div class="bento-metrics-row">
-            <div class="bento-metric-cell">
-              <span>REACTIONS</span>
-              <strong>27 Modeled</strong>
-            </div>
-            <div class="bento-metric-cell">
-              <span>CATALYST</span>
-              <strong>CZZA Site</strong>
-            </div>
-            <div class="bento-metric-cell">
-              <span>ANALYSIS</span>
-              <strong>GC (FID/TCD)</strong>
-            </div>
-          </div>
-        </div>
-
-        <!-- Tile 3 (Span 7): Master's Thesis Project -->
-        <div class="bento-tile bento-span-7" style="border-left: 4px solid var(--amber-500);">
-          <div class="bento-header-tag">
-            <span class="badge badge-amber">Master's Thesis Research</span>
-            <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--amber-400);">Mar 2026 – Present</span>
-          </div>
-          <h3>Development of a Dynamic Model for Process Monitoring & Fault Detection</h3>
-          <p>
-            Developing a dynamic process simulation framework integrated with AI/ML techniques to analyse plant behavior, identify operational anomalies, and support fault detection and diagnosis (FDD) to improve process reliability and energy performance.
-          </p>
-          <div style="font-size: 0.82rem; color: var(--text-muted); font-family: var(--font-mono); margin-bottom: 0.75rem;">
-            ICT Mumbai • <span style="color: var(--amber-400);">Major Guide: Dr. Debashish Kundu</span> • <span>Minor Guide: Dr. Supriyo Kumar Mondal</span>
-          </div>
-          <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
-            <span class="badge">Dynamic Simulation</span>
-            <span class="badge">AI/ML in ChemEng</span>
-            <span class="badge">Fault Diagnosis</span>
-            <span class="badge">Plant Reliability</span>
-          </div>
-        </div>
-
-        <!-- Tile 6 (Span 5): Academic Record & Honors -->
-        <div class="bento-tile bento-span-5">
-          <div class="bento-header-tag">
-            <span class="badge">Institutional Distinctions</span>
-          </div>
-          <h3>Academic Track Record & Honors</h3>
-          <div style="display: flex; flex-direction: column; gap: 0.65rem; margin-top: 0.5rem;">
-            <div class="fact-row" style="padding: 0.35rem 0;">
-              <span class="fact-label">Integrated M.Tech (Chem Eng)</span>
-              <span class="fact-val" style="color: var(--amber-400);">CGPA: 8.73 (Rank 3/45, Top 7%)</span>
-            </div>
-            <div class="fact-row" style="padding: 0.35rem 0;">
-              <span class="fact-label">Higher Secondary Certificate (H.S.C.)</span>
-              <span class="fact-val" style="color: var(--teal-400);">88.17% (Science Stream)</span>
-            </div>
-            <div class="fact-row" style="padding: 0.35rem 0;">
-              <span class="fact-label">Secondary School Certificate (S.S.C.)</span>
-              <span class="fact-val" style="color: var(--emerald-400);">100% (Rank 1 Gold Standard)</span>
-            </div>
-            <div class="fact-row" style="padding: 0.35rem 0;">
-              <span class="fact-label">Honorary Award</span>
-              <span class="fact-val" style="color: var(--cyan-400);">Vedvalli Vaidyanathan Girl Student Award</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Tile 5 (Span 12): Technical Software & Systems Matrix -->
-        <div class="bento-tile bento-span-12">
-          <div class="bento-header-tag">
-            <span class="badge">Chemical Engineering Toolchain</span>
-          </div>
-          <h3>Software, Analytics & Industrial Systems</h3>
-          <p style="font-size: 0.88rem; margin-bottom: 0.75rem;">
-            Proficient across rigorous process simulators, computational mathematical packages, and industrial quality standards.
-          </p>
-          <div style="display: flex; flex-wrap: wrap; gap: 0.45rem;">
-            <span class="badge badge-teal">Aspen Plus (RGibbs/RadFrac)</span>
-            <span class="badge badge-teal">Aspen HYSYS</span>
-            <span class="badge badge-teal">DWSIM</span>
-            <span class="badge badge-cyan">Python (NumPy/Pandas)</span>
-            <span class="badge badge-cyan">MATLAB</span>
-            <span class="badge badge-amber">Gas Chromatography (GC)</span>
-            <span class="badge badge-amber">HPLC</span>
-            <span class="badge badge-amber">Karl Fischer Titration</span>
-            <span class="badge">Six Sigma White Belt</span>
-            <span class="badge">PLC Blending</span>
-            <span class="badge">SAP ERP</span>
-          </div>
+    <!-- Leadership -->
+    <section class="section" id="campus">
+      <div class="wrap">
+        <h2 class="split">Leadership & outreach</h2>
+        <div class="lead" id="lead-list"></div>
+        <div class="extras">
+          <div class="reveal"><h3 class="sub">Languages</h3><ul class="mini" id="lang-list"></ul></div>
+          <div class="reveal"><h3 class="sub">Interests</h3><ul class="mini" id="interest-list"></ul></div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ========================================================================
-       Interactive Chemical Engineering Simulators (The Interactive Lab)
-       ======================================================================== -->
-  <section class="section simulators-section" id="simulators">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-tag">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
-          </svg>
-          <span>Interactive Chemical Lab</span>
-        </div>
-        <h2 class="section-title">
-          Real-Time <span class="gradient-text">Process & Thermodynamic</span> Simulators
-        </h2>
-        <p class="section-subtitle">
-          Test interactive mathematical and thermodynamic models derived directly from my syngas conversion research at CSIR-IIP and fluid dynamics modeling.
-        </p>
-      </div>
-
-      <!-- Simulators Tab Navigation -->
-      <div class="sim-tabs-nav">
-        <button class="sim-tab-btn active" data-tab="aspen-sim-pane">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"></circle>
-            <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
-            <path d="M2 12h20"></path>
-          </svg>
-          <span>1. Aspen RGibbs Syngas-to-LPG Reactor Simulator</span>
-        </button>
-        <button class="sim-tab-btn" data-tab="calc-sim-pane">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="4" y="2" width="16" height="20" rx="2"></rect>
-            <line x1="8" y1="6" x2="16" y2="6"></line>
-            <line x1="16" y1="14" x2="16" y2="18"></line>
-            <path d="M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M8 18h.01M12 18h.01"></path>
-          </svg>
-          <span>2. Chemical Engineering Calculations & Reynolds Flow</span>
-        </button>
-      </div>
-
-      <!-- Tab Pane 1: Aspen Syngas-to-LPG -->
-      <div class="sim-content-pane active" id="aspen-sim-pane">
-        <div class="aspen-console">
-          <div class="aspen-controls-panel">
-            <div class="panel-title-badge">
-              <h4>Reactor Operating Controls</h4>
-              <span class="badge badge-teal">CSIR-IIP Route</span>
-            </div>
-
-            <div class="control-slider-group">
-              <div class="slider-label-row">
-                <span>Reaction Temperature (T)</span>
-                <span class="slider-val-readout" id="aspen-temp-val">260 °C</span>
-              </div>
-              <input type="range" class="aspen-slider" id="aspen-temp" min="200" max="350" step="1" value="260">
-              <span style="font-size: 0.72rem; color: var(--text-muted);">Optimum window: 255°C – 275°C for C₃-C₄ selectivity</span>
-            </div>
-
-            <div class="control-slider-group">
-              <div class="slider-label-row">
-                <span>Operating Pressure (P)</span>
-                <span class="slider-val-readout" id="aspen-press-val">40 bar</span>
-              </div>
-              <input type="range" class="aspen-slider" id="aspen-press" min="20" max="60" step="1" value="40">
-              <span style="font-size: 0.72rem; color: var(--text-muted);">Industrial synthesis regime: 30 – 50 bar</span>
-            </div>
-
-            <div class="control-slider-group">
-              <div class="slider-label-row">
-                <span>Feed Ratio (H₂ / CO)</span>
-                <span class="slider-val-readout" id="aspen-ratio-val">1.8 : 1</span>
-              </div>
-              <input type="range" class="aspen-slider" id="aspen-ratio" min="0.5" max="3.0" step="0.1" value="1.8">
-              <span style="font-size: 0.72rem; color: var(--text-muted);">Stoichiometric requirement: 1.5 – 2.0</span>
-            </div>
-
-            <div style="background: var(--bg-card); padding: 0.85rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
-              <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--amber-400); display: block; margin-bottom: 0.2rem;">
-                CATALYST FORMULATION
-              </span>
-              <p style="font-size: 0.82rem; margin: 0; color: var(--text-secondary);">
-                Quaternary <strong>Cu–ZnO–ZrO₂–Al₂O₃ (CZZA)</strong> co-precipitated under pH 7.2 ± 0.1 at 65°C, calcined at 400°C.
-              </p>
+    <!-- Contact -->
+    <section class="section contact" id="contact">
+      <div class="wrap">
+        <h2 class="split">Let's collaborate on process innovation</h2>
+        <a class="mail reveal" href="mailto:vaidarbhibuddhe@gmail.com">vaidarbhibuddhe<wbr>@gmail.com</a>
+        <div class="contact-grid">
+          <div class="contact-info reveal">
+            <p>Based in Jalna, Maharashtra. Open to process engineering, process optimisation, manufacturing, and energy & petrochemical roles.</p>
+            <a class="cline" href="tel:+918484968019"><span>Phone / WhatsApp</span><b>+91 8484968019</b></a>
+            <a class="cline" href="https://linkedin.com/in/vaidarbhi-buddhe" target="_blank" rel="noopener"><span>LinkedIn</span><b>linkedin.com/in/vaidarbhi-buddhe</b></a>
+            <div class="cline"><span>Location</span><b>Jalna, Maharashtra, India</b></div>
+            <div class="contact-row">
+              <button type="button" class="btn" data-copy="vaidarbhibuddhe@gmail.com" data-label="Copy email">Copy email</button>
+              <button type="button" class="btn" data-copy="+91 8484968019" data-label="Copy phone">Copy phone</button>
+              <a class="btn btn-solid" href="assets/documents/Vaidarbhi_Buddhe_Resume.pdf" download>Download CV</a>
             </div>
           </div>
-
-          <div class="aspen-vis-panel">
-            <div class="vis-header-row">
-              <div class="vis-mode-toggles">
-                <button class="vis-toggle-btn active" data-view="yield">LPG Selectivity Curve</button>
-                <button class="vis-toggle-btn" data-view="breakdown">Product Fractions</button>
-                <button class="vis-toggle-btn" data-view="stream">Aspen Stream Table</button>
-              </div>
-              <span class="badge badge-amber">Gibbs Free Energy Minimization</span>
-            </div>
-
-            <div class="chart-wrapper">
-              <canvas id="aspen-chart-canvas"></canvas>
-            </div>
-
-            <div class="aspen-telemetry-strip">
-              <div class="telemetry-card">
-                <span class="t-label">CO CONVERSION</span>
-                <span class="t-value" id="telem-conversion">82.4%</span>
-              </div>
-              <div class="telemetry-card">
-                <span class="t-label">LPG SELECTIVITY</span>
-                <span class="t-value" id="telem-selectivity">71.8%</span>
-              </div>
-              <div class="telemetry-card">
-                <span class="t-label">NET LPG YIELD</span>
-                <span class="t-value" id="telem-yield">59.2%</span>
-              </div>
-              <div class="telemetry-card">
-                <span class="t-label">REACTOR PHASE</span>
-                <span class="t-value" id="telem-phase">Vapor Phase</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tab Pane 4: Unit Converter & Reynolds Calculator -->
-      <div class="sim-content-pane" id="calc-sim-pane">
-        <div class="chem-utils-grid">
-          <!-- Unit Converter -->
-          <div class="util-card">
-            <div class="panel-title-badge" style="margin-bottom: 1.25rem;">
-              <h4>Chemical Engineering Unit Converter</h4>
-              <span class="badge badge-teal">Multi-Physics</span>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Physical Dimension</label>
-              <select id="conv-type-select" class="form-select">
-                <option value="pressure">Pressure (bar, psi, kPa, atm, MPa)</option>
-                <option value="temperature">Temperature (°C, K, °F)</option>
-                <option value="flowrate">Volumetric Flow Rate (m³/h, L/min, gpm)</option>
-                <option value="viscosity">Dynamic Viscosity (cP, Pa·s, poise)</option>
-                <option value="energy">Power & Heat Duty (kW, BTU/h, kcal/h, HP)</option>
+          <form class="contact-form glow reveal" id="contact-form">
+            <h3>Send a message</h3>
+            <label>Your name / organization<input type="text" id="contact-name" required autocomplete="name"></label>
+            <label>Your work email<input type="email" id="contact-email" required autocomplete="email" placeholder="name@company.com"></label>
+            <label>Subject
+              <select id="contact-topic">
+                <option>Process Engineering Role / Hiring</option>
+                <option>Aspen Plus Simulation Collaboration</option>
+                <option>Syngas & Catalytic Research Query</option>
+                <option>Industrial Energy Audit & Six Sigma</option>
+                <option>The Bombay Technologist Outreach</option>
+                <option>General Inquiry</option>
               </select>
-            </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;" class="form-group">
-              <div>
-                <label class="form-label">Input Value</label>
-                <input type="number" id="conv-input-val" class="form-input" value="10">
-              </div>
-              <div>
-                <label class="form-label">From Unit</label>
-                <select id="conv-from-unit" class="form-select"></select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="form-label">To Unit</label>
-              <select id="conv-to-unit" class="form-select"></select>
-            </div>
-            <div style="background: var(--bg-surface); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-glow); text-align: center;">
-              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); display: block;">CONVERTED RESULT</span>
-              <strong id="conv-result-val" style="font-family: var(--font-heading); font-size: 1.8rem; color: var(--teal-400);">0.00</strong>
-            </div>
-          </div>
-
-          <!-- Reynolds Number Calculator -->
-          <div class="util-card">
-            <div class="panel-title-badge" style="margin-bottom: 1.25rem;">
-              <h4>Reynolds Number & Flow Regime</h4>
-              <span class="badge badge-cyan">Fluid Dynamics</span>
-            </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
-              <div class="form-group">
-                <label class="form-label">Density ρ (kg/m³)</label>
-                <input type="number" id="re-density" class="form-input" value="998">
-              </div>
-              <div class="form-group">
-                <label class="form-label">Velocity v (m/s)</label>
-                <input type="number" id="re-velocity" class="form-input" value="1.8" step="0.1">
-              </div>
-              <div class="form-group">
-                <label class="form-label">Pipe Dia D (mm)</label>
-                <input type="number" id="re-diameter" class="form-input" value="50">
-              </div>
-              <div class="form-group">
-                <label class="form-label">Viscosity μ (cP)</label>
-                <input type="number" id="re-viscosity" class="form-input" value="1.0" step="0.1">
-              </div>
-            </div>
-            <div style="background: var(--bg-surface); padding: 1.15rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); text-align: center;">
-              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); display: block;">REYNOLDS NUMBER (Re)</span>
-              <strong id="re-val-out" style="font-family: var(--font-mono); font-size: 1.7rem; color: var(--amber-400);">89,820</strong>
-              <div id="re-regime-out" class="reynolds-regime-pill regime-turbulent">Turbulent Flow (Re > 4,000)</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========================================================================
-       Research & Industrial Experience Timeline
-       ======================================================================== -->
-  <section class="section" id="experience">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-tag">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-          </svg>
-          <span>Plant & Laboratory Track Record</span>
-        </div>
-        <h2 class="section-title">
-          Research & <span class="gradient-text">Industrial Experience</span>
-        </h2>
-        <p class="section-subtitle">
-          Hands-on process engineering, plant operations supervision, energy auditing, and thermodynamic modeling across petrochemical, chemical, and polymer sectors.
-        </p>
-      </div>
-
-      <!-- Interactive Hint Bar -->
-      <div class="exp-interactive-hint">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="10"></circle>
-          <line x1="12" y1="16" x2="12" y2="12"></line>
-          <line x1="12" y1="8" x2="12.01" y2="8"></line>
-        </svg>
-        <span><strong>Interactive Case Studies:</strong> Click any experience card below to pop out full operational metrics, engineering methodologies, and comprehensive project details.</span>
-      </div>
-
-      <!-- Master's Thesis Spotlight (Compact & Interactive) -->
-      <div class="thesis-spotlight-card glass-card exp-card-clickable" data-exp-id="thesis" onclick="openExperienceModal('thesis')" role="button" tabindex="0" aria-haspopup="dialog" style="margin-bottom: 2rem; border-left: 4px solid var(--teal-500); padding: 1.5rem 1.85rem; cursor: pointer;">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 0.5rem;">
-          <div>
-            <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.35rem;">
-              <span class="badge badge-teal">Master’s Thesis Research</span>
-              <span class="badge badge-amber">Mar 2026 – Present</span>
-              <span class="badge badge-cyan">Dynamic Simulation + AI/ML</span>
-            </div>
-            <h3 style="font-size: 1.25rem; margin: 0; color: var(--text-primary); font-family: var(--font-heading);">
-              Development of a Dynamic Model for Process Monitoring and Fault Detection
-            </h3>
-            <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.35rem; font-family: var(--font-mono);">
-              Institute of Chemical Technology (ICT Mumbai) • <span style="color: var(--teal-400);">Major Guide: Dr. Debashish Kundu</span> • <span>Minor Guide: Dr. Supriyo Kumar Mondal</span>
-            </div>
-          </div>
-          <button type="button" class="btn btn-outline-amber btn-sm exp-modal-btn" onclick="event.stopPropagation(); openExperienceModal('thesis')" data-exp-id="thesis" aria-label="Pop out thesis details">
-            <span>View Full Thesis Scope</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-              <polyline points="15 3 21 3 21 9"></polyline>
-              <line x1="10" y1="14" x2="21" y2="3"></line>
-            </svg>
-          </button>
-        </div>
-        <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.5; margin: 0.5rem 0 0.85rem 0;">
-          Developing an advanced dynamic process simulation framework integrated with AI/ML techniques to capture plant transient behaviors, classify anomalies early, and support fault detection and diagnosis (FDD) for improved process reliability.
-        </p>
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; padding-top: 0.75rem; border-top: 1px solid var(--border-subtle);">
-          <div style="display: flex; flex-wrap: wrap; gap: 0.45rem;">
-            <span class="badge">Dynamic Process Simulation</span>
-            <span class="badge">Fault Detection (FDD)</span>
-            <span class="badge">Plant Reliability</span>
-          </div>
-          <span class="exp-click-hint" style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--amber-400); display: flex; align-items: center; gap: 0.3rem;">
-            Click to inspect full methodology ➔
-          </span>
-        </div>
-      </div>
-
-      <div class="experience-timeline" id="experience-timeline-container">
-        <!-- Rendered dynamically from data.js -->
-      </div>
-    </div>
-  </section>
-
-  <!-- ========================================================================
-       Technical Skills & Competencies Matrix
-       ======================================================================== -->
-  <section class="section" id="skills" style="background: var(--bg-surface);">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-tag">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="16 18 22 12 16 6"></polyline>
-            <polyline points="8 6 2 12 8 18"></polyline>
-          </svg>
-          <span>Engineered Competencies</span>
-        </div>
-        <h2 class="section-title">
-          Technical <span class="gradient-text">Proficiency Matrix</span>
-        </h2>
-        <p class="section-subtitle">
-          Comprehensive skill set spanning Aspen Plus simulations, analytical wet chemistry, Python/MATLAB modeling, and Lean Six Sigma methodologies.
-        </p>
-      </div>
-
-      <div class="skills-filter-bar">
-        <button class="filter-btn active" data-category="all">All Disciplines</button>
-        <button class="filter-btn" data-category="simulation">Simulation & Modeling</button>
-        <button class="filter-btn" data-category="chemical">Core Chemical Eng</button>
-        <button class="filter-btn" data-category="analytical">Analytical Lab</button>
-        <button class="filter-btn" data-category="operations">Industrial & Lean</button>
-      </div>
-
-      <div class="skills-grid" id="skills-grid-container">
-        <!-- Rendered dynamically from data.js -->
-      </div>
-    </div>
-  </section>
-
-  <!-- ========================================================================
-       Education, Certifications & Awards
-       ======================================================================== -->
-  <section class="section" id="education">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-tag">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-          </svg>
-          <span>Academic Pedigree</span>
-        </div>
-        <h2 class="section-title">
-          Education & <span class="gradient-text">Honors</span>
-        </h2>
-        <p class="section-subtitle">
-          Demonstrated academic excellence at India's top chemical engineering institute, alongside prestigious awards and industry certifications.
-        </p>
-      </div>
-
-      <div class="edu-awards-grid">
-        <div>
-          <h3 style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
-            <span>Academic Qualifications</span>
-            <span class="badge badge-teal">ICT Mumbai Pedigree</span>
-          </h3>
-          <div id="edu-cards-container">
-            <!-- Rendered dynamically from data.js -->
-          </div>
-        </div>
-
-        <div>
-          <h3 style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
-            <span>Certifications & Honors</span>
-            <span class="badge badge-amber">Accredited</span>
-          </h3>
-          <div class="awards-list" id="awards-list-container">
-            <!-- Rendered dynamically from data.js -->
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========================================================================
-       Leadership, Editorial & Extracurriculars
-       ======================================================================== -->
-  <section class="section" id="leadership" style="background: var(--bg-surface);">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-tag">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="2" y1="12" x2="22" y2="12"></line>
-            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-          </svg>
-          <span>Beyond The Laboratory</span>
-        </div>
-        <h2 class="section-title">
-          Leadership & <span class="gradient-text">Extracurricular Impact</span>
-        </h2>
-        <p class="section-subtitle">
-          Leading editorial initiatives for <em>The Bombay Technologist</em>, mentoring 500+ students in STEM, and competing at state-level sports.
-        </p>
-      </div>
-
-      <div class="leadership-grid" id="leadership-grid-container">
-        <!-- Rendered dynamically from data.js -->
-      </div>
-    </div>
-  </section>
-
-  <!-- ========================================================================
-       Contact & Collaboration Hub
-       ======================================================================== -->
-  <section class="section" id="contact">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-tag">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-            <polyline points="22,6 12,13 2,6"></polyline>
-          </svg>
-          <span>Initiate Contact</span>
-        </div>
-        <h2 class="section-title">
-          Let's Collaborate on <span class="gradient-text">Process Innovation</span>
-        </h2>
-        <p class="section-subtitle">
-          Interested in discussing process simulation, industrial internships, catalytic research, or chemical manufacturing roles? Reach out directly.
-        </p>
-      </div>
-
-      <div class="contact-grid">
-        <div class="contact-info-panel glass-card">
-          <div>
-            <h3 style="margin-bottom: 0.5rem;">Direct Coordinates</h3>
-            <p style="color: var(--text-muted); font-size: 0.95rem;">
-              Based in Jalna, Maharashtra. Available for process engineering and plant optimization opportunities globally.
-            </p>
-          </div>
-
-          <div class="contact-direct-cards">
-            <a href="mailto:vaidarbhibuddhe@gmail.com" class="contact-card-item">
-              <div class="c-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                  <polyline points="22,6 12,13 2,6"></polyline>
-                </svg>
-              </div>
-              <div class="c-details">
-                <span>DIRECT EMAIL</span>
-                <strong>vaidarbhibuddhe@gmail.com</strong>
-              </div>
-            </a>
-
-            <a href="tel:+918484968019" class="contact-card-item">
-              <div class="c-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                </svg>
-              </div>
-              <div class="c-details">
-                <span>PHONE / WHATSAPP</span>
-                <strong>+91 8484968019</strong>
-              </div>
-            </a>
-
-            <a href="https://linkedin.com/in/vaidarbhi-buddhe" target="_blank" rel="noopener noreferrer" class="contact-card-item">
-              <div class="c-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                  <rect x="2" y="9" width="4" height="12"></rect>
-                  <circle cx="4" cy="4" r="2"></circle>
-                </svg>
-              </div>
-              <div class="c-details">
-                <span>LINKEDIN PROFILE</span>
-                <strong>linkedin.com/in/vaidarbhi-buddhe</strong>
-              </div>
-            </a>
-
-            <div class="contact-card-item">
-              <div class="c-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                  <circle cx="12" cy="10" r="3"></circle>
-                </svg>
-              </div>
-              <div class="c-details">
-                <span>LOCATION</span>
-                <strong style="font-size: 0.85rem;">Jalna, Maharashtra, India</strong>
-              </div>
-            </div>
-          </div>
-
-          <div style="display: flex; gap: 0.75rem;">
-            <button class="btn btn-secondary btn-sm" id="copy-email-btn" style="flex: 1;">Copy Email</button>
-            <button class="btn btn-secondary btn-sm" id="copy-phone-btn" style="flex: 1;">Copy Phone</button>
-          </div>
-        </div>
-
-        <div class="contact-form-panel glass-card">
-          <h3 style="margin-bottom: 1.25rem;">Send Technical Inquiry</h3>
-          <form id="contact-form">
-            <div class="form-group">
-              <label class="form-label" for="contact-name">Your Full Name / Organization *</label>
-              <input type="text" id="contact-name" class="form-input" placeholder="e.g. Dr. Rajesh Sharma / Reliance Industries" required>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label" for="contact-email">Your Work Email *</label>
-              <input type="email" id="contact-email" class="form-input" placeholder="name@company.com" required>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label" for="contact-topic">Discussion Subject</label>
-              <select id="contact-topic" class="form-select">
-                <option value="Process Engineering Internship / Role">Process Engineering Role / Hiring</option>
-                <option value="Aspen Plus Simulation Collaboration">Aspen Plus Simulation Collaboration</option>
-                <option value="Syngas & Catalytic Research">Syngas & Catalytic Research Query</option>
-                <option value="Industrial Energy Audit & Six Sigma">Industrial Energy Audit & Six Sigma</option>
-                <option value="The Bombay Technologist Outreach">The Bombay Technologist Outreach</option>
-                <option value="General Engineering Discussion">General Inquiry</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label" for="contact-message">Message / Project Outline *</label>
-              <textarea id="contact-message" class="form-textarea" placeholder="Describe the process requirements, project scope, or opportunity..." required></textarea>
-            </div>
-
-            <button type="submit" class="btn btn-primary" style="width: 100%;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="22" y1="2" x2="11" y2="13"></line>
-                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-              </svg>
-              <span>Transmit Message</span>
-            </button>
+            </label>
+            <label>Message<textarea id="contact-message" rows="4" required></textarea></label>
+            <button type="submit" class="btn btn-solid">Send message</button>
+            <p class="form-note" id="form-note" role="status"></p>
           </form>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
-  <!-- ========================================================================
-       Footer
-       ======================================================================== -->
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="brand-logo">
-          <div class="logo-symbol">VB</div>
-          <div>
-            <div style="font-weight: 700; font-size: 1.05rem;">Vaidarbhi Buddhe</div>
-            <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--teal-400);">Institute of Chemical Technology, Mumbai</div>
-          </div>
-        </div>
-
-        <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
-          <a href="#about" class="nav-link">About</a>
-          <a href="#simulators" class="nav-link">Simulators</a>
-          <a href="#experience" class="nav-link">Experience</a>
-          <a href="#skills" class="nav-link">Skills</a>
-          <a href="#education" class="nav-link">Education</a>
-          <a href="https://linkedin.com/in/vaidarbhi-buddhe" target="_blank" class="nav-link">LinkedIn ↗</a>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <span>© 2026 Vaidarbhi Buddhe • Chemical & Petrochemical Engineer. Designed for high-impact process innovation.</span>
-        <span>ICT MARJ Jalna • Maharashtra, India</span>
-      </div>
+  <footer class="foot">
+    <div class="wrap">
+      <span>Vaidarbhi Buddhe, Institute of Chemical Technology, Mumbai</span>
+      <a href="#top">Back to top</a>
     </div>
   </footer>
 
-  <!-- ========================================================================
-       Interactive Experience Pop-Out Window Modal
-       ======================================================================== -->
-  <div class="modal-backdrop" id="exp-modal" role="dialog" aria-modal="true" aria-labelledby="exp-modal-title" onclick="if(event.target === this) closeExperienceModal()">
-    <div class="modal-dialog glass-card exp-modal-dialog">
-      <button type="button" class="modal-close-btn" id="exp-modal-close" onclick="closeExperienceModal()" aria-label="Close Project Details">✕</button>
-      <div id="exp-modal-content">
-        <!-- Rendered dynamically via JavaScript -->
-      </div>
-    </div>
-  </div>
+  <!-- Case study pop-out -->
+  <dialog class="modal" id="modal" aria-labelledby="modal-title">
+    <button type="button" class="modal-x" id="modal-x" aria-label="Close case study">×</button>
+    <div id="modal-body"></div>
+  </dialog>
 
-  <!-- ========================================================================
-       Print-Ready CV Modal
-       ======================================================================== -->
-  <div class="modal-backdrop" id="cv-modal">
-    <div class="modal-dialog glass-card" style="background: #ffffff; color: #0f172a;">
-      <button class="modal-close-btn" aria-label="Close Modal">✕</button>
+  <noscript><p style="padding:2rem;color:#fff">This page draws its content with JavaScript. The full CV is at assets/documents/Vaidarbhi_Buddhe_Resume.pdf.</p></noscript>
 
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.75rem;" class="no-print">
-        <div>
-          <h3 style="margin: 0; font-size: 1.2rem; color: #0f172a;">Official Resume Preview</h3>
-          <span style="font-size: 0.8rem; color: #64748b;">ICT Mumbai (MARJ Jalna)</span>
-        </div>
-        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-          <a href="assets/documents/Vaidarbhi_Buddhe_Resume.pdf" download="Vaidarbhi_Buddhe_Resume.pdf" class="btn btn-primary btn-sm">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-              <polyline points="7 10 12 15 17 10"></polyline>
-              <line x1="12" y1="15" x2="12" y2="3"></line>
-            </svg>
-            <span>Download Original PDF</span>
-          </a>
-          <a href="assets/documents/Vaidarbhi_Buddhe_Resume.pdf" target="_blank" class="btn btn-secondary btn-sm" style="color: #0f172a; border-color: #cbd5e1;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-              <polyline points="15 3 21 3 21 9"></polyline>
-              <line x1="10" y1="14" x2="21" y2="3"></line>
-            </svg>
-            <span>Open in Tab</span>
-          </a>
-          <button class="btn btn-secondary btn-sm" id="modal-print-cv-btn" style="color: #0f172a; border-color: #cbd5e1;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="6 9 6 2 18 2 18 9"></polyline>
-              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
-              <rect x="6" y="14" width="12" height="8"></rect>
-            </svg>
-            <span>Print View</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Printable Resume Document -->
-      <div class="cv-printable-document" style="display: block;">
-        <div class="cv-header-print">
-          <div>
-            <h1 class="cv-name-print">Vaidarbhi Buddhe</h1>
-            <div class="cv-title-print">Integrated M.Tech (Chemical Engineering) – Minor: Petroleum & Petrochemical Engineering</div>
-            <div style="font-size: 9.5pt; font-weight: 600; color: #334155;">Institute of Chemical Technology, Mumbai, Marathwada Campus, Jalna</div>
-          </div>
-          <div class="cv-contact-print" style="text-align: right;">
-            <div>Jalna, Maharashtra, India</div>
-            <div>+91 8484968019</div>
-            <div>vaidarbhibuddhe@gmail.com</div>
-            <div>linkedin.com/in/vaidarbhi-buddhe</div>
-          </div>
-        </div>
-
-        <div class="cv-section-print">
-          <h2 class="cv-heading-print">Professional Summary</h2>
-          <p style="font-size: 9.5pt; color: #334155; margin-bottom: 0;">
-            Final-year Integrated M.Tech Chemical Engineering student (CGPA: 8.73) with hands-on experience across refinery research, lubricant manufacturing, energy-efficiency projects, and process operations. Skilled in Aspen Plus, Aspen HYSYS, Python, and data analysis, with experience in catalyst development, process simulation, production supervision, and continuous improvement. Interested in Process Engineering, Process Optimisation, Manufacturing, and Energy & Petrochemical Operations.
-          </p>
-        </div>
-
-        <div class="cv-section-print">
-          <h2 class="cv-heading-print">Education</h2>
-          <div class="cv-entry-print">
-            <div class="cv-entry-header-print">
-              <span>Institute of Chemical Technology (ICT Mumbai)</span>
-              <span>2022 – Expected 2027</span>
-            </div>
-            <div class="cv-entry-sub-print">Integrated M.Tech., Chemical Engineering (Major); Minor: Petroleum and Petrochemical Engineering</div>
-            <div style="font-size: 9pt; color: #475569;">CGPA: 8.73 / 10.00 (Trimester 11) | Top Academic Standing</div>
-          </div>
-          <div class="cv-entry-print">
-            <div class="cv-entry-header-print">
-              <span>J. M. Patel College of Arts, Science and Commerce</span>
-              <span>2022</span>
-            </div>
-            <div class="cv-entry-sub-print">H.S.C. (Science), Maharashtra State Board – 88.17%</div>
-          </div>
-          <div class="cv-entry-print">
-            <div class="cv-entry-header-print">
-              <span>Nutan Kanya High School</span>
-              <span>2020</span>
-            </div>
-            <div class="cv-entry-sub-print">S.S.C., Maharashtra State Board – 100% (Gold Standard)</div>
-          </div>
-        </div>
-
-        <div class="cv-section-print">
-          <h2 class="cv-heading-print">Master’s Thesis Project</h2>
-          <div class="cv-entry-print">
-            <div class="cv-entry-header-print">
-              <span>Institute of Chemical Technology (ICT Mumbai)</span>
-              <span>Mar 2026 – Present</span>
-            </div>
-            <div class="cv-entry-sub-print">Thesis: “Development of a Dynamic Model for Process Monitoring and Fault Detection”</div>
-            <div style="font-size: 8.5pt; color: #475569; margin-bottom: 4px;">Major Guide: Dr. Debashish Kundu | Minor Guide: Dr. Supriyo Kumar Mondal</div>
-            <ul class="cv-entry-bullets-print">
-              <li>Developing a process simulation framework integrated with AI/ML techniques to analyse dynamic plant behavior, identify operational anomalies, and support fault detection and diagnosis.</li>
-              <li>Aims to improve process reliability, operational efficiency, and energy performance through simulation-driven analysis and data-driven insights.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="cv-section-print">
-          <h2 class="cv-heading-print">Research & Industrial Experience</h2>
-
-          <div class="cv-entry-print">
-            <div class="cv-entry-header-print">
-              <span>Dow India Technology Centre (DITC), Navi Mumbai (MH)</span>
-              <span>Jul 2026 – Oct 2026</span>
-            </div>
-            <div class="cv-entry-sub-print">Project: “Data Interpretation for EOR Field Datasets: Decline Curve Fitting and Incremental Oil Determination” • Guide: Dr. Neeraj Rohilla</div>
-            <ul class="cv-entry-bullets-print">
-              <li>Analyzed production histories of 5 synthetic oil wells at Dow India Technology Centre (DITC), selecting DITC-5 for decline curve analysis using engineering assessment and production trend interpretation.</li>
-              <li>Developed and validated exponential, harmonic, and hyperbolic decline models using Python; selected the harmonic model based on the lowest blind-forecast errors (RMSE: 315.10, MAE: 292.06) to estimate ~527,000 barrels of apparent incremental oil.</li>
-            </ul>
-          </div>
-          
-          <div class="cv-entry-print">
-            <div class="cv-entry-header-print">
-              <span>CSIR – Indian Institute of Petroleum (IIP), Dehradun (UK)</span>
-              <span>Nov 2025 – Feb 2026</span>
-            </div>
-            <div class="cv-entry-sub-print">Project: “Thermodynamic and Experimental Analysis for Syngas to LPG Conversion through Modified Route”</div>
-            <ul class="cv-entry-bullets-print">
-              <li>Prepared Cu–ZnO–ZrO₂–Al₂O₃ (CZZA) catalysts using the co-precipitation method, involving controlled pH and temperature, followed by drying and calcination.</li>
-              <li>Evaluated catalyst/product samples using Gas Chromatography (GC) as part of the experimental investigation of syngas-to-LPG conversion.</li>
-              <li>Performed thermodynamic analysis of a 27-reaction network and simulated the process using Aspen Plus (RGibbs), conducting sensitivity analysis across temperature, pressure and CO/H₂ ratio to evaluate LPG formation.</li>
-            </ul>
-          </div>
-
-          <div class="cv-entry-print">
-            <div class="cv-entry-header-print">
-              <span>Ultra Plus Lubes Pvt. Ltd., Panvel (MH)</span>
-              <span>April 2025 – June 2025</span>
-            </div>
-            <ul class="cv-entry-bullets-print">
-              <li>Supervised a 12-member production team across lubricant blending, filling, packing and dispatch operations, with exposure to both PLC-controlled and manual blending systems.</li>
-              <li>Conducted daily production audits, documentation and data collection to analyse productive time, identify operational losses, and track oil losses across stages from blending to filling.</li>
-              <li>Monitored daily oil wastage and process performance, tracing major loss points across the production line to support improved operational efficiency and production control.</li>
-            </ul>
-          </div>
-
-          <div class="cv-entry-print">
-            <div class="cv-entry-header-print">
-              <span>Indorama Synthetics (IND) Ltd., Nagpur (MH)</span>
-              <span>Aug 2024 – Oct 2024</span>
-            </div>
-            <div class="cv-entry-sub-print">Project: “Enhancing Energy Efficiency in CF-HTM Systems Through Insulation Upgrades”</div>
-            <ul class="cv-entry-bullets-print">
-              <li>Analysed the impact of a proposed insulation upgrade from mineral wool to calcium silicate, assessing its effect on surface temperature, heat loss, energy consumption and emissions.</li>
-              <li>Supported the assessment of reducing surface temperature from 6°C to 3°C and achieving a 50% reduction in heat loss along with associated energy and emissions savings.</li>
-              <li>Participated in Kaizen activities to identify and implement continuous, incremental process improvements on the plant floor.</li>
-            </ul>
-          </div>
-
-          <div class="cv-entry-print">
-            <div class="cv-entry-header-print">
-              <span>Sanjay Techno Products, Aurangabad (MH)</span>
-              <span>Feb 2024 – Mar 2024</span>
-            </div>
-            <ul class="cv-entry-bullets-print">
-              <li>Studied injection moulding operations for engineering and commodity polymers, analysing defects such as flash, sink marks, burn marks, voids, jetting and warpage.</li>
-            </ul>
-          </div>
-
-          <div class="cv-entry-print">
-            <div class="cv-entry-header-print">
-              <span>Clarion Organics Ltd., Tumsar (MH)</span>
-              <span>Aug 2023 – Sep 2023</span>
-            </div>
-            <ul class="cv-entry-bullets-print">
-              <li>Studied industrial manufacturing processes for pharmaceutical intermediates, including nitration, reduction and hydrogenation, along with downstream filtration, centrifugation and drying operations.</li>
-              <li>Performed Karl Fischer titration and factor determination for moisture analysis, gaining hands-on exposure to laboratory testing and analytical workflows.</li>
-              <li>Observed and studied process equipment including glass-lined and SS316 reactors, hydrogenators, centrifuges, sparkler filters and dryers used in pharmaceutical-intermediate production.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="cv-section-print">
-          <h2 class="cv-heading-print">Technical Knowledge</h2>
-          <table class="cv-skills-table-print">
-            <tr>
-              <td>Process Simulation:</td>
-              <td>Aspen Plus, Aspen HYSYS, DWSIM</td>
-            </tr>
-            <tr>
-              <td>Chemical Engineering:</td>
-              <td>Process Optimisation, Material & Energy Balances, Heat Transfer, Mass Transfer, Reaction Engineering, Process Safety, Catalyst Preparation</td>
-            </tr>
-            <tr>
-              <td>Data & Programming:</td>
-              <td>Python, MATLAB, Microsoft Excel</td>
-            </tr>
-            <tr>
-              <td>Analytical Techniques:</td>
-              <td>Gas Chromatography (GC), HPLC, Karl Fischer Titration, Viscosity Testing, Flash Point, Pour Point</td>
-            </tr>
-            <tr>
-              <td>Process & Energy Efficiency:</td>
-              <td>Energy Efficiency Assessment, Heat-Loss Analysis, Sustainability Analysis, Continuous Improvement, Six Sigma</td>
-            </tr>
-            <tr>
-              <td>Industrial Tools:</td>
-              <td>SAP ERP Systems, PLC, CATIA, MS Office</td>
-            </tr>
-          </table>
-        </div>
-
-        <div class="cv-section-print">
-          <h2 class="cv-heading-print">Certifications & Awards</h2>
-          <ul class="cv-entry-bullets-print">
-            <li><strong>Six Sigma White Belt</strong> (Jul 2026)</li>
-            <li><strong>Aspen Plus – Getting Started</strong>, ChemEngGuy (Aug 2025)</li>
-            <li><strong>Introduction to Symbolic Math with MATLAB</strong> (Aug 2025)</li>
-            <li><strong>Vedvalli Vaidyanathan Girl Student Award</strong>, ICT (2022–2023)</li>
-          </ul>
-        </div>
-
-        <div class="cv-section-print">
-          <h2 class="cv-heading-print">Positions of Responsibility & Extracurricular</h2>
-          <ul class="cv-entry-bullets-print">
-            <li><strong>Off-Campus Representative</strong> – The Bombay Technologist, ICT MARJ (2025–Present)</li>
-            <li><strong>Deputy Head</strong> – Literature Club, ICT MARJ (2024–2025)</li>
-            <li><strong>Member</strong> – Margjal Editorial Board (2022–2024)</li>
-            <li><strong>Event & Competition Team Member</strong> – Aakriti Tech Fest (2023–2024)</li>
-            <li><strong>Science Outreach Volunteer</strong> – Rainbow EduFest, Rotary Club of Jalna (Engaged 500+ students across 15 schools through interactive science demonstrations and awareness activities, Feb 2023)</li>
-            <li><strong>2nd Place</strong>, Government of Maharashtra State Level Rugby Competition (2019–2020)</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Core JavaScript Bundles -->
-  <script src="assets/js/loader.js?v=20261026-v15"></script>
-  <script src="assets/js/data.js?v=20261026-v15"></script>
-  <script src="assets/js/particles.js?v=20261026-v15"></script>
-  <script src="assets/js/simulators.js?v=20261026-v15"></script>
-  <script src="assets/js/engineering-calc.js?v=20261026-v15"></script>
-  <script src="assets/js/app.js?v=20261026-v15"></script>
+  <script src="assets/js/data.js?v=20261112b"></script>
+  <script src="assets/js/site.js?v=20261112b"></script>
+  <script src="assets/js/engineering-calc.js?v=20261112b"></script>
 </body>
 </html>
